@@ -80,6 +80,7 @@ txSetFillColor (txu::Color (24, 24, 24));
 
 ## Функции-члены:
 - [static Color Interpolate (Color a, Color b, double t)](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucolorinterpolate-color-a-color-b-color-t)
+- [static Color Interpolate (const std::initializer_list <Color>& list, double t)]()
 - [operator RGBQUAD  ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoloropreator-rgbquad-)
 - [operator COLORREF ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoloroperator-colorref-)
 - [Color operator ! ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucoloroperator--)
@@ -109,6 +110,27 @@ for (int x = 0; x < size_x; x++)
 Этот код нарисует на экране плавный градиент от синего к розовому:
 ![alt text](https://sun9-75.userapi.com/impg/asgxBLRJxiH55RZZrQ0tVBcCR6iWUAoKkrP6XA/uxpa4NcGZ88.jpg?size=817x146&quality=96&sign=7ec3e464ad7d033a6bc39a8d5a5ef7bc&type=album)
 
+## Color txu::Color::Interpolate (const std::initializer_list <Color>& list, double t)
+Тоже самое что и txu::Color::Interpolate (Color a, Color b, double t), но может принять произвольное количество цветов. Например:
+
+```
+int size_x = 800;
+int size_y = 100;
+
+txCreateWindow (size_x, size_y);
+for (int x = 0; x < size_x; x++)
+{
+	double t = (double) x / size_x;
+	txu::Color color = txu::Color::Interpolate ({txu::Color::DarkCyan, txu::Color::DarkPink, txu::Color::Green}, t);
+	txSetColor (color);
+	txRectangle (x, 0, x+1, size_y);
+}
+```
+
+Этот код нарисует плавный переход от синего к розовому, а от розового к зелёному:
+
+![alt text](https://sun9-39.userapi.com/impg/6LALpjU6cjeGZguiOl8qeR6_S4VijVP8udaG2A/XAC-U1xZ2V8.jpg?size=810x145&quality=96&sign=8f84690a620e0dc3d376eadcc180524e&type=album)
+
 ## txu::Color::opreator RGBQUAD ()
 Оператор преобразования к RGBQUAD
 
@@ -126,20 +148,20 @@ txu::Color white = !black //Белый цвет
 Функция смешивания цветов с учётом альфа-канала.
 Например:
 ```
-	int size_x = 400;
-	int size_y = 400;
+int size_x = 400;
+int size_y = 400;
 
-	txCreateWindow (size_x, size_y);
-	
-	txSetFillColor (txu::Color (24, 24, 24));
-	txClear ();
+txCreateWindow (size_x, size_y);
 
-	txSetFillColor (txu::Color::White);
-	txRectangle (50, 75, 200, 150);
+txSetFillColor (txu::Color (24, 24, 24));
+txClear ();
 
-	for (int x = 100; x < 300; x++)
-		for (int y = 100; y < 300; y++)
-			txSetPixel (x, y, txu::Blend (txu::Color (0, 130, 255, 100), txGetPixel (x, y)));
+txSetFillColor (txu::Color::White);
+txRectangle (50, 75, 200, 150);
+
+for (int x = 100; x < 300; x++)
+	for (int y = 100; y < 300; y++)
+		txSetPixel (x, y, txu::Blend (txu::Color (0, 130, 255, 100), txGetPixel (x, y)));
 ```
 
 Этот код нарисует полу-прозрачный синий квадрат:
