@@ -206,7 +206,11 @@ txTextOut (size_x/2 - txGetTextExtentX (text)/2, size_y/2 - txGetTextExtentY (te
 - [bool txu::Font::getUnderlineEnabled ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txufontgetunderlineenabled-)
 - [void txu::Font::setStrikeoutEnabled (bool enable)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txufontsetstrikeoutenabled-bool-enable)
 - [bool txu::Font::getStrikeoutEnabled ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txufontgetstrikeoutenabled-)
-
+- void setName (const char* name)
+- const char* getName ()
+- HFONT getSystemHandle ()
+- operator HFONT ()
+- void select (HDC dc = txDC ())
 
 
 ## bool txu::Font::create (...)
@@ -244,3 +248,18 @@ txTextOut (size_x/2 - txGetTextExtentX (text)/2, size_y/2 - txGetTextExtentY (te
 
 ## bool txu::Font::getStrikeoutEnabled ()
 Возвращает true если зачёркивание текста включено, в обратном случае false.
+
+## void txu::Font::setName (const char* name)
+Устанавливает имя шрифта.
+
+## const char* txu::Font::getName ()
+Возвращает имя шрифта.
+
+## HFONT txu::Font::getSystemHandle ()
+Возвращает дескриптор шрифта winapi.
+
+## txu::Font::operator HFONT ()
+Оператор преобразования к HFONT.
+
+## void txu::Font::select (HDC dc = txDC ())
+Устанавливает шрифт к HDC указанному в параметре. По умолчанию это txDC ().
