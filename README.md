@@ -198,6 +198,16 @@ txTextOut (size_x/2 - txGetTextExtentX (text)/2, size_y/2 - txGetTextExtentY (te
 - [void txu::Font::setSize (int size_x, int size_y)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txufontsetsize-int-size_x-int-size_y)
 - [int txu::Font::getSizeX ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txufontgetsizex-)
 - [int txu::Font::getSizeY ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txufontgetsizey-)
+- void txu::Font::setWeight (int weight)
+- int txu::Font::getWeight ()
+- void txu::Font::setItalicEnabled (bool enable)
+- bool txu::Font::getItalicEnabled ()
+- void txu::Font::setUnderlineEnabled (bool enable)
+- bool txu::Font::getUnderlineEnabled ()
+- void txu::Font::setStrikeoutEnabled (bool enable)
+- bool txu::Font::getStrikeoutEnabled ()
+
+
 
 ## bool txu::Font::create (...)
 Заново инициализирует шрифт с указанными параметрами. Возвращает true в случае успеха, иначе false.
@@ -210,3 +220,27 @@ txTextOut (size_x/2 - txGetTextExtentX (text)/2, size_y/2 - txGetTextExtentY (te
 
 ## int txu::Font::getSizeY ()
 Возвращает высоту шрифта.
+
+## void txu::Font::setWeight (int weight)
+Устанавливает толщину шрифта. См. [CreateFont](https://docs.microsoft.com/en-us/windows/win32/api/wingdi/nf-wingdi-createfonta#parameters)
+
+## int txu::Font::getWeight ()
+Возвращает толщину шрифта.
+
+## void txu::Font::setItalicEnabled (bool enabled)
+Включает или отключает прописной шрифт.
+
+## bool txu::Font::getItalicEnabled ()
+Возвращает true если прописной шрийт включёт, false вобратном случае.
+
+## void txu::Font::setUnderlineEnabled (bool enable)
+Включает или отключает подчёткивание текста.
+
+## bool txu::Font::getUnderlineEnabled ()
+Возвращает true если подчёркивание текста включено, в обратном случае false.
+
+## void txu::Font::setStrikeoutEnabled (bool enable)
+Включает или отключает зачёркивание текста.
+
+## bool txu::Font::getStrikeoutEnabled ()
+Возвращает true если зачёркивание текста включено, в обратном случае false.
