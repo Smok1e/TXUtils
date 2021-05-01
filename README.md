@@ -114,6 +114,7 @@ txu::Color white = !black //Белый цвет
 ```
 
 Этот код нарисует полу-прозрачный синий квадрат:
+
 ![alt text](https://sun9-7.userapi.com/impg/MgASVpcQx8lKaYcHmaAdbrFjE7MybQO5l4EtWg/dQAGTt2ornE.jpg?size=421x456&quality=96&sign=9a47d95f45c3e79c92693e5e9c4b94a2&type=album)
 
 Примечание: функция Blend учитывает альфа-канал только первого цвета!
