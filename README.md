@@ -89,9 +89,9 @@ txSetFillColor (txu::Color (24, 24, 24));
 - [txu::Color operator <<= (Color a, Color b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucolor-operator--color-a-color-b)
 
 ## Color txu::Color::Interpolate (Color a, Color b, Color t)
-Эта статическая функция позволяет создавать поавный переход между цветами в зависимости от переменной t.
+Эта статическая функция позволяет создавать плавный переход между цветами в зависимости от переменной t.
 При t == 0 функция вернёт цвет A, при t == 1 функция вернёт цвет B, а при t == 0.5 функция вернёт средний цвет между A и B.
-Нпример:
+Например:
 ```
 int size_x = 800;
 int size_y = 100;
