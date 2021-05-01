@@ -30,5 +30,19 @@ TXUtils - это библиотека, написанная мною для ~~с
 
 # txu::Color
 Класс предназначеный для хранения и операций с цветом.
+
+В классе Color содержатся переменные r, g, b, a для хранения соответствующих каналов.
+
 ## Конструкторы класса:
+- txu::Color (int r, int g, int b, int a)
+- txu::Color (int r, int g, int b)
+- txu::Color (const Color& that)
+- txu::Color (RGBQUAD rgbquad)
+- txu::Color (COLORREF colorref)
 - txu::Color ()
+
+##Функции-члены класса:
+- static Color Interpolate (Color a, Color b, double t)
+- operator RGBQUAD  ()
+- operator COLORREF ()
+- Color operator ! ()
