@@ -30,7 +30,21 @@ TXUtils - это opensource библиотека, написанная мною 
 
 
 ## bool txu::WasExitButtonPressed ()
-Возвращает true, если был нажат крестик в меню окна, иначе false.
+Возвращает true, если был нажат крестик в меню окна, иначе false, для того чтобы программист сам мог отреагировать на нажатие крестика. Например так:
+
+```
+txCreateWindow (800, 800);
+
+while (!GetAsyncKeyState (VK_ESCAPE))
+{
+	if (txu::WasExitButtonPressed ())
+		MessageBox (txWindow (), "THERE IS NO EXIT!", "NO!", MB_OK | MB_ICONERROR);
+
+	txSleep (10);
+}
+```
+
+![alt text](https://psv4.userapi.com/c534536/u402150900/docs/d10/93c60311fe0b/TXUtils_Github_WasExitButtonPressed_Example.gif?extra=HscRkmZLtfDWHeatsbDqzKfNDiJEaz7j2fUhOc1vagEy7Kh78LJ0LmSZiPwHBWvcNg58IEa6vbL3WyEOyeJsAO7QXS-UXk0kD3DWqojBk1I7nu7P4QPh8mxfPGdyhLO5I2OjkU52zyWM3tBkgK-J4_-d)
 
 ## int txu::GetMouseWheel ()
 Возвращает сторону, в которое повернулось колёсико мыши.
@@ -186,7 +200,7 @@ txTextOut (size_x/2 - txGetTextExtentX (text)/2, size_y/2 - txGetTextExtentY (te
 - [int txu::Font::getSizeY ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txufontgetsizey-)
 
 ## bool txu::Font::create (...)
-Заного инициализирует шрифт с указанными параметрами. Возвращает true в случае успеха, иначе false.
+Заново инициализирует шрифт с указанными параметрами. Возвращает true в случае успеха, иначе false.
 
 ## void txu::Font::setSize (int size_x, int size_y)
 Устанавливает размер шрифта.
