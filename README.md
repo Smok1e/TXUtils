@@ -28,6 +28,7 @@ TXUtils - это opensource библиотека, написанная мною 
 - txu::Context
 
 
+
 # txu::Color
 Класс предназначеный для хранения и операций с цветом.
 Вы можете пользоваться txu::Color так же как и COLORREF, поскольку класс содержит соответствующий оператор.
@@ -55,11 +56,11 @@ txSetFillColor (txu::Color (24, 24, 24));
 - [operator COLORREF ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoloroperator-colorref-)
 - [Color operator ! ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoloroperator-colorref-)
 
-##Функции для операций с цветом:
+## Функции для операций с цветом:
 - txu::Color Blend (Color a, Color b)
 - txu::Color operator <<= (Color a, Color b)
 
-# Color txu::Color::Interpolate (Color a, Color b, Color t)
+## Color txu::Color::Interpolate (Color a, Color b, Color t)
 Эта функция позволяет создавать поавный переход между цветами в зависимости от переменной t.
 При t == 0 функция вернёт цвет A, при t == 1 функция вернёт цвет B, а при t == 0.5 функция вернёт средний цвет между A и B.
 Нпример:
@@ -80,20 +81,20 @@ for (int x = 0; x < size_x; x++)
 Этот код нарисует на экране плавный градиент от синего к розовому:
 ![alt text](https://sun9-75.userapi.com/impg/asgxBLRJxiH55RZZrQ0tVBcCR6iWUAoKkrP6XA/uxpa4NcGZ88.jpg?size=817x146&quality=96&sign=7ec3e464ad7d033a6bc39a8d5a5ef7bc&type=album)
 
-# txu::Color::opreator RGBQUAD ()
+## txu::Color::opreator RGBQUAD ()
 Оператор преобразования к RGBQUAD
 
-# txu::Color::operator COLORREF ()
+## txu::Color::operator COLORREF ()
 Оператор преобразования к COLORREF
 
-# Color txu::Color::operator ! ()
+## Color txu::Color::operator ! ()
 Возвращает инвертированный цвет:
 ```
 txu::Color black (0, 0, 0)
 txu::Color white = !black //Белый цвет
 ```
 
-# txu::Color Blend (Color a, Color b)
+## txu::Color Blend (Color a, Color b)
 Функция смешивания цветов с учётом альфа-канала.
 Например:
 ```
@@ -119,7 +120,7 @@ txu::Color white = !black //Белый цвет
 
 Примечание: функция Blend учитывает альфа-канал только первого цвета!
 
-# txu::Color operator <<= (Color a, Color b)
+## txu::Color operator <<= (Color a, Color b)
 Делает то же, что и Blend, однако цвета повёрнуты местами. То есть:
 ```
 txu::Color color = txu::Blend (a, b);
