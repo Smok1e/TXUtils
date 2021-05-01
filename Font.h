@@ -13,15 +13,11 @@ class Font
 {
 public :
 	Font ();
-	Font (const char* name, int size_x, int size_y);
-	Font (const char* name, int size_x, int size_y, int weight);
-	Font (const char* name, int size_x, int size_y, int weight, bool italic, bool underline, bool strikeout);
+	Font (const char* name, int size_x, int size_y, int weight = FW_DONTCARE, bool italic = false, bool underline = false, bool strikeout = false);
 	Font (const Font& that);
 
 	bool create ();
-	bool create (const char* name, int size_x, int size_y);
-	bool create (const char* name, int size_x, int size_y, int weight);
-	bool create (const char* name, int size_x, int size_y, int weight, bool italic, bool underline, bool strikeout);
+	bool create (const char* name, int size_x, int size_y, int weight = FW_DONTCARE, bool italic = false, bool underline = false, bool strikeout = false);
 	bool create (const Font& that);
 
 	void setSize (int size_x, int size_y);
@@ -81,35 +77,7 @@ Font::Font () :
 	create (); 
 }
 
-Font::Font (const char* name, int size_x, int size_y) :
-	name_ (nullptr),
-
-	size_x_    (0),
-	size_y_    (0),
-	weight_    (0),
-
-	italic_    (false),
-	underline_ (false),
-	strikeout_ (false)
-{ 
-	create (name, size_x, size_y); 
-}
-
-Font::Font (const char* name, int size_x, int size_y, int weight) :
-	name_ (nullptr),
-
-	size_x_    (0),
-	size_y_    (0),
-	weight_    (0),
-
-	italic_    (false),
-	underline_ (false),
-	strikeout_ (false)
-{ 
-	create (name, size_x, size_y, weight); 
-}
-
-Font::Font (const char* name, int size_x, int size_y, int weight, bool italic, bool underline, bool strikeout) :
+Font::Font (const char* name, int size_x, int size_y, int weight /*= FW_DONTCARE*/, bool italic /*= false*/, bool underline /*= false*/, bool strikeout /*= false*/) :
 	name_ (nullptr),
 
 	size_x_    (0),
@@ -159,45 +127,7 @@ bool Font::create ()
 
 //-------------------
 
-bool Font::create (const char* name, int size_x, int size_y)
-{
-	name_ = name;
-	
-	size_x_ = size_x;
-	size_y_ = size_y;
-	
-	weight_ = FW_DONTCARE;
-
-	italic_    = false;
-	underline_ = false;
-	strikeout_ = false;
-
-	handle_ = nullptr;
-
-	return update ();
-}
-
-bool Font::create (const char* name, int size_x, int size_y, int weight)
-{
-	name_ = name;
-	
-	size_x_ = size_x;
-	size_y_ = size_y;
-	
-	weight_ = weight;
-
-	italic_    = false;
-	underline_ = false;
-	strikeout_ = false;
-
-	handle_ = nullptr;
-
-	return update ();
-}
-
-//-------------------
-
-bool Font::create (const char* name, int size_x, int size_y, int weight, bool italic, bool underline, bool strikeout)
+bool Font::create (const char* name, int size_x, int size_y, int weight /*= FW_DONTCARE*/, bool italic /*= false*/, bool underline /*= false*/, bool strikeout /*= false*/)
 {
 	name_ = name;
 	
