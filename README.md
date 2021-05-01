@@ -47,12 +47,12 @@ while (!GetAsyncKeyState (VK_ESCAPE))
 ![alt text](https://psv4.userapi.com/c534536/u402150900/docs/d10/93c60311fe0b/TXUtils_Github_WasExitButtonPressed_Example.gif?extra=HscRkmZLtfDWHeatsbDqzKfNDiJEaz7j2fUhOc1vagEy7Kh78LJ0LmSZiPwHBWvcNg58IEa6vbL3WyEOyeJsAO7QXS-UXk0kD3DWqojBk1I7nu7P4QPh8mxfPGdyhLO5I2OjkU52zyWM3tBkgK-J4_-d)
 
 ## int txu::GetMouseWheel ()
-Возвращает сторону, в которое повернулось колёсико мыши.
+Возвращает сторону, в которую повернулось колёсико мыши.
 Если колёсико повернулось вниз, функция вернёт -1, если вверх, 1, а если колёсико не было повёрнуто - функция вернёт 0. 
 Значение стороны в которую было повёрнуто колёсико хранится и не изменяется до тех пор, пока колёсико не повернётся снова или не будет вызвана эта функция.
 
 ## void txu::SetConsoleOutputEnabled (bool enable)
-Разрешает или запрещает дублирования данных из консоли поверх окна txlib. В результатах теста было выяснено, что рисование данных консоли поверх окна снижает fps.
+Разрешает или запрещает дублирование данных из консоли поверх окна txlib. В результатах теста было выяснено, что рисование данных консоли поверх окна снижает fps.
 
 ## bool txu::IsConsoleOutputEnabled ()
 Возвращает true если рисование консоли поверх окна разрешено или false в обратном случае.
