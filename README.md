@@ -206,11 +206,11 @@ txTextOut (size_x/2 - txGetTextExtentX (text)/2, size_y/2 - txGetTextExtentY (te
 - [bool txu::Font::getUnderlineEnabled ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txufontgetunderlineenabled-)
 - [void txu::Font::setStrikeoutEnabled (bool enable)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txufontsetstrikeoutenabled-bool-enable)
 - [bool txu::Font::getStrikeoutEnabled ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txufontgetstrikeoutenabled-)
-- void setName (const char* name)
-- const char* getName ()
-- HFONT getSystemHandle ()
-- operator HFONT ()
-- void select (HDC dc = txDC ())
+- [void setName (const char* name)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txufontsetname-const-char-name)
+- [const char* getName ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#const-char-txufontgetname-)
+- [HFONT getSystemHandle ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#hfont-txufontgetsystemhandle-)
+- [operator HFONT ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txufontoperator-hfont-)
+- [void select (HDC dc = txDC ())](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txufontselect-hdc-dc--txdc-)
 
 
 ## bool txu::Font::create (...)
