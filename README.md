@@ -315,3 +315,57 @@ result.render ();
 Этот код загрузит картинку из файла "image.bmp" в txu::Context, а затем уберёт красный канал с фотографии:
 
 ![alt text](https://sun9-55.userapi.com/impg/xpZhX5tJg1XnkjYSRZJbHlfdA5nRIMqL2PQ9dg/q55WyNvV-hY.jpg?size=257x551&quality=96&sign=0075640318e1216b517c650ec61a4b4d&type=album)
+
+Или вот пример посложнее:
+
+```
+void Blur (txu::Context* source, txu::Context* result, int radius)
+{
+	int size_x = source -> getSizeX ();
+	int size_y = source -> getSizeY ();
+	result -> resize (size_x, size_y);
+
+	for (int x = 0; x < size_x; x++)
+	{
+		for (int y = 0; y < size_y; y++)
+		{
+			int r = 0, g = 0, b = 0;
+			int n = 0;
+
+			for (int _x = x-radius; _x < x+radius; _x++)
+			{
+				for (int _y = y-radius; _y < y+radius; _y++)
+				{
+					if (_x < 0 || _x >= size_x || _y < 0 || _y >= size_y) continue;
+
+					txu::Color color = source -> getPixel (_x, _y);
+					r += color.r, g += color.g, b += color.b;
+
+					n++;
+				}
+			}
+
+			if (n == 0)	continue;
+
+			txu::Color color (r/n, g/n, b/n);
+			result -> setPixel (x, y, color);
+		}
+	}
+}
+```
+
+Эта функция размывает картинку. Вызовем её с радиусом в 5 пикселей:
+
+```
+txu::Context source ("image.bmp");
+txu::Context result;
+
+Blur (&source, &result, 5);
+
+txCreateWindow (result.getSizeX (), result.getSizeY ());
+result.render ();
+```
+
+И получим размытое изображение на экране:
+
+![alt text](https://sun9-10.userapi.com/impg/t5uoqE_C-TPDAEGwdfHcROdKHl29ziq3oEZ67w/l4quIqsSiuY.jpg?size=261x551&quality=96&sign=8dac28143c918541d57b24dec161e21a&type=album)
