@@ -55,7 +55,7 @@ txSetFillColor (txu::Color (24, 24, 24));
 - operator COLORREF ()
 - Color operator ! ()
 
-# txu::Color::Interpolate
+# Color txu::Color::Interpolate (Color a, Color b, Color t)
 Эта функция позволяет создавать поавный переход между цветами в зависимости от переменной t.
 При t == 0 функция вернёт цвет A, при t == 1 функция вернёт цвет B, а при t == 0.5 функция вернёт средний цвет между A и B.
 Нпример:
@@ -75,3 +75,17 @@ for (int x = 0; x < size_x; x++)
 
 Этот код нарисует на экране плавный градиент от синего к розовому:
 ![alt text](https://sun9-75.userapi.com/impg/asgxBLRJxiH55RZZrQ0tVBcCR6iWUAoKkrP6XA/uxpa4NcGZ88.jpg?size=817x146&quality=96&sign=7ec3e464ad7d033a6bc39a8d5a5ef7bc&type=album)
+
+# txu::Color::operator COLORREF ()
+Оператор преобразования к COLORREF
+
+# txu::Color::opreator RGBQUAD ()
+Оператор преобразования к RGBQUAD
+
+# Color txu::Color::operator ! ()
+Возвращает инвертированный цвет:
+```
+txu::Color black (0, 0, 0)
+txu::Color white = !black //Белый цвет
+```
+
