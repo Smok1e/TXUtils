@@ -80,7 +80,7 @@ txSetFillColor (txu::Color (24, 24, 24));
 
 ## Функции-члены:
 - [static Color Interpolate (Color a, Color b, double t)](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucolorinterpolate-color-a-color-b-color-t)
-- [static Color Interpolate (const std::initializer_list <Color>& list, double t)]()
+- [static Color Interpolate (const std::initializer_list& list, double t)](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucolorinterpolate-const-stdinitializer_list--list-double-t)
 - [operator RGBQUAD  ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoloropreator-rgbquad-)
 - [operator COLORREF ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoloroperator-colorref-)
 - [Color operator ! ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucoloroperator--)
@@ -110,7 +110,7 @@ for (int x = 0; x < size_x; x++)
 Этот код нарисует на экране плавный градиент от синего к розовому:
 ![alt text](https://sun9-75.userapi.com/impg/asgxBLRJxiH55RZZrQ0tVBcCR6iWUAoKkrP6XA/uxpa4NcGZ88.jpg?size=817x146&quality=96&sign=7ec3e464ad7d033a6bc39a8d5a5ef7bc&type=album)
 
-## Color txu::Color::Interpolate (const std::initializer_list <Color>& list, double t)
+## Color txu::Color::Interpolate (const std::initializer_list& list, double t)
 Тоже самое что и txu::Color::Interpolate (Color a, Color b, double t), но может принять произвольное количество цветов. Например:
 
 ```
