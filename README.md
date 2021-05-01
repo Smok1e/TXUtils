@@ -50,7 +50,7 @@ txSetFillColor (txu::Color (24, 24, 24));
 - txu::Color ()
 
 ## Функции-члены класса:
-- static Color Interpolate (Color a, Color b, double t)
+- [static Color Interpolate (Color a, Color b, double t)](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucolorinterpolate)
 - operator RGBQUAD  ()
 - operator COLORREF ()
 - Color operator ! ()
