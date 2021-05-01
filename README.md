@@ -1,5 +1,5 @@
 # TXUtils
-TXUtils - это библиотека, написанная мною для ~~себя~~ облегчения и удобства работы с графикой, используя [TXLib](http://storage.ded32.net.ru/Lib/TX/TXUpdate/Doc/HTML.ru/).
+TXUtils - это opensource библиотека, написанная мною для ~~себя~~ облегчения и удобства работы с графикой, используя [TXLib](http://storage.ded32.net.ru/Lib/TX/TXUpdate/Doc/HTML.ru/).
 
 
 
@@ -16,16 +16,16 @@ TXUtils - это библиотека, написанная мною для ~~с
 
 Примечание: я гарантирую работу библиотеки лишь с компилятором vusial studio и не отвечаю за совместимость с другими средами.
 
-# Классы библиотеки:
-- txu::Color
-- txu::Font
-- txu::Context
-
 # Функции библиотеки:
 - void txu::WasExitButtonPressed    ()
 - int  txu::GetMouseWheel           ()
 - void txu::SetConsoleOutputEnabled (bool enable)
 - bool txu::IsConsoleOutputEnabled  ()
+
+# Классы библиотеки:
+- txu::Color
+- txu::Font
+- txu::Context
 
 
 # txu::Color
@@ -55,7 +55,7 @@ txSetFillColor (txu::Color (24, 24, 24));
 - operator COLORREF ()
 - Color operator ! ()
 
-# Color txu::Color::Interpolate (Color a, Color b, Color t)
+## Color txu::Color::Interpolate (Color a, Color b, Color t)
 Эта функция позволяет создавать поавный переход между цветами в зависимости от переменной t.
 При t == 0 функция вернёт цвет A, при t == 1 функция вернёт цвет B, а при t == 0.5 функция вернёт средний цвет между A и B.
 Нпример:
@@ -76,13 +76,13 @@ for (int x = 0; x < size_x; x++)
 Этот код нарисует на экране плавный градиент от синего к розовому:
 ![alt text](https://sun9-75.userapi.com/impg/asgxBLRJxiH55RZZrQ0tVBcCR6iWUAoKkrP6XA/uxpa4NcGZ88.jpg?size=817x146&quality=96&sign=7ec3e464ad7d033a6bc39a8d5a5ef7bc&type=album)
 
-# txu::Color::operator COLORREF ()
-Оператор преобразования к COLORREF
-
-# txu::Color::opreator RGBQUAD ()
+## txu::Color::opreator RGBQUAD ()
 Оператор преобразования к RGBQUAD
 
-# Color txu::Color::operator ! ()
+## txu::Color::operator COLORREF ()
+Оператор преобразования к COLORREF
+
+## Color txu::Color::operator ! ()
 Возвращает инвертированный цвет:
 ```
 txu::Color black (0, 0, 0)
