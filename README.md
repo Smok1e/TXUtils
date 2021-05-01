@@ -54,3 +54,23 @@ txSetFillColor (txu::Color (24, 24, 24));
 - operator RGBQUAD  ()
 - operator COLORREF ()
 - Color operator ! ()
+
+# txu::Color::Interpolate
+Эта функция позволяет создавать поавный переход между цветами в зависимости от переменной t.
+При t == 0 функция вернёт цвет A, при t == 1 функция вернёт цвет B, а при t == 0.5 функция вернёт средний цвет между A и B.
+Нпример:
+```
+int size_x = 800;
+int size_y = 100;
+
+txCreateWindow (size_x, size_y);
+
+for (int x = 0; x < size_x; x++)
+{
+  double t = (double) x / size_x;
+  txSetColor (txu::Color::Interpolate (txu::Color::DarkCyan, txu::Color::DarkPink, t));
+  txRectangle (x, 0, x+1, size_y);
+}
+```
+
+Этот код нарисует на экране плавный градиент от синего к розовому.
