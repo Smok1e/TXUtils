@@ -54,7 +54,7 @@ txSetFillColor (txu::Color (24, 24, 24));
 - [static Color Interpolate (Color a, Color b, double t)](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucolorinterpolate-color-a-color-b-color-t)
 - [operator RGBQUAD  ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoloropreator-rgbquad-)
 - [operator COLORREF ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoloroperator-colorref-)
-- [Color operator ! ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoloroperator-colorref-)
+- [Color operator ! ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucoloroperator--)
 
 ## Функции для операций с цветом:
 - txu::Color Blend (Color a, Color b)
