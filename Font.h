@@ -5,10 +5,6 @@ namespace txu
 
 //-------------------
 
-#define txuSelectFont(dc, font) { _txBuffer_Select ((HFONT) font, (HDC) dc); }
-
-//-------------------
-
 class Font
 {
 public :
@@ -41,6 +37,8 @@ public :
 	const char* getName ();
 
 	HFONT getSystemHandle ();
+
+	void select (HDC dc = txDC ());
 
 	operator HFONT ();
 
@@ -259,6 +257,13 @@ HFONT Font::getSystemHandle ()
 Font::operator HFONT ()
 {
 	return getSystemHandle ();
+}
+
+//-------------------
+
+void Font::select (HDC dc /*= txDC ()*/)
+{
+	_txBuffer_Select (handle_, dc);
 }
 
 //-------------------
