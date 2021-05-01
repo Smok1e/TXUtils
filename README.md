@@ -9,6 +9,7 @@ TXUtils - это библиотека, написанная мною для ~~с
 
 ``
 #include <TXLib.h>
+
 #include "C:\Lib\TXUtils\TXU.h"
 ``
 
