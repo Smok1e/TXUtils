@@ -198,14 +198,14 @@ txTextOut (size_x/2 - txGetTextExtentX (text)/2, size_y/2 - txGetTextExtentY (te
 - [void txu::Font::setSize (int size_x, int size_y)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txufontsetsize-int-size_x-int-size_y)
 - [int txu::Font::getSizeX ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txufontgetsizex-)
 - [int txu::Font::getSizeY ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txufontgetsizey-)
-- void txu::Font::setWeight (int weight)
-- int txu::Font::getWeight ()
-- void txu::Font::setItalicEnabled (bool enable)
-- bool txu::Font::getItalicEnabled ()
-- void txu::Font::setUnderlineEnabled (bool enable)
-- bool txu::Font::getUnderlineEnabled ()
-- void txu::Font::setStrikeoutEnabled (bool enable)
-- bool txu::Font::getStrikeoutEnabled ()
+- [void txu::Font::setWeight (int weight)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txufontsetweight-int-weight)
+- [int txu::Font::getWeight ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txufontgetweight-)
+- [void txu::Font::setItalicEnabled (bool enable)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txufontsetitalicenabled-bool-enabled)
+- [bool txu::Font::getItalicEnabled ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txufontgetitalicenabled-)
+- [void txu::Font::setUnderlineEnabled (bool enable)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txufontsetunderlineenabled-bool-enable)
+- [bool txu::Font::getUnderlineEnabled ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txufontgetunderlineenabled-)
+- [void txu::Font::setStrikeoutEnabled (bool enable)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txufontsetstrikeoutenabled-bool-enable)
+- [bool txu::Font::getStrikeoutEnabled ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txufontgetstrikeoutenabled-)
 
 
 
