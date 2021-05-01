@@ -143,3 +143,57 @@ txu::Color color = txu::Blend (a, b);
 ```
 txu::Color color = b <<= a;
 ```
+
+# txu::Font
+Класс, предназначенный для хранения информации о шрифте и установки шрифта в HDC. В будущем постараюсь добавить функцию загрузки шрифта непосредственно из файла.
+
+Пример использования:
+```
+int size_x = 400;
+int size_y = 400;
+
+const char* text = "Hello World!";
+
+txCreateWindow (size_x, size_y);
+
+txSetFillColor (txu::Color (24, 24, 24));
+txClear ();
+
+txu::Font font ("consolas", 25, 50, FW_BOLD);
+font.setItalicEnabled    (true);
+font.setUnderlineEnabled (true);
+font.select ();
+
+txSetColor (txu::Color::White);
+txTextOut (size_x/2 - txGetTextExtentX (text)/2, size_y/2 - txGetTextExtentY (text)/2, text);
+```
+
+Этот код выведет на экран надпись:
+
+![alt text](https://sun9-59.userapi.com/impg/qfrFKRTi7VuiTp7OF1oYxszDmWuSGkT_mn_nsw/nB9r8XHmdcA.jpg?size=415x443&quality=96&sign=75688fd0129e537d00c34d96e983f1de&type=album)
+
+## Конструкторы:
+- Font ()
+- Font (const char* name, int size_x, int size_y, int weight = FW_DONTCARE, bool italic = false, bool underline = false, bool strikeout = false)
+- Font (const Font& that)
+
+## Функции-члены:
+- bool txu::Font::create ()
+- bool txu::Font::create (const char* name, int size_x, int size_y, int weight = FW_DONTCARE, bool italic = false, bool underline = false, bool strikeout = false)
+- bool txu::Font::create (const Font& that)
+- void txu::Font::setSize (int size_x, int size_y)
+- int txu::Font::getSizeX ()
+- int txu::Font::getSizeY ()
+
+## bool txu::Font::create (...)
+Заного инициализирует шрифт с указанными параметрами. Возвращает true в случае успеха, иначе false.
+
+## void txu::Font::setSize (int size_x, int size_y)
+Устанавливает размер шрифта.
+
+## int txu::Font::getSizeX ()
+Возвращает ширину шрифта.
+
+## int txu::Font::getSizeY ()
+Возвращает высоту шрифта.
+## int txu::Font::getSizeY ()
