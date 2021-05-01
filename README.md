@@ -74,4 +74,4 @@ for (int x = 0; x < size_x; x++)
 ```
 
 Этот код нарисует на экране плавный градиент от синего к розовому:
-![alt text](https://sun9-23.userapi.com/impg/2fstiybZH4a5Vjq-EpIaHZ-mrUQYO-8Aj47A6Q/mLoeH0grrG8.jpg?size=1521x602&quality=96&sign=b7367292e82471caf82cc52e760bb40d&type=album)
+![alt text](https://sun9-75.userapi.com/impg/asgxBLRJxiH55RZZrQ0tVBcCR6iWUAoKkrP6XA/uxpa4NcGZ88.jpg?size=817x146&quality=96&sign=7ec3e464ad7d033a6bc39a8d5a5ef7bc&type=album)
