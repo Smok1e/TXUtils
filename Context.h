@@ -251,7 +251,7 @@ void Context::setPixel (int x, int y, Color color)
 
 	if (x < 0 || x >= size_x_ || y < 0 || y >= size_y_) return;
 
-	int index = x + y * size_x_;
+	int index = x + y*size_x_;
 	buffer_[index] = (color.a < 255) ? (buffer_[index] <<= color) : color;
 }
 
@@ -266,7 +266,7 @@ Color Context::getPixel (int x, int y)
 
 	int index = x + y * size_x_;
 
-	return buffer_[index];
+	return txu::Color (buffer_[index]);
 }
 
 //------------------

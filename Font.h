@@ -37,10 +37,9 @@ public :
 	const char* getName ();
 
 	HFONT getSystemHandle ();
+	operator HFONT ();
 
 	void select (HDC dc = txDC ());
-
-	operator HFONT ();
 
 private :
 	const char* name_;

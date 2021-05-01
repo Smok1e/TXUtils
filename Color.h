@@ -32,6 +32,7 @@ union Color
 	Color ();
 
 	static Color Interpolate (Color a, Color b, double t);
+	static Color Interpolate (const std::initializer_list <Color>& list, double t);
 
 	operator RGBQUAD  ();
 	operator COLORREF ();
@@ -98,25 +99,30 @@ Color::Color (int r_, int g_, int b_) :
 {}
 
 Color::Color (const Color& that) :
-	rgbquad (that.rgbquad)
+	r (that.r),
+	g (that.g),
+	b (that.b),
+	a (that.a)
 {}
 
 Color::Color (RGBQUAD rgbquad_) :
 	rgbquad (rgbquad_)
-{}
+{ 
+	a = 255; 
+}
 
 Color::Color (COLORREF colorref) :
 	r (GetRValue (colorref)),
 	g (GetGValue (colorref)),
 	b (GetBValue (colorref)),
-	a ()
+	a (255)
 {}
 
 Color::Color () :
 	r (0),
 	g (0),
 	b (0),
-	a (0)
+	a (255)
 {}
 
 //-------------------
@@ -129,6 +135,21 @@ Color Color::Interpolate (Color a, Color b, double t)
 				  a.g + t * (b.g - a.g),
 				  a.b + t * (b.b - a.b),
 				  a.a + t * (b.a - a.a));
+}
+
+Color Color::Interpolate (const std::initializer_list <Color>& list, double t)
+{
+	t = Clamp (t, 0.0, 1.0);
+
+	size_t size = list.size ()-1;
+
+	int a_index = std::floor (t*size);
+	int b_index = std::ceil  (t*size);
+
+	Color a = *(list.begin () + a_index);
+	Color b = *(list.begin () + b_index);
+
+	return Interpolate (a, b, t*size - std::floor (t*size));
 }
 
 //-------------------
