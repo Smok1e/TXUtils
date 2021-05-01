@@ -24,7 +24,7 @@ TXUtils - это opensource библиотека, написанная мною 
 
 # Классы библиотеки:
 - [txu::Color](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucolor)
-- txu::Font
+- [txu::Font](https://github.com/Smok1e/TXUtils/blob/main/README.md#txufont)
 - txu::Context
 
 
@@ -178,12 +178,12 @@ txTextOut (size_x/2 - txGetTextExtentX (text)/2, size_y/2 - txGetTextExtentY (te
 - Font (const Font& that)
 
 ## Функции-члены:
-- bool txu::Font::create ()
-- bool txu::Font::create (const char* name, int size_x, int size_y, int weight = FW_DONTCARE, bool italic = false, bool underline = false, bool strikeout = false)
-- bool txu::Font::create (const Font& that)
-- void txu::Font::setSize (int size_x, int size_y)
-- int txu::Font::getSizeX ()
-- int txu::Font::getSizeY ()
+- [bool txu::Font::create ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txufontcreate-)
+- [bool txu::Font::create (const char* name, int size_x, int size_y, int weight = FW_DONTCARE, bool italic = false, bool underline = false, bool strikeout = false)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txufontcreate-)
+- [bool txu::Font::create (const Font& that)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txufontcreate-)
+- [void txu::Font::setSize (int size_x, int size_y)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txufontsetsize-int-size_x-int-size_y)
+- [int txu::Font::getSizeX ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txufontgetsizex-)
+- [int txu::Font::getSizeY ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txufontgetsizey-)
 
 ## bool txu::Font::create (...)
 Заного инициализирует шрифт с указанными параметрами. Возвращает true в случае успеха, иначе false.
@@ -196,4 +196,3 @@ txTextOut (size_x/2 - txGetTextExtentX (text)/2, size_y/2 - txGetTextExtentY (te
 
 ## int txu::Font::getSizeY ()
 Возвращает высоту шрифта.
-## int txu::Font::getSizeY ()
