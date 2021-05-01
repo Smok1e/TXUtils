@@ -22,7 +22,13 @@ TXUtils - это библиотека, написанная мною для ~~с
 - txu::Context
 
 # Функции библиотеки:
-- void txu::WasExitButtonPressed ()
-- int txu::GetMouseWheel ()
+- void txu::WasExitButtonPressed    ()
+- int  txu::GetMouseWheel           ()
 - void txu::SetConsoleOutputEnabled (bool enable)
-- bool txu::IsConsoleOutputEnabled ()
+- bool txu::IsConsoleOutputEnabled  ()
+
+
+# txu::Color
+Класс предназначеный для хранения и операций с цветом.
+## Конструкторы класса:
+- txu::Color ()
