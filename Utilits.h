@@ -59,7 +59,7 @@ LRESULT CALLBACK WndProc (HWND wnd, UINT message, WPARAM wpar, LPARAM lpar)
 bool WndProc_OnCLOSE ()
 {
 	_WasExitButtonPressed = true;
-	return true;
+	return false;
 }
 
 //-------------------

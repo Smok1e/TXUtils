@@ -5,24 +5,24 @@ namespace txu
 
 //-------------------
 
+#define txuSelectFont(dc, font) { _txBuffer_Select ((HFONT) font, (HDC) dc); }
+
+//-------------------
+
 class Font
 {
 public :
 	Font ();
-	Font (const char* filename);
 	Font (const char* name, int size_x, int size_y);
 	Font (const char* name, int size_x, int size_y, int weight);
 	Font (const char* name, int size_x, int size_y, int weight, bool italic, bool underline, bool strikeout);
 	Font (const Font& that);
 
 	bool create ();
-	bool create (const char* filename);
 	bool create (const char* name, int size_x, int size_y);
 	bool create (const char* name, int size_x, int size_y, int weight);
 	bool create (const char* name, int size_x, int size_y, int weight, bool italic, bool underline, bool strikeout);
 	bool create (const Font& that);
-
-	bool loadFromFile (const char* filename);
 
 	void setSize (int size_x, int size_y);
 
@@ -233,13 +233,6 @@ bool Font::create (const Font& that)
 	handle_ = nullptr;
 
 	return update ();
-}
-
-//-------------------
-
-bool Font::loadFromFile (const char* filename)
-{
-
 }
 
 //-------------------
