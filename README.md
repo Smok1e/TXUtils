@@ -37,7 +37,7 @@ COLORREF colorref = txu::Color (0, 130, 255);
 ```
 или
 ```
-txSetFillColor (txu::Color (24, 24, 24);
+txSetFillColor (txu::Color (24, 24, 24));
 ```
 В классе содержатся переменные r, g, b, a для хранения соответствующих каналов.
 
