@@ -17,10 +17,10 @@ TXUtils - это opensource библиотека, написанная мною 
 Примечание: я гарантирую работу библиотеки лишь с компилятором vusial studio и не отвечаю за совместимость с другими средами.
 
 # Функции библиотеки:
-- void txu::WasExitButtonPressed    ()
-- int  txu::GetMouseWheel           ()
-- void txu::SetConsoleOutputEnabled (bool enable)
-- bool txu::IsConsoleOutputEnabled  ()
+- void [txu::WasExitButtonPressed    ()](ttps://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txuwasexitbuttonpressed-)
+- int  [txu::GetMouseWheel           ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txugetmousewheel-)
+- void [txu::SetConsoleOutputEnabled (bool enable)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txusetconsoleoutputenabled-bool-enable)
+- bool [txu::IsConsoleOutputEnabled  ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txuisconsoleoutputenabled-)
 
 # Классы библиотеки:
 - [txu::Color](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucolor)
@@ -37,10 +37,10 @@ TXUtils - это opensource библиотека, написанная мною 
 Если колёсико повернулось вниз, функция вернёт -1, если вверх, 1, а если колёсико не было повёрнуто - функция вернёт 0. 
 Значение стороны в которую было повёрнуто колёсико хранится и не изменяется до тех пор, пока колёсико не повернётся снова или не будет вызвана эта функция.
 
-# void txu::SetConsoleOutputEnabled (bool enable)
+## void txu::SetConsoleOutputEnabled (bool enable)
 Разрешает или запрещает дублирования данных из консоли поверх окна txlib. В результатах теста было выяснено, что рисование данных консоли поверх окна снижует fps.
 
-# bool txu::IsConsoleOutputEnabled ()
+## bool txu::IsConsoleOutputEnabled ()
 Возвращает true если рисование консоли поверх окна разрешено или false в обратном случае.
 
 # txu::Color
