@@ -57,11 +57,11 @@ txSetFillColor (txu::Color (24, 24, 24));
 - [Color operator ! ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucoloroperator--)
 
 ## Функции для операций с цветом:
-- txu::Color Blend (Color a, Color b)
-- txu::Color operator <<= (Color a, Color b)
+- [txu::Color Blend (Color a, Color b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucolor-blend-color-a-color-b)
+- [txu::Color operator <<= (Color a, Color b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucolor-operator--color-a-color-b)
 
 ## Color txu::Color::Interpolate (Color a, Color b, Color t)
-Эта функция позволяет создавать поавный переход между цветами в зависимости от переменной t.
+Эта статическая функция позволяет создавать поавный переход между цветами в зависимости от переменной t.
 При t == 0 функция вернёт цвет A, при t == 1 функция вернёт цвет B, а при t == 0.5 функция вернёт средний цвет между A и B.
 Нпример:
 ```
