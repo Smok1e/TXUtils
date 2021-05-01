@@ -41,7 +41,7 @@ TXUtils - это библиотека, написанная мною для ~~с
 - txu::Color (COLORREF colorref)
 - txu::Color ()
 
-##Функции-члены класса:
+## Функции-члены класса:
 - static Color Interpolate (Color a, Color b, double t)
 - operator RGBQUAD  ()
 - operator COLORREF ()
