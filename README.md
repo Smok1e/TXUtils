@@ -291,3 +291,27 @@ txTextOut (size_x/2 - txGetTextExtentX (text)/2, size_y/2 - txGetTextExtentY (te
 Это, пожалуй, основной инструмент библиотеки. Забудьте о ~~ежедневном геморрое с~~ HDC!
 Context обеспечивает удобную и надёжную работу с изображениями. Его не надо освобождать с помощью txDeleteDC, за вас это сделает деструктор.
 Давайте начнём.
+
+```
+txu::Context source ("image.bmp");
+int size_x = source.getSizeX ();
+int size_y = source.getSizeY ();
+
+txu::Context result (size_x, size_y);
+for (int x = 0; x < size_x; x++)
+{
+	for (int y = 0; y < size_y; y++)
+	{
+		txu::Color color = source.getPixel (x, y);
+		color.r = 0;
+		result.setPixel (x, y, color);
+	}
+}
+
+txCreateWindow (size_x, size_y);
+result.render ();
+```
+
+Этот код загрузит картинку из файла "image.bmp" в txu::Context, а затем уберёт красный канал с фотографии:
+
+![alt text](https://sun9-55.userapi.com/impg/xpZhX5tJg1XnkjYSRZJbHlfdA5nRIMqL2PQ9dg/q55WyNvV-hY.jpg?size=257x551&quality=96&sign=0075640318e1216b517c650ec61a4b4d&type=album)
