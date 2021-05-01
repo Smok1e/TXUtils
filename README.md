@@ -23,7 +23,7 @@ TXUtils - это opensource библиотека, написанная мною 
 - bool txu::IsConsoleOutputEnabled  ()
 
 # Классы библиотеки:
-- txu::Color
+- [txu::Color](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucolor)
 - txu::Font
 - txu::Context
 
