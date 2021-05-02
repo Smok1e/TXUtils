@@ -85,6 +85,10 @@ txSetFillColor (txu::Color (24, 24, 24));
 - [operator RGBQUAD  ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoloropreator-rgbquad-)
 - [operator COLORREF ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoloroperator-colorref-)
 - [Color operator ! ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucoloroperator--)
+- [static Color HSV (int h, int s, int v)]
+- [int hue ()]
+- [int saturation ()]
+- [int value ()]
 
 ## Функции для операций с цветом:
 - [txu::Color Blend (Color a, Color b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucolor-blend-color-a-color-b)
@@ -144,6 +148,39 @@ for (int x = 0; x < size_x; x++)
 txu::Color black (0, 0, 0)
 txu::Color white = !black //Белый цвет
 ```
+
+## static Color txu::Color::HSV (int h, int s, int v)
+Возвращает цвет, созданный на основе системы [HSV](https://ru.wikipedia.org/wiki/HSV_(%D1%86%D0%B2%D0%B5%D1%82%D0%BE%D0%B2%D0%B0%D1%8F_%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C)).
+Значения h, s и v должны быть в диапазоне от 0 до 255.
+Например:
+
+```
+int size_x = 800;
+int size_y = 100;
+
+txCreateWindow (size_x, size_y);
+for (int x = 0; x < size_x; x++)
+{
+	double t = (double) x / size_x;
+	int hue = t * 255;
+
+	txSetColor (txu::Color::HSV (hue, 255, 255));
+	txRectangle (x, 0, x+1, size_y);
+}
+```
+
+Этот код нарисует в окне плавный переход между всеми цветами радуги:
+
+![alt text](https://sun9-5.userapi.com/impg/awW2XK_oU7TU_MyafSxOHGHshzaMR_0ZRK03AQ/neJelUgAFcw.jpg?size=806x137&quality=96&sign=426209e04914ba4f3da9da8c6b842bef&type=album)
+
+## int txu::Color::hue ()
+Переводит цвет в формат HSV, и возвращает значение hue (цветовой тон). См. [Цветовая модель HSV](https://ru.wikipedia.org/wiki/HSV_(%D1%86%D0%B2%D0%B5%D1%82%D0%BE%D0%B2%D0%B0%D1%8F_%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C)).
+
+## int txu::Color::saturation ()
+Переводит цвет в формат HSV, и возвращает значение saturatuion (насыщеность). См. [Цветовая модель HSV](https://ru.wikipedia.org/wiki/HSV_(%D1%86%D0%B2%D0%B5%D1%82%D0%BE%D0%B2%D0%B0%D1%8F_%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C)).
+
+## int txu::Color::value ()
+Переводит цвет в формат HSV, и возвращает значение value (яркость). См. [Цветовая модель HSV](https://ru.wikipedia.org/wiki/HSV_(%D1%86%D0%B2%D0%B5%D1%82%D0%BE%D0%B2%D0%B0%D1%8F_%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C)).
 
 ## txu::Color Blend (Color a, Color b)
 Функция смешивания цветов с учётом альфа-канала.
@@ -371,6 +408,9 @@ while (!GetAsyncKeyState (VK_ESCAPE) && !txu::WasExitButtonPressed ())
 - [double Coord2Distance (const Coor2D& a, const Coord2D& b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#double-txucoord2distance-const-coord2d-a-const-coord2d-b)
 - [double Coord2DSqrDistance (const Coord2D& a, const Coord2D& b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#double-txucoord2dsqrdistance-const-coord2d-a-const-coord2d-b)
 
+## Макросы для операций с классом:
+- txCoord(coord)
+
 ## txu::Coord2D::operator POINT ()
 Оператор преобразования к POINT.
 
@@ -436,6 +476,44 @@ Coord2D result = coord * scalar; // result == {5, 25}
 ## double txu::Coord2DSqrDistance (const Coord2D& a, const Coord2D& b)
 Возвращает численное расстояние между точками a и b, возведённое в квадрат.
 Советую использовать это функцию вместо [txu::Coord2Distance](https://github.com/Smok1e/TXUtils/blob/main/README.md#double-txucoord2distance-const-coord2d-a-const-coord2d-b), если вам не нужно точное расстояние (например для сравнения расстояния a и расстояния b), поскольку последней приходится извлекать квадратный корень из расстояния, что является очень дорогой операцией.
+
+## txCoord(coord)
+Это макрос для удобства указания координат в функции, принимающие отдельно координату x и y.
+Например:
+
+```
+txu::Coord2D position (100, 100);
+txu::Coord2D size     (25,  50 );
+
+txRectangle (position.x, position.y, position.x + size.x, position.y + size.y);
+```
+
+эквивалентно
+
+```
+txu::Coord2D position (100, 100);
+txu::Coord2D size     (25,  50 );
+
+txRectangle (txCoord (position), txCoord (position + size));
+```
+
+И ещё один пример:
+
+```
+txu::Coord2D position (100, 100);
+double radius = 5;
+
+txEllipse (position.x - 5, position.y - 5, position.x + 5, position.y + 5);
+```
+
+так же эквивалентно
+
+```
+txu::Coord2D position (100, 100);
+double radius = 5;
+
+txEllipse (txCoord (position-5), txCoord (position+5));
+```
 
 # txu::Context
 Это, пожалуй, основной инструмент библиотеки. Забудьте о ~~ежедневном геморрое с~~ HDC!
