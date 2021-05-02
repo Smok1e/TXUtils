@@ -25,8 +25,6 @@ public :
 	bool loadFromFile (const char* filename);
 	bool saveToFile   (const char* filename);
 
-	void destruct ();
-
 	int getSizeX ();
 	int getSizeY ();
 
@@ -56,6 +54,8 @@ private :
 
 	int size_x_;
 	int size_y_;
+
+	void destruct ();
 };
 
 //-------------------
