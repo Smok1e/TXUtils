@@ -21,7 +21,7 @@ TXUtils - это opensource библиотека, написанная мною 
 - [int  txu::GetMouseWheel           ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txugetmousewheel-)
 - [void txu::SetConsoleOutputEnabled (bool enable)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txusetconsoleoutputenabled-bool-enable)
 - [bool txu::IsConsoleOutputEnabled  ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txuisconsoleoutputenabled-)
-- [bool txu::SetWindowIcon (const char* filename)]
+- [bool txu::SetWindowIcon (const char* filename)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txusetwindowicon-const-char-filename)
 
 # Классы библиотеки:
 - [txu::Color](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucolor)
