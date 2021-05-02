@@ -402,7 +402,7 @@ result.render ();
 - [void txu::Context::setFont (const char* name, int sx, int sy = -1, int bold = FW_DONTCARE, bool italic = false, bool underline = false, bool strikeout = false, double angle = 0)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetfont-const-char-name-int-sx-int-sy---1-int-bold--fw_dontcare-bool-italic--false-bool-underline--false-bool-strikeout--false-double-angle--0)
 
 ## bool txu::Context::create (...)
-Заного инициализирует изображение в соответствии с указанными параметрами. Возвращает true в случае успеха.
+Заново инициализирует изображение в соответствии с указанными параметрами. Возвращает true в случае успеха.
 
 ## bool txu::Context::loadFromFile (const char* filename)
 Загружает изображение из файла. Возвращает true в случае успеха.
