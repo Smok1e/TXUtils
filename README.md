@@ -21,6 +21,7 @@ TXUtils - это opensource библиотека, написанная мною 
 - [int  txu::GetMouseWheel           ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txugetmousewheel-)
 - [void txu::SetConsoleOutputEnabled (bool enable)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txusetconsoleoutputenabled-bool-enable)
 - [bool txu::IsConsoleOutputEnabled  ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txuisconsoleoutputenabled-)
+- [bool txu::SetWindowIcon (const char* filename)]
 
 # Классы библиотеки:
 - [txu::Color](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucolor)
@@ -57,6 +58,31 @@ while (!GetAsyncKeyState (VK_ESCAPE))
 
 ## bool txu::IsConsoleOutputEnabled ()
 Возвращает true если рисование консоли поверх окна разрешено или false в обратном случае.
+
+## bool txu::SetWindowIcon (const char* filename)
+Вам не надоела иконка TXLib'а, которую [дед](ded32.net.ru) нагло вставил в свою библиотеку? Мне да.
+Поэтому я и сделал это функцию.
+Она устанавливает окну TXLib иконку, загруженную из файла, указанного в параметрах. Если картинка загружена успешно, функция вернёт true. В обратном случае - false.
+Иконка должна быть в формате [.ico](https://ru.wikipedia.org/wiki/ICO_(%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82_%D1%84%D0%B0%D0%B9%D0%BB%D0%B0))
+
+Я нарисовал такую иконку для своей программы:
+
+![alt text](https://sun9-61.userapi.com/impg/jcPy9ayljutrfxSUlVeiHfjQ6SBaEAGdxOZukg/r4VcKT8VOCQ.jpg?size=169x166&quality=96&sign=a333f4d1b05460349f4cc026e2ee655b&type=album)
+
+И вызвал функция txu::SetWindowIcon:
+
+```
+txCreateWindow (800, 800);
+txu::SetWindowIcon ("icon.ico")
+```
+
+Теперь в заголовке окна висит моя собственная иконка:
+
+![alt text](https://sun9-63.userapi.com/impg/DKhOVKqwbEFdh2wzPU08lPZ-5hIvPFHiCXSMiw/Qyis_dQnOVs.jpg?size=200x200&quality=96&sign=38dd977af1f3b6bb2b6c4a752bf0c2b9&type=album)
+
+Так же, советую вам [плагин для фотошопа, позволяющий сохранять картинки в формате ico](https://rugraphics.ru/photoshop/plagin-format-ico-v-photoshop-cs6-i-cc).
+
+И напоследок, если вам не нравится то, что TXLib устанавливает своё имя в заголовке окна, используйте функцию [SetWindowText](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowtexta) из WinApi.
 
 # txu::Color
 Класс предназначеный для хранения и операций с цветом.
