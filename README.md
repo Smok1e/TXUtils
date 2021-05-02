@@ -25,7 +25,7 @@ TXUtils - это opensource библиотека, написанная мною 
 # Классы библиотеки:
 - [txu::Color](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucolor)
 - [txu::Font](https://github.com/Smok1e/TXUtils/blob/main/README.md#txufont)
-- txu::Context
+- [txu::Context](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucontext)
 
 
 
