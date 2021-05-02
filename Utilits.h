@@ -30,7 +30,7 @@ int  GetMouseWheel           ();
 void SetConsoleOutputEnabled (bool enable);
 bool IsConsoleOutputEnabled  ();
 
-void SetWindowIcon (const char* filename);
+bool SetWindowIcon (const char* filename);
 
 //-------------------
 
@@ -106,9 +106,10 @@ bool IsConsoleOutputEnabled ()
 
 //-------------------
 
-void SetWindowIcon (const char* filename)
+bool SetWindowIcon (const char* filename)
 {
 	HICON icon = (HICON) LoadImageA (NULL, filename, IMAGE_ICON, 32, 32, LR_LOADFROMFILE | LR_SHARED);
+	if (!icon) return false;
 
 	SendMessage (txWindow (), WM_SETICON, ICON_SMALL, (LPARAM) icon);
 	SendMessage (txWindow (), WM_SETICON, ICON_BIG,   (LPARAM) icon);
