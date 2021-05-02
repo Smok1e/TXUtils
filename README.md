@@ -60,7 +60,7 @@ while (!GetAsyncKeyState (VK_ESCAPE))
 Возвращает true если рисование консоли поверх окна разрешено или false в обратном случае.
 
 ## bool txu::SetWindowIcon (const char* filename)
-Вам не надоела иконка TXLib'а, которую [дед](ded32.net.ru) нагло вставил в свою библиотеку? Мне да.
+Вам не надоела иконка TXLib'а, которую [дед](http://ded32.net.ru/) нагло вставил в свою библиотеку? Мне да.
 Поэтому я и сделал это функцию.
 Она устанавливает окну TXLib иконку, загруженную из файла, указанного в параметрах. Если картинка загружена успешно, функция вернёт true. В обратном случае - false.
 Иконка должна быть в формате [.ico](https://ru.wikipedia.org/wiki/ICO_(%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82_%D1%84%D0%B0%D0%B9%D0%BB%D0%B0))
@@ -73,7 +73,7 @@ while (!GetAsyncKeyState (VK_ESCAPE))
 
 ```
 txCreateWindow (800, 800);
-txu::SetWindowIcon ("icon.ico")
+txu::SetWindowIcon ("icon.ico");
 ```
 
 Теперь в заголовке окна висит моя собственная иконка:
