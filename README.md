@@ -453,8 +453,12 @@ for (int x = 0; x < size_x; x++)
 	for (int y = 0; y < size_y; y++)
 	{
 		txu::Color color = source.getPixel (x, y);
-		color.r = 0;
-		result.setPixel (x, y, color);
+
+		int h = color.hue        ();
+		int s = color.saturation ();
+		int v = color.value      ();
+
+		result.setPixel (x, y, txu::Color::HSV ((h + 140) % 255, s, v));
 	}
 }
 
@@ -462,9 +466,9 @@ txCreateWindow (size_x, size_y);
 result.render ();
 ```
 
-Этот код загрузит картинку из файла "image.bmp" в txu::Context, а затем уберёт красный канал с фотографии:
+Этот код загрузит картинку из файла "image.bmp" в txu::Context, затем конвертирует цвет каждого пикселя в систему HSV, прибавит к hue 140 и конвертирует цвет обратно в RGB:
 
-![alt text](https://sun9-55.userapi.com/impg/xpZhX5tJg1XnkjYSRZJbHlfdA5nRIMqL2PQ9dg/q55WyNvV-hY.jpg?size=257x551&quality=96&sign=0075640318e1216b517c650ec61a4b4d&type=album)
+![alt text](https://sun1-16.userapi.com/impg/ix5DdnCQIjldKG6F59DXZ_dsGUHd0KL-hIQQRQ/P0gmmLEBPeM.jpg?size=262x554&quality=96&sign=4809b998ccb105073ec5b1aaf4591d4b&type=album)
 
 Или вот пример посложнее:
 
