@@ -370,3 +370,83 @@ result.render ();
 И получим размытое изображение на экране:
 
 ![alt text](https://sun9-10.userapi.com/impg/t5uoqE_C-TPDAEGwdfHcROdKHl29ziq3oEZ67w/l4quIqsSiuY.jpg?size=261x551&quality=96&sign=8dac28143c918541d57b24dec161e21a&type=album)
+
+Экземпляром класса можно пользоваться так же, как и HDC. Для этого в нём есть соответствующий оператор.
+
+## Конструкторы класса:
+- txu::Context ()
+- txu::Context (int size_x, int size_y)
+- txu::Context (const Context& that)
+- txu::Context (const HDC& dc)
+- txu::Context (const char* filename)
+
+## Функции-члены:
+- bool txu::Context::create ()
+- bool txu::Context::create (int size_x, int size_y)
+- bool txu::Context::create (const Context& that)
+- bool txu::Context::create (const HDC& dc)
+- bool txu::Context::create (const char* filename)
+- bool txu::Context::loadFromFile (const char* filename)
+- bool txu::Context::saveToFile (const char* filename)
+- int txu::Context::getSizeX ()
+- int txu::Context::getSizeY ()
+- void txu::Context::resize (int new_size_x, int new_size_y)
+- void txu::Context::render (HDC dc = txDC (), int x = 0, int y = 0, int width = 0, int height = 0)
+- void txu::Context::clear (txu::Color color)
+- txu::Context::operator HDC& ()
+- void txu::Context::setPixel (int x, int y, txu::Color color)
+- txu::Color txu::Context::getPixel (int x, int y)
+- void txu::Context::setColor (txu::Color color, int thikness = 0)
+- void txu::Context::setFillColor (txu::Color color)
+- void txu::Context::setFont (HFONT font)
+- void txu::Context::setFont (const char* name, int sx, int sy = -1, int bold = FW_DONTCARE, bool italic = false, bool underline = false, bool strikeout = false, double angle = 0)
+
+## bool txu::Context::create (...)
+Заного инициализирует изображение в соответствии с указанными параметрами. Возвращает true в случае успеха.
+
+## bool txu::Context::loadFromFile (const char* filename)
+Загружает изображение из файла. Возвращает true в случае успеха.
+К сожалению, WinAPI позволяет загружать изображения лишь формата bmp. В будущем я постараюсь реализовать загрузку изображений формата png при помощи [libpng](http://www.libpng.org/pub/png/libpng.html).
+
+## bool txu::Context::saveToFile (const char* filename)
+Сохраняет изображение в файл в формате bmp.
+
+## int txu::Context::getSizeX ()
+Возвращает ширину изображения.
+
+## int txu::Context::getSizeY ()
+Возвращает высоту изображентя.
+
+## void txu::Context::resize (int new_size_x, int new_size_y)
+Меняет размер изображения в соответствии с параметрами, при этом сохраняя исходное изображение. 
+
+## void txu::Context::render (HDC dc = txDC (), int x = 0, int y = 0, int width = 0, int height = 0)
+Копирует изображение в HDC указанный в параметрах. Если HDC не указан, изображение копируется в окно TXLib.
+В параметрах так же можно указать координаты и размер копируемого изображения.
+
+## void txu::Context::clear (txu::Color color)
+Очищает изображение указанным в параметрах цветом.
+
+## txu::Context::operator HDC& ()
+Оператор преобразования к HDC. 
+
+## void txu::Context::setPixel (int x, int y, txu::Color color)
+Устанавливает пиксель в точке, указанной параметрами x и y с учётом альфа-канала входного цвета.
+
+## txu::Color txu::Context::getPixel (int x, int y)
+Возвращает цвет пикселя по указанным координатам. Если координаты выходят за рамки изображения, функция вернёт txu::Color::Black.
+
+## void txu::Context::setColor (txu::Color color, int thikness = 0)
+Устанавливает цвет обводки для внутреннего HDC. Тоже самое, что и txSetColor.
+
+## void txu::Context::setFillColor (txu::Color color)
+Устанавливает цвет заливки для внутреннего HDC. Тоже самое, что и txSetFillColor.
+
+## void txu::Context::setFont (HFONT font)
+Устанавливает шрифт для внутреннего HDC, указанный в параметрах. В качестве параметра используйте txu::Font.
+
+## void txu::Context::setFont (const char* name, int sx, int sy = -1, int bold = FW_DONTCARE, bool italic = false, bool underline = false, bool strikeout = false, double angle = 0)
+Устанавливает шрифт для внутреннего HDC по указанным параметрам. То же, что и txSelectFont.
+
+# Спасибо за использование TXUtils!
+Я буду рад ответить на ваши жалобы и предложения. В будущем я собираюсь добавить ещё множество удобных фич!
