@@ -86,7 +86,7 @@ txSetFillColor (txu::Color (24, 24, 24));
 - [operator COLORREF ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoloroperator-colorref-)
 - [Color operator ! ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucoloroperator--)
 - [static Color HSV (int h, int s, int v)](https://github.com/Smok1e/TXUtils/blob/main/README.md#static-color-txucolorhsv-int-h-int-s-int-)
-- [int hue ()](vhttps://github.com/Smok1e/TXUtils/blob/main/README.md#int-txucolorhue-)
+- [int hue ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txucolorhue-)
 - [int saturation ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txucolorsaturation-)
 - [int value ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txucolorvalue-)
 
