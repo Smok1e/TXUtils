@@ -85,6 +85,10 @@ txSetFillColor (txu::Color (24, 24, 24));
 - [operator RGBQUAD  ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoloropreator-rgbquad-)
 - [operator COLORREF ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoloroperator-colorref-)
 - [Color operator ! ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucoloroperator--)
+- [static Color HSV (int h, int s, int v)](https://github.com/Smok1e/TXUtils/blob/main/README.md#static-color-txucolorhsv-int-h-int-s-int-)
+- [int hue ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txucolorhue-)
+- [int saturation ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txucolorsaturation-)
+- [int value ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txucolorvalue-)
 
 ## Функции для операций с цветом:
 - [txu::Color Blend (Color a, Color b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucolor-blend-color-a-color-b)
@@ -144,6 +148,40 @@ for (int x = 0; x < size_x; x++)
 txu::Color black (0, 0, 0)
 txu::Color white = !black //Белый цвет
 ```
+
+## static Color txu::Color::HSV (int h, int s, int v)
+Возвращает цвет, созданный на основе системы [HSV](https://ru.wikipedia.org/wiki/HSV_(%D1%86%D0%B2%D0%B5%D1%82%D0%BE%D0%B2%D0%B0%D1%8F_%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C)).
+Значения h, s и v должны быть в диапазоне от 0 до 255.
+Эта функция является статической, то есть её можно вызвать не создавая экземпляра класса Color.
+Например:
+
+```
+int size_x = 800;
+int size_y = 100;
+
+txCreateWindow (size_x, size_y);
+for (int x = 0; x < size_x; x++)
+{
+	double t = (double) x / size_x;
+	int hue = t * 255;
+
+	txSetColor (txu::Color::HSV (hue, 255, 255));
+	txRectangle (x, 0, x+1, size_y);
+}
+```
+
+Этот код нарисует в окне плавный переход между всеми цветами радуги:
+
+![alt text](https://sun9-5.userapi.com/impg/awW2XK_oU7TU_MyafSxOHGHshzaMR_0ZRK03AQ/neJelUgAFcw.jpg?size=806x137&quality=96&sign=426209e04914ba4f3da9da8c6b842bef&type=album)
+
+## int txu::Color::hue ()
+Переводит цвет в формат HSV, и возвращает значение hue (цветовой тон). См. [Цветовая модель HSV](https://ru.wikipedia.org/wiki/HSV_(%D1%86%D0%B2%D0%B5%D1%82%D0%BE%D0%B2%D0%B0%D1%8F_%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C)).
+
+## int txu::Color::saturation ()
+Переводит цвет в формат HSV, и возвращает значение saturatuion (насыщеность). См. [Цветовая модель HSV](https://ru.wikipedia.org/wiki/HSV_(%D1%86%D0%B2%D0%B5%D1%82%D0%BE%D0%B2%D0%B0%D1%8F_%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C)).
+
+## int txu::Color::value ()
+Переводит цвет в формат HSV, и возвращает значение value (яркость). См. [Цветовая модель HSV](https://ru.wikipedia.org/wiki/HSV_(%D1%86%D0%B2%D0%B5%D1%82%D0%BE%D0%B2%D0%B0%D1%8F_%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C)).
 
 ## txu::Color Blend (Color a, Color b)
 Функция смешивания цветов с учётом альфа-канала.
@@ -368,6 +406,11 @@ while (!GetAsyncKeyState (VK_ESCAPE) && !txu::WasExitButtonPressed ())
 - [txu::Coord operator / (const Coord2D& coord, double scalar)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%81%D0%BA%D0%B0%D0%BB%D1%8F%D1%80%D0%BD%D1%8B%D0%B5-%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-coord2d)
 - [bool operator == (const Coord2D& a, const Coord2D& b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-operator--const-coord2d-a-const-coord2d-b)
 - [bool operator != (const Coord2D& a, const Coord2D& b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-operator--const-coord2da-const-coord2d-b)
+- [double Coord2Distance (const Coor2D& a, const Coord2D& b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#double-txucoord2distance-const-coord2d-a-const-coord2d-b)
+- [double Coord2DSqrDistance (const Coord2D& a, const Coord2D& b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#double-txucoord2dsqrdistance-const-coord2d-a-const-coord2d-b)
+
+## Макросы для операций с классом:
+- txCoord(coord)
 
 ## txu::Coord2D::operator POINT ()
 Оператор преобразования к POINT.
@@ -428,6 +471,51 @@ Coord2D result = coord * scalar; // result == {5, 25}
 ## bool operator != (const Coord2D&a, const Coord2D& b)
 Оператор сравнения для Coord2D. Возвращает true, если a.x != b.x, или a.y != b.y, иначе false.
 
+## double txu::Coord2Distance (const Coord2D& a, const Coord2D& b)
+Очень полезная функция. Возвращает численное расстояние между точками a и b по теореме пифагора.
+
+## double txu::Coord2DSqrDistance (const Coord2D& a, const Coord2D& b)
+Возвращает численное расстояние между точками a и b, возведённое в квадрат.
+Советую использовать это функцию вместо [txu::Coord2Distance](https://github.com/Smok1e/TXUtils/blob/main/README.md#double-txucoord2distance-const-coord2d-a-const-coord2d-b), если вам не нужно точное расстояние (например для сравнения расстояния a и расстояния b), поскольку последней приходится извлекать квадратный корень из расстояния, что является очень дорогой операцией.
+
+## txCoord(coord)
+Это макрос для удобства указания координат в функции, принимающие отдельно координату x и y.
+Например:
+
+```
+txu::Coord2D position (100, 100);
+txu::Coord2D size     (25,  50 );
+
+txRectangle (position.x, position.y, position.x + size.x, position.y + size.y);
+```
+
+эквивалентно
+
+```
+txu::Coord2D position (100, 100);
+txu::Coord2D size     (25,  50 );
+
+txRectangle (txCoord (position), txCoord (position + size));
+```
+
+И ещё один пример:
+
+```
+txu::Coord2D position (100, 100);
+double radius = 5;
+
+txEllipse (position.x - 5, position.y - 5, position.x + 5, position.y + 5);
+```
+
+так же эквивалентно
+
+```
+txu::Coord2D position (100, 100);
+double radius = 5;
+
+txEllipse (txCoord (position-5), txCoord (position+5));
+```
+
 # txu::Context
 Это, пожалуй, основной инструмент библиотеки. Забудьте о ~~ежедневном геморрое с~~ HDC!
 Context обеспечивает удобную и надёжную работу с изображениями. Его не надо освобождать с помощью txDeleteDC, за вас это сделает деструктор.
@@ -444,8 +532,12 @@ for (int x = 0; x < size_x; x++)
 	for (int y = 0; y < size_y; y++)
 	{
 		txu::Color color = source.getPixel (x, y);
-		color.r = 0;
-		result.setPixel (x, y, color);
+
+		int h = color.hue        ();
+		int s = color.saturation ();
+		int v = color.value      ();
+
+		result.setPixel (x, y, txu::Color::HSV ((h + 140) % 255, s, v));
 	}
 }
 
@@ -453,9 +545,9 @@ txCreateWindow (size_x, size_y);
 result.render ();
 ```
 
-Этот код загрузит картинку из файла "image.bmp" в txu::Context, а затем уберёт красный канал с фотографии:
+Этот код загрузит картинку из файла "image.bmp" в txu::Context, затем конвертирует цвет каждого пикселя в систему HSV, прибавит к hue 140 и конвертирует цвет обратно в RGB:
 
-![alt text](https://sun9-55.userapi.com/impg/xpZhX5tJg1XnkjYSRZJbHlfdA5nRIMqL2PQ9dg/q55WyNvV-hY.jpg?size=257x551&quality=96&sign=0075640318e1216b517c650ec61a4b4d&type=album)
+![alt text](https://sun1-16.userapi.com/impg/ix5DdnCQIjldKG6F59DXZ_dsGUHd0KL-hIQQRQ/P0gmmLEBPeM.jpg?size=262x554&quality=96&sign=4809b998ccb105073ec5b1aaf4591d4b&type=album)
 
 Или вот пример посложнее:
 
