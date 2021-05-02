@@ -293,7 +293,7 @@ txTextOut (size_x/2 - txGetTextExtentX (text)/2, size_y/2 - txGetTextExtentY (te
 Скорее всего, вы уже сталкивались со структурой POINT из WinApi. Класс Coord2D представляет из себя тоже самое, но с некоторыми преимуществами.
 Во первых, POINT способна хранить исключительно целые числа, в то время как Coord2D оперирует с double. А во вторых, для Coord2D определены всевозможные математические операторы. Кроме того, разумеется, вы сможете явно или неявно преобразовать POINT к Coord2D, и обратно.
 
-Представьте ситуацию. У вас есть графический интерфейс и обрасть рисования, которая смещена относительно этого интерфейса. Вам необходимо получить относительные координаты мыши этой области рисования. Это очень легко сделать при помощи Coord2D.
+Представьте ситуацию. У вас есть графический интерфейс и область рисования, которая смещена относительно этого интерфейса. Вам необходимо получить относительные координаты мыши этой области рисования. Это очень легко сделать при помощи Coord2D.
 
 Я накодил такой пример:
 
@@ -338,6 +338,77 @@ while (!GetAsyncKeyState (VK_ESCAPE) && !txu::WasExitButtonPressed ())
 Если нажать на поле рисования, на нём остаются белые кружки.
 
 ![alt text](https://psv4.userapi.com/c536236/u402150900/docs/d31/baf144931962/TXUTils_Coord2D_example.gif?extra=_tmdIIpoWSkwxGCBuYDbSu4LIoiKejK7p3rYdGl9w0CJrFWx4O4YBc7SJyk4JpFxDusAEhuadsZLCYtcK9oNud47kThRD7dwHe7URvHy5ZQ_GmRwqROuRmkBTFiiO1SL9j7hQGT72zAz32n3vaVwhT5L)
+
+## Конструкторы класса:
+- txu::Coord2D (double x, double y)
+- txu::Coord2D (const Coord2D& that)
+- txu::Coord2D (POINT point)
+- txu::Coord2D ()
+
+## Функции-члены:
+- txu::Coord2D::operator POINT ()
+- Coord2D txu::Coord2D::operator - ()
+- Coord2D& txu::Coord2D::operator += (const Coord2D& that)
+- Coord2D& txu::Coord2D::operator -= (const Coord2D& that)
+- Coord2D& txu::Coord2D::operator *= (const Coord2D& that)
+- Coord2D& txu::Coord2D::operator /= (const Coord2D& that)
+- Coord2D& txu::Coord2D::operator += (double scalar)
+- Coord2D& txu::Coord2D::operator -= (double scalar)
+- Coord2D& txu::Coord2D::operator *= (double scalar)
+- Coord2D& txu::Coord2D::operator /= (double scalar)
+
+## txu::Coord2D::operator POINT ()
+Оператор преобразования к POINT.
+
+## Coord2D txu::Coord2D::operator - () (унарный)
+Возвращает отрицательный Coord2D.
+То есть 
+
+```
+Coord2D a (-5, -2); 
+Coord2D b ( 5,  2); 
+a == -b //true
+```
+
+## Математические операторы Coord2D
+Делают то же, что и обычные операторы чисел, но применяются к каждмоу из чисел класса Coord2D.
+То есть
+
+```
+Coord2D a (1, 5);
+Coord2D b (2, 3);
+
+Coord2D c = a + b; // c == {3, 8}
+```
+
+или
+
+```
+Coord2D a (1, 5);
+Coord2D b (2, 3);
+
+Coord2D c = a * b; // c == {2, 15}
+```
+
+## Скалярные математические операторы Coord2D
+Далают то же, что и обычные операторы Coord2D, но скалярное число оперируется с каждым из чисел Coord2D.
+То есть
+
+```
+Coord2D coord (1, 5);
+double scalar = 5;
+
+Coord2D result = coord + scalar; // result == {6, 10}
+```
+
+или
+
+```
+Coord2D coord (1, 5);
+double scalar = 5;
+
+Coord2D result = coord * scalar; // result == {5, 25}
+```
 
 # txu::Context
 Это, пожалуй, основной инструмент библиотеки. Забудьте о ~~ежедневном геморрое с~~ HDC!
