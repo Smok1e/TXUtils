@@ -402,7 +402,7 @@ result.render ();
 - [void txu::Context::setFont (const char* name, int sx, int sy = -1, int bold = FW_DONTCARE, bool italic = false, bool underline = false, bool strikeout = false, double angle = 0)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetfont-const-char-name-int-sx-int-sy---1-int-bold--fw_dontcare-bool-italic--false-bool-underline--false-bool-strikeout--false-double-angle--0)
 
 ## bool txu::Context::create (...)
-Заного инициализирует изображение в соответствии с указанными параметрами. Возвращает true в случае успеха.
+Заново инициализирует изображение в соответствии с указанными параметрами. Возвращает true в случае успеха.
 
 ## bool txu::Context::loadFromFile (const char* filename)
 Загружает изображение из файла. Возвращает true в случае успеха.
@@ -415,13 +415,13 @@ result.render ();
 Возвращает ширину изображения.
 
 ## int txu::Context::getSizeY ()
-Возвращает высоту изображентя.
+Возвращает высоту изображения.
 
 ## void txu::Context::resize (int new_size_x, int new_size_y)
 Меняет размер изображения в соответствии с параметрами, при этом сохраняя исходное изображение. 
 
 ## void txu::Context::render (HDC dc = txDC (), int x = 0, int y = 0, int width = 0, int height = 0)
-Копирует изображение в HDC указанный в параметрах. Если HDC не указан, изображение копируется в окно TXLib.
+Копирует изображение в HDC, указанный в параметрах. Если HDC не указан, изображение копируется в окно TXLib.
 В параметрах так же можно указать координаты и размер копируемого изображения.
 
 ## void txu::Context::clear (txu::Color color)
@@ -437,7 +437,7 @@ result.render ();
 Возвращает цвет пикселя по указанным координатам. Если координаты выходят за рамки изображения, функция вернёт txu::Color::Black.
 
 ## void txu::Context::setColor (txu::Color color, int thikness = 0)
-Устанавливает цвет обводки для внутреннего HDC. Тоже самое, что и txSetColor.
+Устанавливает цвет и толщину обводки для внутреннего HDC. Тоже самое, что и txSetColor.
 
 ## void txu::Context::setFillColor (txu::Color color)
 Устанавливает цвет заливки для внутреннего HDC. Тоже самое, что и txSetFillColor.
@@ -446,7 +446,7 @@ result.render ();
 Устанавливает шрифт для внутреннего HDC, указанный в параметрах. В качестве параметра используйте txu::Font.
 
 ## void txu::Context::setFont (const char* name, int sx, int sy = -1, int bold = FW_DONTCARE, bool italic = false, bool underline = false, bool strikeout = false, double angle = 0)
-Устанавливает шрифт для внутреннего HDC по указанным параметрам. То же, что и txSelectFont.
+Устанавливает шрифт для внутреннего HDC по указанным параметрам. Тоже самое, что и txSelectFont.
 
 # Спасибо за использование TXUtils!
-Я буду рад ответить на ваши жалобы и предложения. В будущем я собираюсь добавить ещё множество удобных фич!
+Я буду рад ответить на ваши вопросы и предложения. В будущем я собираюсь добавить ещё множество удобных фич!
