@@ -11,7 +11,7 @@ bool operator == (const Coord2D& a, const Coord2D& b);
 bool operator != (const Coord2D& a, const Coord2D& b);
 
 double Coord2DSqrDistance (const Coord2D& a, const Coord2D& b);
-double COord2Distance     (const Coord2D& a, const Coord2D& b);
+double Coord2Distance     (const Coord2D& a, const Coord2D& b);
 
 //-------------------
 
@@ -28,7 +28,6 @@ public :
 	operator POINT ();
 
 	Coord2D operator - ();
-	Coord2D operator ! ();
 
 	Coord2D& operator += (const Coord2D& that);
 	Coord2D& operator -= (const Coord2D& that);

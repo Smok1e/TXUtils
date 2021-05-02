@@ -39,6 +39,11 @@ union Color
 
 	Color operator ! ();
 
+	static Color HSV (int hue, int saturation, int value);
+	int hue        ();
+	int saturation ();
+	int value      ();
+
 	static Color Black;
 	static Color White;
 	static Color Red;
@@ -169,6 +174,132 @@ Color::operator COLORREF ()
 Color Color::operator ! ()
 {
 	return Color (255-r, 255-g, 255-b, a);
+}
+
+//-------------------
+
+Color Color::HSV (int h, int s, int v)
+{
+	Color rgb;
+	h = Clamp (h, 0, 255);
+	s = Clamp (s, 0, 255);
+	v = Clamp (v, 0, 255);
+
+    if (s == 0)
+    {
+        rgb.r = v;
+        rgb.g = v;
+        rgb.b = v;
+
+        return rgb;
+    }
+
+    int region = h / 43;
+    int remainder = (h - (region * 43)) * 6; 
+
+    int p = (v * (255 - s)) >> 8;
+    int q = (v * (255 - ((s * remainder) >> 8))) >> 8;
+    int t = (v * (255 - ((s * (255 - remainder)) >> 8))) >> 8;
+
+    switch (region)
+    {
+        case 0:
+            rgb.r = v; rgb.g = t; rgb.b = p;
+            break;
+
+        case 1:
+            rgb.r = q; rgb.g = v; rgb.b = p;
+            break;
+
+        case 2:
+			rgb.r = p; rgb.g = v; rgb.b = t;
+            break;
+
+        case 3:
+            rgb.r = p; rgb.g = q; rgb.b = v;
+            break;
+
+        case 4:
+            rgb.r = t; rgb.g = p; rgb.b = v;
+            break;
+
+        default:
+            rgb.r = v; rgb.g = p; rgb.b = q;
+            break;
+
+    }
+
+    return rgb;
+}
+
+int Color::hue ()
+{
+    double min = 0, max = 0, delta = 0;
+
+    min = r   < g ? r   : g;
+    min = min < b ? min : b;
+
+    max = r   > g ? r   : g;
+    max = max > b ? max : b;
+
+    delta = max - min;
+	
+	double h = 0;
+
+	if (delta < 0.00001)
+		return h;
+
+    if (r >= max)
+        h = (g - b) / delta;
+
+    else if (g >= max)
+        h = 2.0 + (b - r) / delta;
+
+    else
+        h = 4.0 + (r - g) / delta;
+
+    h *= 60.0;
+
+    if (h < 0)
+        h += 360.0;
+
+    return 255.0/360.0*h;
+}
+
+int Color::saturation ()
+{
+	double min = 0, max = 0, delta = 0;
+
+    min = r   < g ? r   : g;
+    min = min < b ? min : b;
+
+    max = r   > g ? r   : g;
+    max = max > b ? max : b;
+
+    delta = max - min;
+
+	double s = 0;
+
+	if (delta < 0.00001)
+		s = 0;
+
+	else if (max > 0.0)
+		s = (double) (delta / max);
+
+	return s * 255;
+}
+
+int Color::value ()
+{
+    double min = 0, max = 0, delta = 0;
+
+    min = r   < g ? r   : g;
+    min = min < b ? min : b;
+
+    max = r   > g ? r   : g;
+    max = max > b ? max : b;
+
+	return max;
 }
 
 //-------------------
