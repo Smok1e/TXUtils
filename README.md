@@ -366,8 +366,8 @@ while (!GetAsyncKeyState (VK_ESCAPE) && !txu::WasExitButtonPressed ())
 - [txu::Coord operator - (const Coord2D& coord, double scalar)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%81%D0%BA%D0%B0%D0%BB%D1%8F%D1%80%D0%BD%D1%8B%D0%B5-%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-coord2d)
 - [txu::Coord operator * (const Coord2D& coord, double scalar)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%81%D0%BA%D0%B0%D0%BB%D1%8F%D1%80%D0%BD%D1%8B%D0%B5-%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-coord2d)
 - [txu::Coord operator / (const Coord2D& coord, double scalar)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%81%D0%BA%D0%B0%D0%BB%D1%8F%D1%80%D0%BD%D1%8B%D0%B5-%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-coord2d)
-- bool operator == (const Coord2D& a, const Coord2D& b)
-- bool operator != (const Coord2D& a, const Coord2D& b)
+- [bool operator == (const Coord2D& a, const Coord2D& b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-operator--const-coord2d-a-const-coord2d-b)
+- [bool operator != (const Coord2D& a, const Coord2D& b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-operator--const-coord2da-const-coord2d-b)
 
 ## txu::Coord2D::operator POINT ()
 Оператор преобразования к POINT.
