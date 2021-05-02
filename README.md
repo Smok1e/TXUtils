@@ -69,7 +69,7 @@ while (!GetAsyncKeyState (VK_ESCAPE))
 
 ![alt text](https://sun9-61.userapi.com/impg/jcPy9ayljutrfxSUlVeiHfjQ6SBaEAGdxOZukg/r4VcKT8VOCQ.jpg?size=169x166&quality=96&sign=a333f4d1b05460349f4cc026e2ee655b&type=album)
 
-И вызвал функция txu::SetWindowIcon:
+И вызвал функцию txu::SetWindowIcon:
 
 ```
 txCreateWindow (800, 800);
