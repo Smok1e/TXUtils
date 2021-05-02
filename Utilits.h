@@ -113,6 +113,8 @@ bool SetWindowIcon (const char* filename)
 
 	SendMessage (txWindow (), WM_SETICON, ICON_SMALL, (LPARAM) icon);
 	SendMessage (txWindow (), WM_SETICON, ICON_BIG,   (LPARAM) icon);
+
+	return true;
 }
 
 //-------------------
