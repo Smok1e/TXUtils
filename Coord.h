@@ -10,6 +10,9 @@ class Coord2D;
 bool operator == (const Coord2D& a, const Coord2D& b);
 bool operator != (const Coord2D& a, const Coord2D& b);
 
+double Coord2DSqrDistance (const Coord2D& a, const Coord2D& b);
+double COord2Distance     (const Coord2D& a, const Coord2D& b);
+
 //-------------------
 
 class Coord2D
@@ -153,6 +156,21 @@ bool operator == (const Coord2D& a, const Coord2D& b)
 bool operator != (const Coord2D& a, const Coord2D& b)
 {
 	return a.x != b.x || a.y != b.y;
+}
+
+//-------------------
+
+double Coord2DSqrDistance (const Coord2D& a, const Coord2D& b)
+{
+	double x = b.x - a.x;
+	double y = b.y - a.y;
+
+	return x*x + y*y;
+}
+
+double Coord2Distance (const Coord2D& a, const Coord2D& b)
+{
+	return sqrt (Coord2DSqrDistance (a, b));
 }
 
 //-------------------
