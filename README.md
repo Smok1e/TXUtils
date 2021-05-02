@@ -357,6 +357,18 @@ while (!GetAsyncKeyState (VK_ESCAPE) && !txu::WasExitButtonPressed ())
 - [Coord2D& txu::Coord2D::operator *= (double scalar)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%81%D0%BA%D0%B0%D0%BB%D1%8F%D1%80%D0%BD%D1%8B%D0%B5-%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-coord2d)
 - [Coord2D& txu::Coord2D::operator /= (double scalar)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%81%D0%BA%D0%B0%D0%BB%D1%8F%D1%80%D0%BD%D1%8B%D0%B5-%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-coord2d)
 
+## Функции для операций с Coord2D:
+- [txu::Coord operator + (const Coord2D& a, const Coord2D& b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-coord2d)
+- [txu::Coord operator - (const Coord2D& a, const Coord2D& b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-coord2d)
+- [txu::Coord operator * (const Coord2D& a, const Coord2D& b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-coord2d)
+- [txu::Coord operator / (const Coord2D& a, const Coord2D& b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-coord2d)
+- [txu::Coord operator + (const Coord2D& coord, double scalar)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%81%D0%BA%D0%B0%D0%BB%D1%8F%D1%80%D0%BD%D1%8B%D0%B5-%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-coord2d)
+- [txu::Coord operator - (const Coord2D& coord, double scalar)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%81%D0%BA%D0%B0%D0%BB%D1%8F%D1%80%D0%BD%D1%8B%D0%B5-%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-coord2d)
+- [txu::Coord operator * (const Coord2D& coord, double scalar)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%81%D0%BA%D0%B0%D0%BB%D1%8F%D1%80%D0%BD%D1%8B%D0%B5-%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-coord2d)
+- [txu::Coord operator / (const Coord2D& coord, double scalar)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%81%D0%BA%D0%B0%D0%BB%D1%8F%D1%80%D0%BD%D1%8B%D0%B5-%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-coord2d)
+- bool operator == (const Coord2D& a, const Coord2D& b)
+- bool operator != (const Coord2D& a, const Coord2D& b)
+
 ## txu::Coord2D::operator POINT ()
 Оператор преобразования к POINT.
 
@@ -409,6 +421,12 @@ double scalar = 5;
 
 Coord2D result = coord * scalar; // result == {5, 25}
 ```
+
+## bool operator == (const Coord2D& a, const Coord2D& b)
+Оператор сравнения для Coord2D. Возвращает true, если a.x == b.x и a.y == b.y, иначе false.
+
+## bool operator != (const Coord2D&a, const Coord2D& b)
+Оператор сравнения для Coord2D. Возвращает true, если a.x != b.x, или a.y != b.y, иначе false.
 
 # txu::Context
 Это, пожалуй, основной инструмент библиотеки. Забудьте о ~~ежедневном геморрое с~~ HDC!
