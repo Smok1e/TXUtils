@@ -24,6 +24,7 @@ public :
 
 	operator POINT ();
 
+	Coord2D operator - ();
 	Coord2D operator ! ();
 
 	Coord2D& operator += (const Coord2D& that);
@@ -68,7 +69,7 @@ Coord2D::operator POINT ()
 
 //-------------------
 
-Coord2D Coord2D::operator ! ()
+Coord2D Coord2D::operator - ()
 {
 	return Coord2D (-x, -y);
 }
