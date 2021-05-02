@@ -368,8 +368,8 @@ while (!GetAsyncKeyState (VK_ESCAPE) && !txu::WasExitButtonPressed ())
 - [txu::Coord operator / (const Coord2D& coord, double scalar)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%81%D0%BA%D0%B0%D0%BB%D1%8F%D1%80%D0%BD%D1%8B%D0%B5-%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-coord2d)
 - [bool operator == (const Coord2D& a, const Coord2D& b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-operator--const-coord2d-a-const-coord2d-b)
 - [bool operator != (const Coord2D& a, const Coord2D& b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-operator--const-coord2da-const-coord2d-b)
-- double Coord2Distance (const Coor2D& a, const Coord2D& b)
-- double Coord2DSqrDistance (const Coord2D& a, const Coord2D& b)
+- [double Coord2Distance (const Coor2D& a, const Coord2D& b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#double-txucoord2distance-const-coord2d-a-const-coord2d-b)
+- [double Coord2DSqrDistance (const Coord2D& a, const Coord2D& b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#double-txucoord2dsqrdistance-const-coord2d-a-const-coord2d-b)
 
 ## txu::Coord2D::operator POINT ()
 Оператор преобразования к POINT.
@@ -434,8 +434,8 @@ Coord2D result = coord * scalar; // result == {5, 25}
 Очень полезная функция. Возвращает численное расстояние между точками a и b по теореме пифагора.
 
 ## double txu::Coord2DSqrDistance (const Coord2D& a, const Coord2D& b)
-Возвращает численное расстояние между точками a и и, возведённое в квадрат.
-Советую использовать это функцию вместо txu::Coord2Distance, если вам не нужно точное расстояние (например для сравнения расстояния a и расстояния b), поскольку последней приходится извлекать квадратный корень из расстояния, что является очень дорогой операцией.
+Возвращает численное расстояние между точками a и b, возведённое в квадрат.
+Советую использовать это функцию вместо [txu::Coord2Distance](https://github.com/Smok1e/TXUtils/blob/main/README.md#double-txucoord2distance-const-coord2d-a-const-coord2d-b), если вам не нужно точное расстояние (например для сравнения расстояния a и расстояния b), поскольку последней приходится извлекать квадратный корень из расстояния, что является очень дорогой операцией.
 
 # txu::Context
 Это, пожалуй, основной инструмент библиотеки. Забудьте о ~~ежедневном геморрое с~~ HDC!
