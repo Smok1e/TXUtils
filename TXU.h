@@ -2,6 +2,7 @@
 	#include "Utilits.h"
 	#include "Color.h"
 	#include "Font.h"
+	#include "Coord.h"
 	#include "Context.h"
 
 	#define _TXUTILS_INCLUDED
