@@ -25,6 +25,7 @@ TXUtils - это opensource библиотека, написанная мною 
 # Классы библиотеки:
 - [txu::Color](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucolor)
 - [txu::Font](https://github.com/Smok1e/TXUtils/blob/main/README.md#txufont)
+- txu::Coord2D
 - [txu::Context](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucontext)
 
 
@@ -287,6 +288,56 @@ txTextOut (size_x/2 - txGetTextExtentX (text)/2, size_y/2 - txGetTextExtentY (te
 Устанавливает шрифт к HDC указанному в параметре. По умолчанию это txDC ().
 
 
+
+# txu::Coord2D
+Скорее всего, вы уже сталкивались со структурой POINT из WinApi. Класс Coord2D представляет из себя тоже самое, но с некоторыми преимуществами.
+Во первых, POINT способна хранить исключительно целые числа, в то время как Coord2D оперирует с double. А во вторых, для Coord2D определены всевозможные математические операторы. Кроме того, разумеется, вы сможете явно или неявно преобразовать POINT к Coord2D, и обратно.
+
+Представьте ситуацию. У вас есть графический интерфейс и обрасть рисования, которая смещена относительно этого интерфейса. Вам необходимо получить относительные координаты мыши этой области рисования. Это очень легко сделать при помощи Coord2D.
+
+Я накодил такой пример:
+
+```
+int size_x = 800;
+int size_y = 800;
+
+txCreateWindow (size_x, size_y);
+txDisableAutoPause ();
+
+txu::Coord2D drawfield_offset (150, 0);
+txu::Context drawfield (size_x - drawfield_offset.x, size_y - drawfield_offset.y);
+
+drawfield.clear (txu::Color (24, 24, 24));
+
+txBegin ();
+while (!GetAsyncKeyState (VK_ESCAPE) && !txu::WasExitButtonPressed ())
+{
+	txSetFillColor (txu::Color (32, 32, 32));
+	txClear ();
+
+	txSetFillColor (txu::Color::White);
+	txSelectFont ("consolas", 20, 10, FW_BOLD);
+	txTextOut (0, size_y/2, "Some ui here!");
+
+	if (txMouseButtons () == 1)
+	{
+		txu::Coord2D mouse = txMousePos ();
+		mouse -= drawfield_offset;
+
+		drawfield.setColor     (txu::Color::White);
+		drawfield.setFillColor (txu::Color::White);
+		txEllipse (txCoord (mouse - 5), txCoord (mouse + 5), drawfield);
+	}
+
+	drawfield.render (txDC (), txCoord (drawfield_offset));
+	txSleep (0);
+}
+```
+
+О том, что такое txu::Context я расскажу чуть позже. В этом примере слева находится абстрактное меню, а справа от него область рисования. 
+Если нажать на поле рисования, на нём остаются белые кружки.
+
+![alt text](https://psv4.userapi.com/c536236/u402150900/docs/d31/baf144931962/TXUTils_Coord2D_example.gif?extra=_tmdIIpoWSkwxGCBuYDbSu4LIoiKejK7p3rYdGl9w0CJrFWx4O4YBc7SJyk4JpFxDusAEhuadsZLCYtcK9oNud47kThRD7dwHe7URvHy5ZQ_GmRwqROuRmkBTFiiO1SL9j7hQGT72zAz32n3vaVwhT5L)
 
 # txu::Context
 Это, пожалуй, основной инструмент библиотеки. Забудьте о ~~ежедневном геморрое с~~ HDC!
