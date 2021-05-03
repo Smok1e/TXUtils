@@ -61,7 +61,7 @@ while (!GetAsyncKeyState (VK_ESCAPE))
 
 ## bool txu::SetWindowIcon (const char* filename)
 Вам не надоела иконка TXLib'а, которую [дед](http://ded32.net.ru/) нагло вставил в свою библиотеку? Мне да.
-Поэтому я и сделал это функцию.
+Поэтому я и сделал эту функцию.
 Она устанавливает окну TXLib иконку, загруженную из файла, указанного в параметрах. Если картинка загружена успешно, функция вернёт true. В обратном случае - false.
 Иконка должна быть в формате [.ico](https://ru.wikipedia.org/wiki/ICO_(%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82_%D1%84%D0%B0%D0%B9%D0%BB%D0%B0))
 
@@ -69,7 +69,7 @@ while (!GetAsyncKeyState (VK_ESCAPE))
 
 ![alt text](https://sun9-61.userapi.com/impg/jcPy9ayljutrfxSUlVeiHfjQ6SBaEAGdxOZukg/r4VcKT8VOCQ.jpg?size=169x166&quality=96&sign=a333f4d1b05460349f4cc026e2ee655b&type=album)
 
-И вызвал функция txu::SetWindowIcon:
+И вызвал функцию txu::SetWindowIcon:
 
 ```
 txCreateWindow (800, 800);
