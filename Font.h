@@ -1,5 +1,11 @@
 #pragma once
 
+//-------------------
+
+#include "FontLoader.h"
+
+//-------------------
+
 namespace txu
 {
 
@@ -12,9 +18,13 @@ public :
 	Font (const char* name, int size_x, int size_y, int weight = FW_DONTCARE, bool italic = false, bool underline = false, bool strikeout = false);
 	Font (const Font& that);
 
+	~Font ();
+
 	bool create ();
 	bool create (const char* name, int size_x, int size_y, int weight = FW_DONTCARE, bool italic = false, bool underline = false, bool strikeout = false);
 	bool create (const Font& that);
+
+	bool loadFromFile (const char* filename);
 
 	void setSize (int size_x, int size_y);
 
@@ -44,6 +54,10 @@ public :
 private :
 	const char* name_;
 
+	char loaded_name_    [MAX_PATH];
+	char loaded_filename_[MAX_PATH];
+	bool has_loaded_;
+
 	int size_x_;
 	int size_y_;
 
@@ -56,12 +70,17 @@ private :
 	HFONT handle_;
 
 	bool update ();
+	void unload ();
 };
 
 //-------------------
 
 Font::Font () :
-	name_ (nullptr),
+	name_        (nullptr),
+	
+	loaded_name_     (""),
+	loaded_filename_ (""),
+	has_loaded_  (false),
 
 	size_x_    (0),
 	size_y_    (0),
@@ -77,6 +96,10 @@ Font::Font () :
 Font::Font (const char* name, int size_x, int size_y, int weight /*= FW_DONTCARE*/, bool italic /*= false*/, bool underline /*= false*/, bool strikeout /*= false*/) :
 	name_ (nullptr),
 
+	loaded_name_     (""),
+	loaded_filename_ (""),
+	has_loaded_  (false),
+
 	size_x_    (0),
 	size_y_    (0),
 	weight_    (0),
@@ -91,6 +114,10 @@ Font::Font (const char* name, int size_x, int size_y, int weight /*= FW_DONTCARE
 Font::Font (const Font& that) :
 	name_ (nullptr),
 
+	loaded_name_     (""),
+	loaded_filename_ (""),
+	has_loaded_  (false),
+
 	size_x_    (0),
 	size_y_    (0),
 	weight_    (0),
@@ -104,8 +131,17 @@ Font::Font (const Font& that) :
 
 //-------------------
 
+Font::~Font ()
+{
+	unload ();
+}
+
+//-------------------
+
 bool Font::create ()
 {
+	unload ();
+
 	name_ = "arial";
 	
 	size_x_ = 30;
@@ -126,7 +162,11 @@ bool Font::create ()
 
 bool Font::create (const char* name, int size_x, int size_y, int weight /*= FW_DONTCARE*/, bool italic /*= false*/, bool underline /*= false*/, bool strikeout /*= false*/)
 {
+	unload ();
+
 	name_ = name;
+
+	has_loaded_ = false;
 	
 	size_x_ = size_x;
 	size_y_ = size_y;
@@ -146,6 +186,8 @@ bool Font::create (const char* name, int size_x, int size_y, int weight /*= FW_D
 
 bool Font::create (const Font& that)
 {
+	unload ();
+
 	name_ = that.name_;
 	
 	size_x_ = that.size_x_;
@@ -158,6 +200,23 @@ bool Font::create (const Font& that)
 	strikeout_ = that.strikeout_;
 
 	handle_ = nullptr;
+
+	return update ();
+}
+
+//-------------------
+
+bool Font::loadFromFile (const char* filename)
+{
+	unload ();
+
+	if (!fl::get_fucking_font_name (filename, loaded_name_, MAX_PATH)) return false;
+	if (!AddFontResourceExA (filename, FR_NOT_ENUM, 0))                return false;
+
+	strncpy_s (loaded_filename_, filename, MAX_PATH);
+	name_ = loaded_name_;
+
+	has_loaded_ = true;
 
 	return update ();
 }
@@ -271,6 +330,16 @@ bool Font::update ()
 {
 	handle_ = CreateFontA (size_y_, size_x_, 0, 0, weight_, italic_, underline_, strikeout_, RUSSIAN_CHARSET, 0, 0, 0, 0, name_);
 	return handle_ != 0;
+}
+
+//-------------------
+
+void Font::unload ()
+{
+	if (!has_loaded_) return;
+	RemoveFontResourceA (loaded_filename_);
+	RemoveFontResourceA (loaded_name_);
+	has_loaded_ = false;
 }
 
 //-------------------
