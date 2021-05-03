@@ -23,13 +23,14 @@ TXUtils - это opensource библиотека, написанная мною 
 - [bool txu::IsConsoleOutputEnabled  ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txuisconsoleoutputenabled-)
 - [bool txu::SetWindowIcon (const char* filename)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txusetwindowicon-const-char-filename)
 
+# Макросы
+- WS_NOFRAME
+
 # Классы библиотеки:
 - [txu::Color](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucolor)
 - [txu::Font](https://github.com/Smok1e/TXUtils/blob/main/README.md#txufont)
 - [txu::Coord2D](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoord2d)
 - [txu::Context](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucontext)
-
-
 
 ## bool txu::WasExitButtonPressed ()
 Возвращает true, если был нажат крестик в меню окна, иначе false, для того чтобы программист сам мог отреагировать на нажатие крестика. Например так:
@@ -83,6 +84,13 @@ txu::SetWindowIcon ("icon.ico");
 Так же, советую вам [плагин для фотошопа, позволяющий сохранять картинки в формате ico](https://rugraphics.ru/photoshop/plagin-format-ico-v-photoshop-cs6-i-cc).
 
 И напоследок, если вам не нравится то, что TXLib устанавливает своё имя в заголовке окна, используйте функцию [SetWindowText](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowtexta) из WinApi.
+
+## WS_NOFRAME
+Стиль окна без заголовка и рамок.
+```
+_txWindowStyle = WS_NOFRAME;
+txCreateWindow (800, 800);
+```
 
 # txu::Color
 Класс предназначеный для хранения и операций с цветом.
@@ -246,7 +254,7 @@ txu::Color color = b <<= a;
 ```
 
 # txu::Font
-Класс, предназначенный для хранения информации о шрифте и установки шрифта в HDC. В будущем постараюсь добавить функцию загрузки шрифта непосредственно из файла.
+Класс, предназначенный для хранения информации о шрифте и установки шрифта в HDC. Класс txu::Font позволяет загружать шрифты непосредственно из файла.
 
 Пример использования:
 ```
@@ -282,6 +290,7 @@ txTextOut (size_x/2 - txGetTextExtentX (text)/2, size_y/2 - txGetTextExtentY (te
 - [bool txu::Font::create ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txufontcreate-)
 - [bool txu::Font::create (const char* name, int size_x, int size_y, int weight = FW_DONTCARE, bool italic = false, bool underline = false, bool strikeout = false)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txufontcreate-)
 - [bool txu::Font::create (const Font& that)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txufontcreate-)
+- [bool txu::Font::loadFromFile (const char* filename)]()
 - [void txu::Font::setSize (int size_x, int size_y)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txufontsetsize-int-size_x-int-size_y)
 - [int txu::Font::getSizeX ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txufontgetsizex-)
 - [int txu::Font::getSizeY ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txufontgetsizey-)
@@ -302,6 +311,57 @@ txTextOut (size_x/2 - txGetTextExtentX (text)/2, size_y/2 - txGetTextExtentY (te
 
 ## bool txu::Font::create (...)
 Заново инициализирует шрифт с указанными параметрами. Возвращает true в случае успеха, иначе false.
+
+## bool txu::Font::loadFromFile (const char* filename)
+Позволяет загрузить шрифт из файла. Вы не сможете загрузить шрифт, используя только TXLib или WinApi, поскольку эти библиотеки не предоставляют средств для чтения внутреннего имени шрифта, необходимого для его использования. Мне удалось решить эту проблему, написав собственную функцию чтения файла .ttf, однако, к сожалению, некоторые шрифты всё равно не загружаются, даже если loadFromFile вернёт true.
+
+Я написал небольшой пример:
+
+```
+int size_x = 400;
+int size_y = 400;
+
+_txWindowStyle = WS_NOFRAME;
+txCreateWindow (size_x, size_y);
+txDisableAutoPause ();
+txu::SetConsoleOutputEnabled (false);
+
+txu::Context context (size_x, size_y);
+
+txu::Font font;
+font.loadFromFile ("font.ttf");	
+font.setSize (25, 50);
+
+const char* text = "Hello World!";
+double hue = 0;
+
+txBegin ();
+while (!GetAsyncKeyState (VK_ESCAPE) && !txu::WasExitButtonPressed ())
+{
+	context.clear (txu::Color (24, 24, 24));
+
+	txu::Color color = txu::Color::HSV (hue, 255, 255);
+
+	context.setColor     (color);
+	context.setFillColor (color);
+	context.setFont      (font);
+
+	int x = size_x/2 - strlen (text)*font.getSizeX () / 2;
+	int y = size_y/2 -               font.getSizeY () / 2;
+
+	txTextOut (x, y, text, context);
+
+	hue += 0.02;
+	if (hue > 255) hue = 0;
+
+	context.render ();
+	txSleep (0);
+}
+```
+
+Этот код загружает шрифт из файла "font.ttf", а затем выводит надпись "Hello world!" переливающимся цветом. О том, что такое txu::Context сказанно чуть-чуть ниже.
+
+![alt text](https://psv4.userapi.com/c536132/u402150900/docs/d32/d9079a8139ee/TXUtils_Git_font_load_example.gif?extra=ocPzp6ryrwFcfEYoQwVkaWFurHM-xWif1ip0hdM-w2zKzWtCc7BriuQwzcOJBKuSymFhtXtnA5SAqOHH_aC1yai2t8qz7Szq_5W8fM2wnjTAQ-tSYBDajSZzyEaCFtKf4pT23AUoSHdykZJoykklPwxN)
 
 ## void txu::Font::setSize (int size_x, int size_y)
 Устанавливает размер шрифта.
