@@ -24,7 +24,7 @@ TXUtils - это opensource библиотека, написанная мною 
 - [bool txu::SetWindowIcon (const char* filename)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txusetwindowicon-const-char-filename)
 
 # Макросы
-- WS_NOFRAME
+- [WS_NOFRAME](https://github.com/Smok1e/TXUtils/blob/main/README.md#ws_noframe)
 
 # Классы библиотеки:
 - [txu::Color](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucolor)
@@ -290,7 +290,7 @@ txTextOut (size_x/2 - txGetTextExtentX (text)/2, size_y/2 - txGetTextExtentY (te
 - [bool txu::Font::create ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txufontcreate-)
 - [bool txu::Font::create (const char* name, int size_x, int size_y, int weight = FW_DONTCARE, bool italic = false, bool underline = false, bool strikeout = false)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txufontcreate-)
 - [bool txu::Font::create (const Font& that)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txufontcreate-)
-- [bool txu::Font::loadFromFile (const char* filename)]()
+- [bool txu::Font::loadFromFile (const char* filename)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txufontloadfromfile-const-char-filename)
 - [void txu::Font::setSize (int size_x, int size_y)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txufontsetsize-int-size_x-int-size_y)
 - [int txu::Font::getSizeX ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txufontgetsizex-)
 - [int txu::Font::getSizeY ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txufontgetsizey-)
