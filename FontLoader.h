@@ -58,45 +58,54 @@ struct NameRecord
 
 //-------------------
 
+#define NAMEID_COPIRYGHT_NOTICE         0
+#define NAMEID_FONT_FAMILY_NAME         1
+#define NAMEID_FONT_SUBFAMILY_NAME      2
+#define NAMEID_UNIQUE_IDENTIFIER        3
+#define NAMEID_FULL_FONT_NAME           4
+#define NAMEID_VERSION                  5
+#define NAMEID_POSTSCRIPT_NAME          6
+#define NAMEID_TRADEMARK                7
+#define NAMEID_MANUFACTURER             8
+#define NAMEID_DESIGNER                 9
+#define NAMEID_DESCRIPTION             10
+#define NAMEID_URL_VENDOR              11
+#define NAMEID_URL_DESIGNED            12
+#define NAMEID_LICENSE_DESCRIPTION     13
+#define NAMEID_LICENSE_INFORMATION_URL 14
+#define NAMEID_RESERVED                15
+#define NAMEID_PREFFERED_FAMILY        16
+#define NAMEID_PREFFERED_SUBFAMILY     17
+#define NAMEID_SAMPLE_TEXT             19
+#define NAMEID_POSTSCRIPT_CID          20
+
+//-------------------
+
+#define PLATFORMID_APPLE_UNICODE 0
+#define PLATFORMID_MACINTOSH     1
+#define PLATFORMID_ISO           2
+#define PLATFORMID_MICROSOFT     3
+#define PLATFORMID_CUSTOM        4
+#define PLATFORMID_ADOBE         5
+
+//-------------------
+
+const char* load_fucking_font_record_data_228 (const char* filename, int nameid, char* buffer, size_t nMaxCount);
+
 void sswap (sinfo_t& x);
 void lswap (linfo_t& x);
 
 template <typename Type>
 void readobj (FILE* file, Type* obj);
 
-bool get_fucking_font_name (const char* filename, char* buffer, size_t nMaxCount);
-
 //-------------------
 
-#define NAMEID_FONT 1
-
-//-------------------
-
-void sswap (sinfo_t& x)
-{
-    x = _byteswap_ushort (x);
-}
-
-void lswap (linfo_t& x)
-{
-    x = _byteswap_ulong (x);
-}
-
-//-------------------
-
-template <typename Type>
-void readobj (FILE* file, Type* obj)
-{
-    fread (obj, 1, sizeof (Type), file);
-}
-
-//-------------------
-
-bool get_fucking_font_name (const char* filename, char* buffer, size_t nMaxCount)
+const char* load_fucking_font_record_data_228 (const char* filename, int nameid, char* buffer, size_t nMaxCount)
 {
     FILE* file = nullptr;
     errno_t err = fopen_s (&file, filename, "r");
-    if (err || !file) return false;
+    if (err || !file)
+        return "failed to open file";
 
     OffsetTable offset = {};
     readobj (file, &offset);
@@ -108,7 +117,7 @@ bool get_fucking_font_name (const char* filename, char* buffer, size_t nMaxCount
     if (offset.major_version != 1 || offset.minor_version != 0) 
     {   
         fclose (file);
-        return false;
+        return "file is not a ttf";
     }
 
     TableDirectory  dir    = {};
@@ -131,7 +140,7 @@ bool get_fucking_font_name (const char* filename, char* buffer, size_t nMaxCount
     if (!found) 
     {
         fclose (file);
-        return false;
+        return "failed to find name tag";
     }
     found = false;
 
@@ -140,33 +149,60 @@ bool get_fucking_font_name (const char* filename, char* buffer, size_t nMaxCount
     sswap (header.name_records_count);
     sswap (header.storage_offset    );
 
+    if (header.name_records_count == 0)
+        return "0 name records count, wtf????";
+
     NameRecord record = {};
     for (size_t i = 0; i < header.name_records_count && !found; i++)
     {
         readobj (file, &record);
         sswap (record.name_id);
 
-        if (record.name_id == NAMEID_FONT)
+        if (record.name_id == nameid)
         {
+            sswap (record.encoding_id  );
+            sswap (record.platform_id  );
+            sswap (record.language_id  );
             sswap (record.string_length);
-            sswap (record.string_offset);
+            sswap (record.string_offset);        
 
-            size_t max = std::min ((size_t) record.string_length, nMaxCount);
+            if (record.string_length >= nMaxCount)
+            {
+                fclose (file);
+                return "Buffer is too small";
+            }
 
             fseek (file, dir.offset + header.storage_offset + record.string_offset, SEEK_SET);
-            fread (buffer, 1, max, file);
+            fread (buffer, 1, record.string_length, file);
+            buffer[record.string_length] = '\0';
 
             found = true;
         }
     }
 
     fclose (file);
-    return found;
+    return nullptr;
 }
 
 //-------------------
 
-#undef NAMEID_FONT
+void sswap (sinfo_t& x)
+{
+    x = _byteswap_ushort (x);
+}
+
+void lswap (linfo_t& x)
+{
+    x = _byteswap_ulong (x);
+}
+
+//-------------------
+
+template <typename Type>
+void readobj (FILE* file, Type* obj)
+{
+    fread (obj, 1, sizeof (Type), file);
+}
 
 //-------------------
 
