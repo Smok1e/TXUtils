@@ -27,7 +27,6 @@ public :
 
 	int getSizeX ();
 	int getSizeY ();
-
 	void resize  (int new_size_x, int new_size_y);
 
 	void render (HDC dc = txDC (), int x = 0, int y = 0, int width = 0, int height = 0);
@@ -35,6 +34,12 @@ public :
 	void clear (Color color);
 
 	operator HDC& ();
+
+	RGBQUAD* getBuffer       ();
+	size_t   getBufferLength ();
+
+	RGBQUAD* access (size_t index);
+	RGBQUAD* access (int x, int y);
 
 	void  setPixel (int x, int y, Color color);
 	Color getPixel (int x, int y);
@@ -227,6 +232,32 @@ Context::operator HDC& ()
 
 //-------------------
 
+RGBQUAD* Context::getBuffer ()
+{
+	return buffer_;
+}
+
+size_t Context::getBufferLength ()
+{
+	return size_x_*size_y_;
+}
+
+RGBQUAD* Context::access (size_t index)
+{
+	if (index >= size_x_*size_y_) return nullptr;
+	return buffer_ + index;
+}
+
+RGBQUAD* Context::access (int x, int y)
+{
+	y = size_y_ - y-1;
+	if (x < 0 || x >= size_x_ || y < 0 || y >= size_y_)	return nullptr;
+	size_t index = y*size_x_ + x;
+	return buffer_ + index;
+}
+
+//-------------------
+
 void Context::render (HDC dc /* = txDC () */, int x /* = 0 */, int y /* = 0 */, int width /* = 0 */, int height /* = 0 */)
 {
 	txBitBlt (dc, x, y, width, height, dc_);
@@ -246,7 +277,6 @@ void Context::clear (Color color)
 
 void Context::setPixel (int x, int y, Color color)
 {
-	x =           x  ;
 	y = size_y_ - y-1;
 
 	if (x < 0 || x >= size_x_ || y < 0 || y >= size_y_) return;
@@ -259,7 +289,6 @@ void Context::setPixel (int x, int y, Color color)
 
 Color Context::getPixel (int x, int y)
 {
-	x =           x  ;
 	y = size_y_ - y-1;
 
 	if (x < 0 || x >= size_x_ || y < 0 || y >= size_y_) return Color::Black;
