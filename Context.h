@@ -1,5 +1,13 @@
 #pragma once
 
+//-------------------
+
+#ifdef TXU_USE_PNG
+	#include "PngLoader.h"
+#endif
+
+//-------------------
+
 namespace txu
 {
 
@@ -181,6 +189,27 @@ void Context::destruct ()
 
 bool Context::loadFromFile (const char* filename)
 {
+#ifdef TXU_USE_PNG
+	if (png_loader::check_signature (filename))
+	{
+		RGBQUAD* buffer = nullptr;
+		int      sx     = 0;
+		int      sy     = 0;
+
+		if (png_loader::load_png (&buffer, &sx, &sy, filename))
+			return false;
+		
+		resize (sx, sy);
+
+		for (size_t i = 0; i < sx*sy; i++)
+			buffer_[i] = buffer[i];
+
+		delete[] (buffer);
+
+		return true;
+	}
+#endif
+
 	HDC dc = txLoadImage (filename);
 	if (!dc) return false;
 	create (dc);

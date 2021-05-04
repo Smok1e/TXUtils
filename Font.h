@@ -210,8 +210,8 @@ bool Font::loadFromFile (const char* filename)
 {
 	unload ();
 
-	if (fl::load_fucking_font_record_data_228 (filename, NAMEID_FONT_FAMILY_NAME, loaded_name_, MAX_PATH)) return false;
-	if (!AddFontResourceExA (filename, FR_NOT_ENUM, 0))                                                    return false;
+	if (font_loader::load_fucking_font_record_data_228 (filename, NAMEID_FONT_FAMILY_NAME, loaded_name_, MAX_PATH)) return false;
+	if (!AddFontResourceExA (filename, FR_NOT_ENUM, 0))                                                             return false;
 
 	strncpy_s (loaded_filename_, filename, MAX_PATH);
 	name_ = loaded_name_;

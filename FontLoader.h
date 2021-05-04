@@ -5,7 +5,7 @@
 namespace txu
 {
 
-namespace fl
+namespace font_loader
 {
 
 //-------------------
