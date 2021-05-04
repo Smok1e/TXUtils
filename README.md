@@ -712,10 +712,10 @@ result.render ();
 - [void txu::Context::render (HDC dc = txDC (), int x = 0, int y = 0, int width = 0, int height = 0)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetpixel-int-x-int-y-txucolor-color)
 - [void txu::Context::clear (txu::Color color)](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucolor-txucontextgetpixel-int-x-int-y)
 - [txu::Context::operator HDC& ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetcolor-txucolor-color-int-thikness--0)
-- [RGBQUAD* txu::Context::getBuffer ()]()
-- [size_t txu::Context::getBufferLength ()]()
-- [RGBQUAD* txu::Context::access (size_t index)]()
-- [RGBQUAD* txu::Context::access (int x, int y)]()
+- [RGBQUAD* txu::Context::getBuffer ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#rgbquad-txucontextgetbuffer-)
+- [size_t txu::Context::getBufferLength ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#size_t-txucontextgetbuffersize-)
+- [RGBQUAD* txu::Context::access (size_t index)](https://github.com/Smok1e/TXUtils/blob/main/README.md#rgbquad-txucontextaccess-size_t-index)
+- [RGBQUAD* txu::Context::access (int x, int y)](https://github.com/Smok1e/TXUtils/blob/main/README.md#rgbquad-txucontextaccess-int-x-int-y)
 - [void txu::Context::setPixel (int x, int y, txu::Color color)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetfillcolor-txucolor-color)
 - [txu::Color txu::Context::getPixel (int x, int y)](github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetfont-hfont-font)
 - [void txu::Context::setColor (txu::Color color, int thikness = 0)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetcolor-txucolor-color-int-thikness--0)
@@ -762,7 +762,7 @@ result.render ();
 Возвращает указатель на пиксель изорбажения под индексом, указанным в параметрах. Внутри функции существует проверка индекса, благодаря которой функция вернёт nullptr если индекс вышел за границы массива. Обратите внимание, что эта проверка работает только в debug сборке. Если выйти за границы в сборке release, может произойти исключение access violation. 
 
 ## RGBQUAD* txu::Context::access (int x, int y)
-Делает то же, что и [txu::Context::access (size_t index)](), но вместа индекса принимает координаты пикселя.
+Делает то же, что и [txu::Context::access (size_t index)](https://github.com/Smok1e/TXUtils/blob/main/README.md#rgbquad-txucontextaccess-int-x-int-y), но вместа индекса принимает координаты пикселя.
 
 ## void txu::Context::setPixel (int x, int y, txu::Color color)
 Устанавливает пиксель в точке, указанной параметрами x и y с учётом альфа-канала входного цвета.
