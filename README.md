@@ -727,8 +727,30 @@ result.render ();
 Заново инициализирует изображение в соответствии с указанными параметрами. Возвращает true в случае успеха.
 
 ## bool txu::Context::loadFromFile (const char* filename)
-Загружает изображение из файла. Возвращает true в случае успеха.
-К сожалению, WinAPI позволяет загружать изображения лишь формата bmp. В будущем я постараюсь реализовать загрузку изображений формата png при помощи [libpng](http://www.libpng.org/pub/png/libpng.html).
+Загружает изображение из файла, указанного в параметрах.
+Помимо .bmp, я реализовал загрузку изображений формата png, посредством [libpng](http://www.libpng.org/pub/png/libpng.html).
+Внимание! Для того, чтобы загрузить файл формата png, убедитесь, что у вас установлена библиотека libpng, а перед включением TXU.h вы объявили макрос TXU_USE_PNG. Возможно, библиотека libpng у вас уже установлена (по крайней мере у меня она уже была), а если нет, вы можете установить её при помощи [vcpkg](https://docs.microsoft.com/ru-ru/cpp/build/vcpkg?view=msvc-160)
+
+Вот небольшой пример загрузки изображения из png-файла:
+
+```
+#define TXU_USE_PNG
+
+//-------------------
+
+#include <TXLib.h>
+#include <TXU.h>
+
+//-------------------
+
+int main ()
+{
+	txu::Context image;
+	image.loadFromFile ("image.png");
+	int size_x = image.getSizeX ();
+	int size_y = image.getSizeY ();
+}
+```
 
 ## bool txu::Context::saveToFile (const char* filename)
 Сохраняет изображение в файл в формате bmp.
