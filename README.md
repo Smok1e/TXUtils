@@ -731,6 +731,8 @@ result.render ();
 Помимо .bmp, я реализовал загрузку изображений формата png, посредством [libpng](http://www.libpng.org/pub/png/libpng.html).
 Внимание! Для того, чтобы загрузить файл формата png, убедитесь, что у вас установлена библиотека libpng, а перед включением TXU.h вы объявили макрос TXU_USE_PNG. Возможно, библиотека libpng у вас уже установлена (по крайней мере у меня она уже была), а если нет, вы можете установить её при помощи [vcpkg](https://docs.microsoft.com/ru-ru/cpp/build/vcpkg?view=msvc-160)
 
+Функция вернёт true если изображение загружено успешно, или false - в обратном случае.
+
 Вот небольшой пример загрузки изображения из png-файла:
 
 ```
@@ -749,8 +751,19 @@ int main ()
 	image.loadFromFile ("image.png");
 	int size_x = image.getSizeX ();
 	int size_y = image.getSizeY ();
+	
+	_txWindowStyle = WS_NOFRAME;
+	txCreateWindow (size_x, size_y);
+	
+	image.render ();
+	
+	return 0;
 }
 ```
+
+В результате, на экране кошка.
+
+![alt text](https://sun9-8.userapi.com/impg/Zbr5ZnEhrr05McC97DMXZQYe0SptXHXurWhZcw/MUPU7Qj1YSw.jpg?size=1101x835&quality=96&sign=5d96cf10d674560c05ccb29735998869&type=album)
 
 ## bool txu::Context::saveToFile (const char* filename)
 Сохраняет изображение в файл в формате bmp.
