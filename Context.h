@@ -244,16 +244,22 @@ size_t Context::getBufferLength ()
 
 RGBQUAD* Context::access (size_t index)
 {
+#ifdef _DEBUG
 	if (index >= size_x_*size_y_) return nullptr;
+#endif
+
 	return buffer_ + index;
 }
 
 RGBQUAD* Context::access (int x, int y)
 {
 	y = size_y_ - y-1;
+
+#ifdef _DEBUG
 	if (x < 0 || x >= size_x_ || y < 0 || y >= size_y_)	return nullptr;
-	size_t index = y*size_x_ + x;
-	return buffer_ + index;
+#endif
+
+	return buffer_ + y*size_x_ + x;
 }
 
 //-------------------
