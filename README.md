@@ -49,7 +49,7 @@ while (!GetAsyncKeyState (VK_ESCAPE))
 }
 ```
 
-![alt text](https://psv4.userapi.com/c534536/u402150900/docs/d10/93c60311fe0b/TXUtils_Github_WasExitButtonPressed_Example.gif?extra=HscRkmZLtfDWHeatsbDqzKfNDiJEaz7j2fUhOc1vagEy7Kh78LJ0LmSZiPwHBWvcNg58IEa6vbL3WyEOyeJsAO7QXS-UXk0kD3DWqojBk1I7nu7P4QPh8mxfPGdyhLO5I2OjkU52zyWM3tBkgK-J4_-d)
+![WasExitButtonPressed_example](https://user-images.githubusercontent.com/33802666/117330931-e2ea3e00-ae9e-11eb-91c9-a5e5cf0ac772.gif)
 
 ## int txu::GetMouseWheel ()
 Возвращает сторону, в которую повернулось колёсико мыши.
@@ -70,7 +70,7 @@ while (!GetAsyncKeyState (VK_ESCAPE))
 
 Я нарисовал такую иконку для своей программы:
 
-![alt text](https://sun9-61.userapi.com/impg/jcPy9ayljutrfxSUlVeiHfjQ6SBaEAGdxOZukg/r4VcKT8VOCQ.jpg?size=169x166&quality=96&sign=a333f4d1b05460349f4cc026e2ee655b&type=album)
+![setwindowicon_example_1](https://user-images.githubusercontent.com/33802666/117330977-f0072d00-ae9e-11eb-8355-25fd6b65d703.png)
 
 И вызвал функцию txu::SetWindowIcon:
 
@@ -81,7 +81,7 @@ txu::SetWindowIcon ("icon.ico");
 
 Теперь в заголовке окна висит моя собственная иконка:
 
-![alt text](https://sun9-63.userapi.com/impg/DKhOVKqwbEFdh2wzPU08lPZ-5hIvPFHiCXSMiw/Qyis_dQnOVs.jpg?size=200x200&quality=96&sign=38dd977af1f3b6bb2b6c4a752bf0c2b9&type=album)
+![setwindowicon_example_2](https://user-images.githubusercontent.com/33802666/117331032-001f0c80-ae9f-11eb-82e1-cf1503ff5560.png)
 
 Так же, советую вам [плагин для фотошопа, позволяющий сохранять картинки в формате ico](https://rugraphics.ru/photoshop/plagin-format-ico-v-photoshop-cs6-i-cc).
 
@@ -149,7 +149,8 @@ for (int x = 0; x < size_x; x++)
 ```
 
 Этот код нарисует на экране плавный градиент от синего к розовому:
-![alt text](https://sun9-75.userapi.com/impg/asgxBLRJxiH55RZZrQ0tVBcCR6iWUAoKkrP6XA/uxpa4NcGZ88.jpg?size=817x146&quality=96&sign=7ec3e464ad7d033a6bc39a8d5a5ef7bc&type=album)
+
+![color_interpolate_example](https://user-images.githubusercontent.com/33802666/117331183-2d6bba80-ae9f-11eb-8345-622fd799f51a.png)
 
 ## Color txu::Color::Interpolate (const std::initializer_list& list, double t)
 Тоже самое что и txu::Color::Interpolate (Color a, Color b, double t), но может принять произвольное количество цветов. Например:
@@ -170,7 +171,7 @@ for (int x = 0; x < size_x; x++)
 
 Этот код нарисует плавный переход от синего к розовому, а от розового к зелёному:
 
-![alt text](https://sun9-39.userapi.com/impg/6LALpjU6cjeGZguiOl8qeR6_S4VijVP8udaG2A/XAC-U1xZ2V8.jpg?size=810x145&quality=96&sign=8f84690a620e0dc3d376eadcc180524e&type=album)
+![color_interpolate_initializer_list_example](https://user-images.githubusercontent.com/33802666/117331231-39577c80-ae9f-11eb-961f-6b6fc0e6d246.png)
 
 ## txu::Color::opreator RGBQUAD ()
 Оператор преобразования к RGBQUAD
@@ -208,7 +209,7 @@ for (int x = 0; x < size_x; x++)
 
 Этот код нарисует в окне плавный переход между всеми цветами радуги:
 
-![alt text](https://sun9-5.userapi.com/impg/awW2XK_oU7TU_MyafSxOHGHshzaMR_0ZRK03AQ/neJelUgAFcw.jpg?size=806x137&quality=96&sign=426209e04914ba4f3da9da8c6b842bef&type=album)
+![color_hsv_example](https://user-images.githubusercontent.com/33802666/117331258-41afb780-ae9f-11eb-8684-9174395668c2.png)
 
 ## int txu::Color::hue ()
 Переводит цвет в формат HSV, и возвращает значение hue (цветовой тон). См. [Цветовая модель HSV](https://ru.wikipedia.org/wiki/HSV_(%D1%86%D0%B2%D0%B5%D1%82%D0%BE%D0%B2%D0%B0%D1%8F_%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C)).
@@ -241,7 +242,7 @@ for (int x = 100; x < 300; x++)
 
 Этот код нарисует полу-прозрачный синий квадрат:
 
-![alt text](https://sun9-7.userapi.com/impg/MgASVpcQx8lKaYcHmaAdbrFjE7MybQO5l4EtWg/dQAGTt2ornE.jpg?size=421x456&quality=96&sign=9a47d95f45c3e79c92693e5e9c4b94a2&type=album)
+![color_blend_example](https://user-images.githubusercontent.com/33802666/117331317-52602d80-ae9f-11eb-995e-f1391f8604f6.png)
 
 Примечание: функция Blend учитывает альфа-канал только первого цвета!
 
@@ -281,7 +282,7 @@ txTextOut (size_x/2 - txGetTextExtentX (text)/2, size_y/2 - txGetTextExtentY (te
 
 Этот код выведет на экран надпись:
 
-![alt text](https://sun9-59.userapi.com/impg/qfrFKRTi7VuiTp7OF1oYxszDmWuSGkT_mn_nsw/nB9r8XHmdcA.jpg?size=415x443&quality=96&sign=75688fd0129e537d00c34d96e983f1de&type=album)
+![font_example](https://user-images.githubusercontent.com/33802666/117331362-5a1fd200-ae9f-11eb-88ce-51cbb778ea6f.png)
 
 ## Конструкторы:
 - Font ()
@@ -363,7 +364,7 @@ while (!GetAsyncKeyState (VK_ESCAPE) && !txu::WasExitButtonPressed ())
 
 Этот код загружает шрифт из файла "font.ttf", а затем выводит надпись "Hello world!" переливающимся цветом. О том, что такое txu::Context сказанно чуть-чуть ниже.
 
-![alt text](https://psv4.userapi.com/c536132/u402150900/docs/d32/d9079a8139ee/TXUtils_Git_font_load_example.gif?extra=ocPzp6ryrwFcfEYoQwVkaWFurHM-xWif1ip0hdM-w2zKzWtCc7BriuQwzcOJBKuSymFhtXtnA5SAqOHH_aC1yai2t8qz7Szq_5W8fM2wnjTAQ-tSYBDajSZzyEaCFtKf4pT23AUoSHdykZJoykklPwxN)
+![font_load_example](https://user-images.githubusercontent.com/33802666/117331419-686dee00-ae9f-11eb-909c-e2456a08367f.gif)
 
 ## void txu::Font::setSize (int size_x, int size_y)
 Устанавливает размер шрифта.
@@ -463,7 +464,7 @@ while (!GetAsyncKeyState (VK_ESCAPE) && !txu::WasExitButtonPressed ())
 О том, что такое txu::Context я расскажу чуть позже. В этом примере слева находится абстрактное меню, а справа от него область рисования. 
 Если нажать на поле рисования, на нём остаются белые кружки.
 
-![alt text](https://psv4.userapi.com/c536236/u402150900/docs/d31/baf144931962/TXUTils_Coord2D_example.gif?extra=_tmdIIpoWSkwxGCBuYDbSu4LIoiKejK7p3rYdGl9w0CJrFWx4O4YBc7SJyk4JpFxDusAEhuadsZLCYtcK9oNud47kThRD7dwHe7URvHy5ZQ_GmRwqROuRmkBTFiiO1SL9j7hQGT72zAz32n3vaVwhT5L)
+![Coord2D_example](https://user-images.githubusercontent.com/33802666/117331646-a2d78b00-ae9f-11eb-9863-cf26e28ed19e.gif)
 
 ## Конструкторы класса:
 - txu::Coord2D (double x, double y)
@@ -635,7 +636,7 @@ result.render ();
 
 Этот код загрузит картинку из файла "image.bmp" в txu::Context, затем конвертирует цвет каждого пикселя в систему HSV, прибавит к hue 140 и конвертирует цвет обратно в RGB:
 
-![alt text](https://sun1-16.userapi.com/impg/ix5DdnCQIjldKG6F59DXZ_dsGUHd0KL-hIQQRQ/P0gmmLEBPeM.jpg?size=262x554&quality=96&sign=4809b998ccb105073ec5b1aaf4591d4b&type=album)
+![context_example_1](https://user-images.githubusercontent.com/33802666/117331689-af5be380-ae9f-11eb-94c5-6d49013cf082.png)
 
 Или вот пример посложнее:
 
@@ -689,7 +690,7 @@ result.render ();
 
 И получим размытое изображение на экране:
 
-![alt text](https://sun9-10.userapi.com/impg/t5uoqE_C-TPDAEGwdfHcROdKHl29ziq3oEZ67w/l4quIqsSiuY.jpg?size=261x551&quality=96&sign=8dac28143c918541d57b24dec161e21a&type=album)
+![context_example_2](https://user-images.githubusercontent.com/33802666/117331765-bd116900-ae9f-11eb-8100-02d3fe9e0e81.png)
 
 Экземпляром класса можно пользоваться так же, как и HDC. Для этого в нём есть соответствующий оператор.
 
@@ -765,7 +766,7 @@ int main ()
 
 В результате, на экране кошка.
 
-![alt text](https://sun9-8.userapi.com/impg/Zbr5ZnEhrr05McC97DMXZQYe0SptXHXurWhZcw/MUPU7Qj1YSw.jpg?size=1101x835&quality=96&sign=5d96cf10d674560c05ccb29735998869&type=album)
+![context_load_from_file_example](https://user-images.githubusercontent.com/33802666/117331803-c6023a80-ae9f-11eb-82cc-ac27f3f68ebc.png)
 
 ## bool txu::Context::saveToFile (const char* filename)
 Сохраняет изображение в файл в формате bmp.
