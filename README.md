@@ -121,7 +121,7 @@ txSetFillColor (txu::Color (24, 24, 24));
 - [operator RGBQUAD  ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoloropreator-rgbquad-)
 - [operator COLORREF ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoloroperator-colorref-)
 - [Color operator ! ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucoloroperator--)
-- [Color& operator = (const Color& that)]()
+- [Color& operator = (const Color& that)](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucoloroperator--const-color-that)
 - [static Color HSV (int h, int s, int v)](https://github.com/Smok1e/TXUtils/blob/main/README.md#static-color-txucolorhsv-int-h-int-s-int-)
 - [int hue ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txucolorhue-)
 - [int saturation ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txucolorsaturation-)
