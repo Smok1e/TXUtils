@@ -37,6 +37,8 @@ union Color
 	operator RGBQUAD  ();
 	operator COLORREF ();
 
+	Color& operator = (const Color& that);
+
 	Color operator ! ();
 
 	static Color HSV (int hue, int saturation, int value);
@@ -174,6 +176,20 @@ Color::operator COLORREF ()
 Color Color::operator ! ()
 {
 	return Color (255-r, 255-g, 255-b, a);
+}
+
+//-------------------
+
+Color& Color::operator = (const Color& that)
+{
+	if (this == &that) return *this;
+
+	r = that.r;
+	g = that.g;
+	b = that.b;
+	a = that.a;
+
+	return *this;
 }
 
 //-------------------

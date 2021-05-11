@@ -92,8 +92,8 @@ struct NameRecord
 
 const char* load_fucking_font_record_data_228 (const char* filename, int nameid, char* buffer, size_t nMaxCount);
 
-void sswap (sinfo_t& x);
-void lswap (linfo_t& x);
+sinfo_t& sswap (sinfo_t& x);
+linfo_t& lswap (linfo_t& x);
 
 template <typename Type>
 void readobj (FILE* file, Type* obj);
@@ -103,7 +103,7 @@ void readobj (FILE* file, Type* obj);
 const char* load_fucking_font_record_data_228 (const char* filename, int nameid, char* buffer, size_t nMaxCount)
 {
     FILE* file = nullptr;
-    errno_t err = fopen_s (&file, filename, "r");
+    errno_t err = fopen_s (&file, filename, "rb");
     if (err || !file)
         return "failed to open file";
 
@@ -186,14 +186,14 @@ const char* load_fucking_font_record_data_228 (const char* filename, int nameid,
 
 //-------------------
 
-void sswap (sinfo_t& x)
+sinfo_t& sswap (sinfo_t& x)
 {
-    x = _byteswap_ushort (x);
+    return x = _byteswap_ushort (x);
 }
 
-void lswap (linfo_t& x)
+linfo_t& lswap (linfo_t& x)
 {
-    x = _byteswap_ulong (x);
+    return x = _byteswap_ulong (x);
 }
 
 //-------------------
