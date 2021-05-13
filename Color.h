@@ -13,6 +13,9 @@ TypeValue Clamp (TypeValue value, TypeMin min, TypeMax max);
 Color Blend        (Color a, Color b);
 Color operator <<= (Color a, Color b);
 
+bool operator == (const Color& a, const Color& b);
+bool operator != (const Color& a, const Color& b);
+
 //-------------------
 
 #pragma pack (push, 1)
@@ -168,6 +171,9 @@ Color::operator RGBQUAD ()
 
 Color::operator COLORREF ()
 {
+	if (a == 0)	
+		return TX_TRANSPARENT;
+
 	return RGB (r, g, b);
 }
 
@@ -343,6 +349,18 @@ Color Blend (Color a, Color b)
 Color operator <<= (Color a, Color b)
 {
 	return Blend (b, a);
+}
+
+//-------------------
+
+bool operator == (const Color& a, const Color& b)
+{
+	return a.r == b.r && a.g == b.g && a.b == b.b;
+}
+
+bool operator != (const Color& a, const Color& b)
+{
+	return a.r != b.r || a.g != b.g || a.b != b.b;
 }
 
 //-------------------
