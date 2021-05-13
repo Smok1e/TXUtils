@@ -1,5 +1,11 @@
 #pragma once
 
+//-------------------
+
+#include <shlwapi.h>
+
+//-------------------
+
 namespace txu
 {
 
@@ -9,14 +15,28 @@ namespace txu
 
 //-------------------
 
-int _Init ();
+#define _TXU_INIT_INITIALIZED   0
+#define _TXU_INIT_FAILED		1
+#define _TXU_INIT_UNINITIALIZED	2
 
 //-------------------
 
-int _InitResult = _Init ();
+int  _Init   ();
+void _Uninit ();
+
+//-------------------
+
+volatile HINSTANCE _ShellApi = nullptr;
+
+typedef LPCSTR (WINAPI* _ShellApi_GetFileExtentionFunc) (LPCSTR filename);
+_ShellApi_GetFileExtentionFunc _ShellApi_GetFileExtention = nullptr;
+
+//-------------------
 
 volatile int _MouseWheelDelta      = 0;
 volatile int _WasExitButtonPressed = false;
+
+int _InitResult = _Init ();
 
 //-------------------
 
@@ -36,8 +56,36 @@ bool SetWindowIcon (const char* filename);
 
 int _Init ()
 {
+	int result = _TXU_INIT_INITIALIZED;
+
+	if (_InitResult == _TXU_INIT_INITIALIZED)
+		return result;
+
 	txSetWindowsHook (WndProc);
-	return true;
+	
+	_ShellApi = LoadLibraryA ("Shlwapi.dll");
+
+	if (_ShellApi)
+		(FARPROC&) _ShellApi_GetFileExtention = GetProcAddress (_ShellApi, "PathFindExtensionA");
+
+	else
+	{
+		printf ("Warning! Failed to load shlwapi.dll, som function may crash\n");
+		result = _TXU_INIT_FAILED;
+	}
+
+	atexit (_Uninit);
+	return result;
+}
+
+//-------------------
+
+void _Uninit ()
+{
+	if (_ShellApi)
+		FreeLibrary (_ShellApi);
+
+	_InitResult = _TXU_INIT_INITIALIZED;
 }
 
 //-------------------

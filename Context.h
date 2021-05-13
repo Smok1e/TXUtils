@@ -192,7 +192,7 @@ void Context::destruct ()
 bool Context::loadFromFile (const char* filename)
 {
 #ifdef TXU_USE_PNG
-	if (png_loader::check_signature (filename))
+	if (!png_loader::check_signature (filename))
 	{
 		RGBQUAD* buffer = nullptr;
 		int      sx     = 0;
@@ -224,6 +224,13 @@ bool Context::loadFromFile (const char* filename)
 
 bool Context::saveToFile (const char* filename)
 {
+#ifdef TXU_USE_PNG
+	const char* extention = txu::_ShellApi_GetFileExtention (filename);
+
+	if (!strcmp (extention, ".png"))
+		return txu::png_loader::write_png (buffer_, size_x_, size_y_, filename);
+#endif
+
 	return txSaveImage (filename, dc_);
 }
 
