@@ -801,6 +801,8 @@ int main ()
 ## void txu::Context::clear (txu::Color color)
 Очищает изображение указанным в параметрах цветом.
 
+## void txu::Context::capture (HWND wnd = nullptr)
+
 ## txu::Context::operator HDC& ()
 Оператор преобразования к HDC. 
 
