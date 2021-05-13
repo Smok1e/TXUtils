@@ -731,7 +731,7 @@ result.render ();
 - [void txu::Context::capture (HWND wnd = nullptr)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextcapture-hwnd-wnd--nullptr)
 - [txu::Context::operator HDC& ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucontextoperator-hdc-)
 - [RGBQUAD* txu::Context::getBuffer ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#rgbquad-txucontextgetbuffer-)
-- [size_t txu::Context::getBufferLength ()]
+- [size_t txu::Context::getBufferLength ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#size_t-txucontextgetbufferlength-)
 - [RGBQUAD* txu::Context::access (size_t index)](https://github.com/Smok1e/TXUtils/blob/main/README.md#rgbquad-txucontextaccess-size_t-index)
 - [RGBQUAD* txu::Context::access (int x, int y)](https://github.com/Smok1e/TXUtils/blob/main/README.md#rgbquad-txucontextaccess-int-x-int-y)
 - [void txu::Context::setPixel (int x, int y, txu::Color color)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetpixel-int-x-int-y-txucolor-color)
