@@ -728,6 +728,7 @@ result.render ();
 - [void txu::Context::resize (int new_size_x, int new_size_y)](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucontextoperator-hdc-)
 - [void txu::Context::render (HDC dc = txDC (), int x = 0, int y = 0, int width = 0, int height = 0)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetpixel-int-x-int-y-txucolor-color)
 - [void txu::Context::clear (txu::Color color)](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucolor-txucontextgetpixel-int-x-int-y)
+- [void txu::Context::capture (HWND wnd = nullptr)]()
 - [txu::Context::operator HDC& ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetcolor-txucolor-color-int-thikness--0)
 - [RGBQUAD* txu::Context::getBuffer ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#rgbquad-txucontextgetbuffer-)
 - [size_t txu::Context::getBufferLength ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#size_t-txucontextgetbuffersize-)
@@ -802,6 +803,7 @@ int main ()
 Очищает изображение указанным в параметрах цветом.
 
 ## void txu::Context::capture (HWND wnd = nullptr)
+Захватывает изображения из окна, указанного в параметре. По умолчанию дексриптор окна равен nullptr, что означает, что захвачен будет весь экран. Изображение автоматически изменится до нужного размера.
 
 ## txu::Context::operator HDC& ()
 Оператор преобразования к HDC. 
