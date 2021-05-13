@@ -121,6 +121,7 @@ txSetFillColor (txu::Color (24, 24, 24));
 - [operator RGBQUAD  ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoloropreator-rgbquad-)
 - [operator COLORREF ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoloroperator-colorref-)
 - [Color operator ! ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucoloroperator--)
+- [Color& operator = (const Color& that)](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucoloroperator--const-color-that)
 - [static Color HSV (int h, int s, int v)](https://github.com/Smok1e/TXUtils/blob/main/README.md#static-color-txucolorhsv-int-h-int-s-int-)
 - [int hue ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txucolorhue-)
 - [int saturation ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txucolorsaturation-)
@@ -185,6 +186,9 @@ for (int x = 0; x < size_x; x++)
 txu::Color black (0, 0, 0)
 txu::Color white = !black //Белый цвет
 ```
+
+## Color& txu::Color::operator = (const Color& that)
+Опиратор присваивания
 
 ## static Color txu::Color::HSV (int h, int s, int v)
 Возвращает цвет, созданный на основе системы [HSV](https://ru.wikipedia.org/wiki/HSV_(%D1%86%D0%B2%D0%B5%D1%82%D0%BE%D0%B2%D0%B0%D1%8F_%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C)).
