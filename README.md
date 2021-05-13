@@ -811,7 +811,7 @@ int main ()
 ## RGBQUAD* txu::Context::getBuffer ()
 Возвращает указатель на начало буффера изображения в формате RGBQUAD.
 
-## size_t txu::Context::getBufferSize ()
+## size_t txu::Context::getBufferLength ()
 Возвращает размер буффера изображения.
 
 ## RGBQUAD* txu::Context::access (size_t index)
