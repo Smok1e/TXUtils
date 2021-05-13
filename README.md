@@ -130,6 +130,8 @@ txSetFillColor (txu::Color (24, 24, 24));
 ## Функции для операций с цветом:
 - [txu::Color Blend (Color a, Color b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucolor-blend-color-a-color-b)
 - [txu::Color operator <<= (Color a, Color b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucolor-operator--color-a-color-b)
+- [bool operator == (const Color& a, const Color& b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-operator--const-color-a-const-color-b)
+- [bool operator != (const Color& a, const COlor& b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-operator--const-color-a-const-color-b-1)
 
 ## Color txu::Color::Interpolate (Color a, Color b, Color t)
 Эта статическая функция позволяет создавать плавный переход между цветами в зависимости от переменной t.
@@ -179,6 +181,8 @@ for (int x = 0; x < size_x; x++)
 
 ## txu::Color::operator COLORREF ()
 Оператор преобразования к COLORREF
+Обратите внимание, что если альфа-канал цвета равен нулю, то оператор COLORREF вернёт TX_TRANSPARENT.
+В остальных случаях альфа-канал не учитывается. К сожалению, хоть размер COLORREF и равен четырём байтам, в одном из которых в теории можно хранить альфа-канал, GDI windows не позволяет оперировать полу-прозрачными цветами нативно, а четвёртый байт COLORREF'a считается зарезервированным.
 
 ## Color txu::Color::operator ! ()
 Возвращает инвертированный цвет:
@@ -259,6 +263,12 @@ txu::Color color = txu::Blend (a, b);
 ```
 txu::Color color = b <<= a;
 ```
+
+## bool operator == (const Color& a, const Color& b)
+Оператор сравнения двух цветов: возвращает true только если a.r == b.r, и a.g == b.g, и a.b == b.b. Альфа-канал не учтён.
+
+## bool operator != (const Color& a, const Color& b)
+Оператор сравнения двух цветов: возвращает true, если a.r != b.r, или a.g != b.g, или a.b != b.b. Альфа-канал не учтён.
 
 # txu::Font
 Класс, предназначенный для хранения информации о шрифте и установки шрифта в HDC. Класс txu::Font позволяет загружать шрифты непосредственно из файла.
@@ -707,24 +717,25 @@ result.render ();
 
 ## Функции-члены:
 - [bool txu::Context::create ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txucontextcreate-)
-- [bool txu::Context::create (int size_x, int size_y)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txucontextloadfromfile-const-char-filename)
-- [bool txu::Context::create (const Context& that)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txucontextsavetofile-const-char-filename)
-- [bool txu::Context::create (const HDC& dc)](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txucontextgetsizex-)
-- [bool txu::Context::create (const char* filename)](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txucontextgetsizey-)
-- [bool txu::Context::loadFromFile (const char* filename)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextresize-int-new_size_x-int-new_size_y)
-- [bool txu::Context::saveToFile (const char* filename)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextrender-hdc-dc--txdc--int-x--0-int-y--0-int-width--0-int-height--0)
-- [int txu::Context::getSizeX ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextrender-hdc-dc--txdc--int-x--0-int-y--0-int-width--0-int-height--0)
-- [int txu::Context::getSizeY ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextclear-txucolor-color)
-- [void txu::Context::resize (int new_size_x, int new_size_y)](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucontextoperator-hdc-)
-- [void txu::Context::render (HDC dc = txDC (), int x = 0, int y = 0, int width = 0, int height = 0)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetpixel-int-x-int-y-txucolor-color)
-- [void txu::Context::clear (txu::Color color)](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucolor-txucontextgetpixel-int-x-int-y)
-- [txu::Context::operator HDC& ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetcolor-txucolor-color-int-thikness--0)
+- [bool txu::Context::create (int size_x, int size_y)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txucontextcreate-)
+- [bool txu::Context::create (const Context& that)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txucontextcreate-)
+- [bool txu::Context::create (const HDC& dc)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txucontextcreate-)
+- [bool txu::Context::create (const char* filename)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txucontextcreate-)
+- [bool txu::Context::loadFromFile (const char* filename)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txucontextloadfromfile-const-char-filename)
+- [bool txu::Context::saveToFile (const char* filename)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txucontextsavetofile-const-char-filename)
+- [int txu::Context::getSizeX ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txucontextgetsizex-)
+- [int txu::Context::getSizeY ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txucontextgetsizey-)
+- [void txu::Context::resize (int new_size_x, int new_size_y)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextresize-int-new_size_x-int-new_size_y)
+- [void txu::Context::render (HDC dc = txDC (), int x = 0, int y = 0, int width = 0, int height = 0)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextrender-hdc-dc--txdc--int-x--0-int-y--0-int-width--0-int-height--0)
+- [void txu::Context::clear (txu::Color color)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextclear-txucolor-color)
+- [void txu::Context::capture (HWND wnd = nullptr)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextcapture-hwnd-wnd--nullptr)
+- [txu::Context::operator HDC& ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucontextoperator-hdc-)
 - [RGBQUAD* txu::Context::getBuffer ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#rgbquad-txucontextgetbuffer-)
-- [size_t txu::Context::getBufferLength ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#size_t-txucontextgetbuffersize-)
+- [size_t txu::Context::getBufferLength ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#size_t-txucontextgetbufferlength-)
 - [RGBQUAD* txu::Context::access (size_t index)](https://github.com/Smok1e/TXUtils/blob/main/README.md#rgbquad-txucontextaccess-size_t-index)
 - [RGBQUAD* txu::Context::access (int x, int y)](https://github.com/Smok1e/TXUtils/blob/main/README.md#rgbquad-txucontextaccess-int-x-int-y)
-- [void txu::Context::setPixel (int x, int y, txu::Color color)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetfillcolor-txucolor-color)
-- [txu::Color txu::Context::getPixel (int x, int y)](github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetfont-hfont-font)
+- [void txu::Context::setPixel (int x, int y, txu::Color color)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetpixel-int-x-int-y-txucolor-color)
+- [txu::Color txu::Context::getPixel (int x, int y)](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucolor-txucontextgetpixel-int-x-int-y)
 - [void txu::Context::setColor (txu::Color color, int thikness = 0)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetcolor-txucolor-color-int-thikness--0)
 - [void txu::Context::setFillColor (txu::Color color)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetfillcolor-txucolor-color)
 - [void txu::Context::setFont (HFONT font)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetfont-hfont-font)
@@ -791,13 +802,16 @@ int main ()
 ## void txu::Context::clear (txu::Color color)
 Очищает изображение указанным в параметрах цветом.
 
+## void txu::Context::capture (HWND wnd = nullptr)
+Захватывает изображения из окна, указанного в параметре. По умолчанию дексриптор окна равен nullptr, что означает, что захвачен будет весь экран. Изображение автоматически изменится до нужного размера.
+
 ## txu::Context::operator HDC& ()
 Оператор преобразования к HDC. 
 
 ## RGBQUAD* txu::Context::getBuffer ()
 Возвращает указатель на начало буффера изображения в формате RGBQUAD.
 
-## size_t txu::Context::getBufferSize ()
+## size_t txu::Context::getBufferLength ()
 Возвращает размер буффера изображения.
 
 ## RGBQUAD* txu::Context::access (size_t index)
