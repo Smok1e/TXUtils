@@ -784,7 +784,7 @@ int main ()
 ![context_load_from_file_example](https://user-images.githubusercontent.com/33802666/117331803-c6023a80-ae9f-11eb-82cc-ac27f3f68ebc.png)
 
 ## bool txu::Context::saveToFile (const char* filename)
-Сохраняет изображение в файл в формате bmp.
+Сохраняет изображение в файл, указанный в параметрах. По умолчанию сохраняет в формате .bmp, однако, если вы подключили использование libpng (см [bool txu::Context::loadFromFile (const char* filename)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txucontextloadfromfile-const-char-filename)), функция автоматически определит его расширение из строки имени. То есть, если в конце имени файла указано ".png", и при этом подключён libpng, то изображение сохранится в формате png. В любых других случаях, изображение будет сохранено в формате bmp.
 
 ## int txu::Context::getSizeX ()
 Возвращает ширину изображения.
