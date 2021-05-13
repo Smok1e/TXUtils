@@ -41,6 +41,8 @@ public :
 
 	void clear (Color color);
 
+	void capture (HWND wnd = nullptr);
+
 	operator HDC& ();
 
 	RGBQUAD* getBuffer       ();
@@ -306,6 +308,15 @@ void Context::clear (Color color)
 	setFillColor (color);
 	txClear (dc_);
 	setFillColor (last_fillcolor);
+}
+
+//-------------------
+
+void Context::capture (HWND wnd /*= nullptr*/)
+{
+	HDC capture = GetDC (wnd);
+	create (capture);
+	txDeleteDC (capture);
 }
 
 //-------------------
