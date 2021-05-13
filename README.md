@@ -130,6 +130,8 @@ txSetFillColor (txu::Color (24, 24, 24));
 ## Функции для операций с цветом:
 - [txu::Color Blend (Color a, Color b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucolor-blend-color-a-color-b)
 - [txu::Color operator <<= (Color a, Color b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucolor-operator--color-a-color-b)
+- bool operator == (const Color& a, const Color& b)
+- bool operator != (const Color& a, const COlor& b)
 
 ## Color txu::Color::Interpolate (Color a, Color b, Color t)
 Эта статическая функция позволяет создавать плавный переход между цветами в зависимости от переменной t.
@@ -179,6 +181,8 @@ for (int x = 0; x < size_x; x++)
 
 ## txu::Color::operator COLORREF ()
 Оператор преобразования к COLORREF
+Обратите внимание, что если альфа-канал цвета равен нулю, то оператор COLORREF вернёт TX_TRANSPARENT.
+В остальных случаях альфа-канал не учитывается. К сожалению, хоть размер COLORREF и равен четырём байтам, в одном из которых в теории можно хранить альфа-канал, GDI windows не позволяет оперировать полу-прозрачными цветами нативно, а четвёртый байт COLORREF'a считается зарезервированным.
 
 ## Color txu::Color::operator ! ()
 Возвращает инвертированный цвет:
@@ -259,6 +263,12 @@ txu::Color color = txu::Blend (a, b);
 ```
 txu::Color color = b <<= a;
 ```
+
+## bool operator == (const Color& a, const Color& b)
+Оператор сравнения двух цветов: возвращает true только если a.r == b.r, и a.g == b.g, и a.b == b.b. Альфа-канал не учтён.
+
+## bool operator != (const Color& a, const Color& b)
+Оператор сравнения двух цветов: возвращает true, если a.r != b.r, или a.g != b.g, или a.b != b.b. Альфа-канал не учтён.
 
 # txu::Font
 Класс, предназначенный для хранения информации о шрифте и установки шрифта в HDC. Класс txu::Font позволяет загружать шрифты непосредственно из файла.
