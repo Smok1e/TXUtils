@@ -875,7 +875,7 @@ double time = txu::Time::seconds (1); // будет равна 1000 милисе
 Оператор так же возвращает значение в милисекундах. Поэтому, вы можете использовать Time как обычное число в функциях, принимающих время в милисекундах.
 
 # Внутренние типы
-- txu::Time::time_t
+- [txu::Time::time_t](https://github.com/Smok1e/TXUtils/blob/main/README.md#txutimetime_t)
 
 # Конструкторы:
 - txu::Time::Time (Time::time_t time)
@@ -883,17 +883,17 @@ double time = txu::Time::seconds (1); // будет равна 1000 милисе
 - txu::Time::Time ()
 
 # Функции-члены:
-- txu::Time::time_t txu::Time::getMicroseconds ()
-- txu::Time::time_t txu::Time::getMilliseconds ()
-- txu::Time::time_t txu::Time::getSeconds ()
-- txu::Time::time_t txu::Time::getMinutes ()
-- txu::Time::time_t txu::Time::getHours ()
-- txu::Time operator double ()
-- txu::Time txu::Time::microseconds (Time::time_t microseconds)
-- txu::Time txu::Time::milliseconds (Time::time_t millisedonds)
-- txu::Time txu::Time::seconds (Time::time_t seconds)
-- txu::time txu::Time::minutes (Time::time_t minutes)
-- txu::Time txu::Time::hours (Time::time_t hours)
+- [txu::Time::time_t txu::Time::getMicroseconds ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8-%D0%B4%D0%BB%D1%8F-%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%B8)
+- [txu::Time::time_t txu::Time::getMilliseconds ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8-%D0%B4%D0%BB%D1%8F-%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%B8)
+- [txu::Time::time_t txu::Time::getSeconds ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8-%D0%B4%D0%BB%D1%8F-%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%B8)
+- [txu::Time::time_t txu::Time::getMinutes ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8-%D0%B4%D0%BB%D1%8F-%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%B8)
+- [txu::Time::time_t txu::Time::getHours ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8-%D0%B4%D0%BB%D1%8F-%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%B8)
+- [txu::Time operator double ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txutimeoperator-double-)
+- [txu::Time txu::Time::microseconds (Time::time_t microseconds)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%81%D1%82%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8-%D0%B8%D0%BD%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8)
+- [txu::Time txu::Time::milliseconds (Time::time_t millisedonds)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%81%D1%82%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8-%D0%B8%D0%BD%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8)
+- [txu::Time txu::Time::seconds (Time::time_t seconds)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%81%D1%82%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8-%D0%B8%D0%BD%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8)
+- [txu::time txu::Time::minutes (Time::time_t minutes)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%81%D1%82%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8-%D0%B8%D0%BD%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8)
+- [txu::Time txu::Time::hours (Time::time_t hours)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%81%D1%82%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8-%D0%B8%D0%BD%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8)
 
 ## txu::Time::time_t
 Это тип абстрактной единицы времени. По сути представляет из себя знаковое число с точкой.
@@ -905,7 +905,7 @@ double time = txu::Time::seconds (1); // будет равна 1000 милисе
 Возвращает время в милисекундах.
 
 ## Статические функции инициализации
-Функции txu::Time::milliseconds, txu::Time::seconds и другие без префикса get - возвращают объект типа txu::Time, созданный в указанной еденице времени из числа, указанного в параметре.
+Функции txu::Time::milliseconds, txu::Time::seconds и другие без префикса get - являются статическими (то есть их можно вызвать, не создавая переменную типа Time) и возвращают объект типа txu::Time, созданный в указанной еденице времени из числа, указанного в параметре.
 
 # Спасибо за использование TXUtils!
 Я буду рад ответить на ваши вопросы и предложения. В будущем я собираюсь добавить ещё множество удобных фич!
