@@ -34,6 +34,7 @@ TXUtils - это opensource библиотека, написанная мною 
 - [txu::Coord2D](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoord2d)
 - [txu::Context](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucontext)
 - [txu::Time](https://github.com/Smok1e/TXUtils/blob/main/README.md#txutime)
+- [txu::Timer]()
 
 ## bool txu::WasExitButtonPressed ()
 Возвращает true, если был нажат крестик в меню окна, иначе false, для того чтобы программист сам мог отреагировать на нажатие крестика. Например так:
@@ -905,6 +906,37 @@ double time = txu::Time::seconds (1); // будет равна 1000 милисе
 
 ## Статические функции инициализации
 Функции txu::Time::milliseconds, txu::Time::seconds и другие без префикса get - являются статическими (то есть их можно вызвать, не создавая переменную типа Time) и возвращают объект типа txu::Time, созданный в указанной еденице времени из числа, указанного в параметре.
+
+# txu::Timer
+Это сопутствующий txu::Time класс. Он выполняет функцию таймера, как несложно догадаться из названия. Класс очень простой, в нём всего 2 функции, но полезный. Он считает время не в милисекундах, как например примитывный GetTickCount (), а в микросекундах, используя для работы значения частоты и тиков процессора, так что он позволяет выявить даже самые незначительные различия во времени.
+
+Его использование крайне простое, например, для измерения времени, которое занимает функция test, подойдёт следующий код:
+
+```
+txu::Timer timer;
+timer.start ();
+
+test ();
+
+txu::Time elapsed = timer.getTime ();
+printf ("Function call elapsed %lf microseconds\n", elapsed.getMicroseconds ());
+```
+
+Для начала отсчёта нужно вызвать функцию start. Дальше, для получения прошедшего времени на текущий момент - вызвовите функцию getTime (), которая вернёт объект типа txu::Time.
+
+# Конструкторы класса:
+- txu::Timer::Timer (const Timer& that) 
+- txu::Timer::Timer ()
+
+# Функции-члены:
+- void txu::Timer::srart ()
+- txu::Time txu::Timer::getTime ()
+
+## void txu::Timer::start ()
+Начинает отсчёт времени с текущего момента.
+
+## txu::Timer txu::Timer::getTime ()
+Возвращает прошедшее с момента вызва функции start время в виде объекта txu::Time.
 
 # Спасибо за использование TXUtils!
 Я буду рад ответить на ваши вопросы и предложения. В будущем я собираюсь добавить ещё множество удобных фич!
