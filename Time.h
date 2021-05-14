@@ -7,7 +7,18 @@ namespace txu
 
 //-------------------
 
+class Time;
 class Timer;
+
+//-------------------
+
+Time operator + (const Time& a, const Time& b);
+Time operator - (const Time& a, const Time& b);
+
+bool operator == (const Time& a, const Time& b);
+bool operator != (const Time& a, const Time& b);
+
+//-------------------
 
 class Time
 {
@@ -32,10 +43,23 @@ public:
 
 	operator double ();
 
+	Time& operator = (const Time& that);
+
+	Time operator - ();
+
+	Time& operator += (const Time& that);
+	Time& operator -= (const Time& that);
+
 private:
 	double milliseconds_;
 
 	friend class Timer;
+
+	friend Time operator + (const Time& a, const Time& b);
+	friend Time operator - (const Time& a, const Time& b);
+
+	friend bool operator == (const Time& a, const Time& b);
+	friend bool operator != (const Time& a, const Time& b);
 };
 
 //-------------------
@@ -111,6 +135,62 @@ Time Time::hours (Time::time_t hours)
 Time::operator double ()
 {
 	return static_cast <double> (milliseconds_);
+}
+
+//-------------------
+
+Time& Time::operator = (const Time& that)
+{
+	if (this == &that) 
+		return *this;
+
+	milliseconds_ = that.milliseconds_;
+	return *this;
+}
+
+//-------------------
+
+Time Time::operator - ()
+{
+	return Time (-milliseconds_);
+}
+
+//-------------------
+
+Time& Time::operator += (const Time& that)
+{
+	milliseconds_ += that.milliseconds_;
+	return *this;
+}
+
+Time& Time::operator -= (const Time& that)
+{
+	milliseconds_ -= that.milliseconds_;
+	return *this;
+}
+
+//-------------------
+
+Time operator + (const Time& a, const Time& b)
+{
+	return Time (a.milliseconds_ + b.milliseconds_);
+}
+
+Time operator - (const Time& a, const Time& b)
+{
+	return Time (a.milliseconds_ - b.milliseconds_);
+}
+
+//-------------------
+
+bool operator == (const Time& a, const Time& b)
+{
+	return a.milliseconds_ == b.milliseconds_;
+}
+
+bool operator != (const Time& a, const Time& b)
+{
+	return a.milliseconds_ != b.milliseconds_;
 }
 
 //-------------------
