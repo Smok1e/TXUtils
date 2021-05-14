@@ -33,6 +33,8 @@ TXUtils - это opensource библиотека, написанная мною 
 - [txu::Font](https://github.com/Smok1e/TXUtils/blob/main/README.md#txufont)
 - [txu::Coord2D](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoord2d)
 - [txu::Context](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucontext)
+- [txu::Time]
+- [txu::Timer]
 
 ## bool txu::WasExitButtonPressed ()
 Возвращает true, если был нажат крестик в меню окна, иначе false, для того чтобы программист сам мог отреагировать на нажатие крестика. Например так:
@@ -837,6 +839,73 @@ int main ()
 
 ## void txu::Context::setFont (const char* name, int sx, int sy = -1, int bold = FW_DONTCARE, bool italic = false, bool underline = false, bool strikeout = false, double angle = 0)
 Устанавливает шрифт для внутреннего HDC по указанным параметрам. Тоже самое, что и txSelectFont.
+
+# txu::Time
+Класс, предназначенный для представления единиц времени в удобном формате. Поначалу, может показаться, что эта вещь бесполезна. Ведь время это же просто величина, как расстояние и скорость? В простых случаях - так и есть. Программист заводит переменную, к примеру, int timeout и вызвает абстрактную функцию Sleep (timeout). Как правило, для представления времени в программировании используются милисекунды, а значит timeout - время (в милисекундах). Но что если надо представить время не в милисекундах, а, например, в секундах? Тогда значение придётся умножить на 1000, а значит вызов Sleep будет происходить как Sleep (timeout * 1000). Но любой человек, посмотревший на такой код может сказать: А что это за "магическое" число 1000? Магическими числами называют численные выражения, не пояснённые и не обозначенные никакой переменной, из за чего сложно понять для чего они предназначаются. Все эти проблемы и решает класс txu::Time. С его использованием, предыдущий пример будет выглядеть так:
+```
+txu::Time timeout = txu::Time::seconds (1);
+Sleep (timeout);
+```
+
+Всё, теперь ничего пояснять не нужно. Вы можете инициализировать класс пятью разными способами из микросекунд, милисекунд, секунд, минут и часов. 
+
+```
+txu::Time::microseconds (1000000) == 
+txu::Time::miliseconds  (1000)    == 
+txu::Time::seconds      (1)       == 
+txu::Time::minutes      (1/60)    == 
+txu::Time::hours        (1/3600);
+```
+
+Все эти записи эквивалентны и равняются одной секунде.
+
+Разумеется, после создания переменной типа Time, вы можете достать из неё значения в любом удобном формате с помощью Time::getMicroseconds, Time::getMilliseconds, и.т.д.
+
+По умолчанию, время присваевается в милисекундах, то есть:
+
+```
+txu::Time time = 1000; // будет равна 1000 милисекундам
+```
+
+Ну и разумеется, в классе предусмотрен оператор приведения к double:
+```
+double time = txu::Time::seconds (1); // будет равна 1000 милисекундам
+```
+
+Оператор так же возвращает значение в милисекундах. Поэтому, вы можете использовать Time как обычное число в функциях, принимающих время в милисекундах.
+
+# Внутренние типы
+- txu::Time::time_t
+
+# Конструкторы:
+- txu::Time::Time (Time::time_t time)
+- txu::Time::Time (const Time& that)
+- txu::Time::Time ()
+
+# Функции-члены:
+- txu::Time::time_t txu::Time::getMicroseconds ()
+- txu::Time::time_t txu::Time::getMilliseconds ()
+- txu::Time::time_t txu::Time::getSeconds ()
+- txu::Time::time_t txu::Time::getMinutes ()
+- txu::Time::time_t txu::Time::getHours ()
+- txu::Time operator double ()
+- txu::Time txu::Time::microseconds (Time::time_t microseconds)
+- txu::Time txu::Time::milliseconds (Time::time_t millisedonds)
+- txu::Time txu::Time::seconds (Time::time_t seconds)
+- txu::time txu::Time::minutes (Time::time_t minutes)
+- txu::Time txu::Time::hours (Time::time_t hours)
+
+## txu::Time::time_t
+Это тип абстрактной единицы времени. По сути представляет из себя знаковое число с точкой.
+
+## Функции для получения времени
+Возвращают время в указанных единицах. getMicroseconds вернёт микросекунды, getMilliseconds - милисекунды, и так далее.
+
+## txu::Time::operator double ()
+Возвращает время в милисекундах.
+
+## Статические функции инициализации
+Функции txu::Time::milliseconds, txu::Time::seconds и другие без префикса get - возвращают объект типа txu::Time, созданный в указанной еденице времени из числа, указанного в параметре.
 
 # Спасибо за использование TXUtils!
 Я буду рад ответить на ваши вопросы и предложения. В будущем я собираюсь добавить ещё множество удобных фич!
