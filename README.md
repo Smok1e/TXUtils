@@ -33,7 +33,7 @@ TXUtils - это opensource библиотека, написанная мною 
 - [txu::Font](https://github.com/Smok1e/TXUtils/blob/main/README.md#txufont)
 - [txu::Coord2D](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoord2d)
 - [txu::Context](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucontext)
-- [txu::Time]
+- [txu::Time](https://github.com/Smok1e/TXUtils/blob/main/README.md#txutime)
 - [txu::Timer]
 
 ## bool txu::WasExitButtonPressed ()
@@ -896,7 +896,7 @@ double time = txu::Time::seconds (1); // будет равна 1000 милисе
 - [txu::Time txu::Time::hours (Time::time_t hours)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%81%D1%82%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8-%D0%B8%D0%BD%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8)
 
 ## txu::Time::time_t
-Это тип абстрактной единицы времени. По сути представляет из себя знаковое число с точкой.
+Это тип абстрактной единицы времени. По сути представляет из себя знаковое число с плавающей точкой.
 
 ## Функции для получения времени
 Возвращают время в указанных единицах. getMicroseconds вернёт микросекунды, getMilliseconds - милисекунды, и так далее.
