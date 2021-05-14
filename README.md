@@ -34,7 +34,6 @@ TXUtils - это opensource библиотека, написанная мною 
 - [txu::Coord2D](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoord2d)
 - [txu::Context](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucontext)
 - [txu::Time](https://github.com/Smok1e/TXUtils/blob/main/README.md#txutime)
-- [txu::Timer]
 
 ## bool txu::WasExitButtonPressed ()
 Возвращает true, если был нажат крестик в меню окна, иначе false, для того чтобы программист сам мог отреагировать на нажатие крестика. Например так:
