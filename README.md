@@ -929,8 +929,8 @@ printf ("Function call elapsed %lf microseconds\n", elapsed.getMicroseconds ());
 - txu::Timer::Timer ()
 
 # Функции-члены:
-- void txu::Timer::srart ()
-- txu::Time txu::Timer::getTime ()
+- [void txu::Timer::start ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txutimerstart-)
+- [txu::Time txu::Timer::getTime (https://github.com/Smok1e/TXUtils/blob/main/README.md#txutimer-txutimergettime-)]()
 
 ## void txu::Timer::start ()
 Начинает отсчёт времени с текущего момента.
