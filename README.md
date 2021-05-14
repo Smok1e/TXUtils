@@ -851,7 +851,7 @@ Sleep (timeout);
 
 ```
 txu::Time::microseconds (1000000) == 
-txu::Time::miliseconds  (1000)    == 
+txu::Time::milliseconds (1000)    == 
 txu::Time::seconds      (1)       == 
 txu::Time::minutes      (1/60)    == 
 txu::Time::hours        (1/3600);
