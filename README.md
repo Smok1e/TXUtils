@@ -894,10 +894,16 @@ double time = txu::Time::seconds (1); // будет равна 1000 милисе
 - [txu::time txu::Time::minutes (Time::time_t minutes)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%81%D1%82%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8-%D0%B8%D0%BD%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8)
 - [txu::Time txu::Time::hours (Time::time_t hours)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%81%D1%82%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8-%D0%B8%D0%BD%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8)
 - [txu::Time operator double ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txutimeoperator-double-)
-- txu::Time operator = (const Time& that)
-- txu::Time::operator - ()
-- txu::Time::operator += (const Time& that)
-- txu::Time::operator -= (const Time& that)
+- [txu::Time operator = (const Time& that)](https://github.com/Smok1e/TXUtils/blob/main/README.md#txutime-txutimeoperator--const-time-that)
+- [txu::Time::operator - ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txutime-txutimeoperator--const-time-that)
+- [txu::Time::operator += (const Time& that)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%83%D0%BD%D0%B0%D1%80%D0%BD%D1%8B%D0%B5-%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B)
+- [txu::Time::operator -= (const Time& that)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%83%D0%BD%D0%B0%D1%80%D0%BD%D1%8B%D0%B5-%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B)
+
+# Функции для операций с классом:
+- [bool operator == (const txu::Time& a, const txu::Time& b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-operator--const-txutime-a-const-txutime-b)
+- [bool operator != (const txu::Time& a, const txu::Time& b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-operator--const-txutime-a-const-txutime-b-1)
+- [txu::Time operator + (const txu::Time& a, const txu::Time& b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D0%B1%D0%B8%D0%BD%D0%B0%D1%80%D0%BD%D1%8B%D0%B5-%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B)
+- [txu::Time operator - (const txu::Time& b, const txu::Time& b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D0%B1%D0%B8%D0%BD%D0%B0%D1%80%D0%BD%D1%8B%D0%B5-%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B)
 
 ## txu::Time::time_t
 Это тип абстрактной единицы времени. По сути представляет из себя знаковое число с плавающей точкой.
