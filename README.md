@@ -888,12 +888,16 @@ double time = txu::Time::seconds (1); // будет равна 1000 милисе
 - [txu::Time::time_t txu::Time::getSeconds ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8-%D0%B4%D0%BB%D1%8F-%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%B8)
 - [txu::Time::time_t txu::Time::getMinutes ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8-%D0%B4%D0%BB%D1%8F-%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%B8)
 - [txu::Time::time_t txu::Time::getHours ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8-%D0%B4%D0%BB%D1%8F-%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%B8)
-- [txu::Time operator double ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txutimeoperator-double-)
 - [txu::Time txu::Time::microseconds (Time::time_t microseconds)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%81%D1%82%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8-%D0%B8%D0%BD%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8)
 - [txu::Time txu::Time::milliseconds (Time::time_t millisedonds)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%81%D1%82%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8-%D0%B8%D0%BD%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8)
 - [txu::Time txu::Time::seconds (Time::time_t seconds)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%81%D1%82%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8-%D0%B8%D0%BD%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8)
 - [txu::time txu::Time::minutes (Time::time_t minutes)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%81%D1%82%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8-%D0%B8%D0%BD%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8)
 - [txu::Time txu::Time::hours (Time::time_t hours)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D1%81%D1%82%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8-%D0%B8%D0%BD%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8)
+- [txu::Time operator double ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txutimeoperator-double-)
+- txu::Time operator = (const Time& that)
+- txu::Time::operator - ()
+- txu::Time::operator += (const Time& that)
+- txu::Time::operator -= (const Time& that)
 
 ## txu::Time::time_t
 Это тип абстрактной единицы времени. По сути представляет из себя знаковое число с плавающей точкой.
@@ -906,6 +910,24 @@ double time = txu::Time::seconds (1); // будет равна 1000 милисе
 
 ## Статические функции инициализации
 Функции txu::Time::milliseconds, txu::Time::seconds и другие без префикса get - являются статическими (то есть их можно вызвать, не создавая переменную типа Time) и возвращают объект типа txu::Time, созданный в указанной еденице времени из числа, указанного в параметре.
+
+## txu::Time& txu::Time::operator = (const Time& that)
+Оператор присваивания.
+
+## txu::Time txu::Time::operator - ()
+Возвращает объект класса с отрицательным значением времени.
+
+## Унарные математические операторы 
+Операторы, такие как += и -= - выполняют то же, что и математические += и -=.
+
+## bool operator == (const txu::Time& a, const txu::Time& b)
+Возвращает true, если значение времени левого операнда равно значению правого.
+
+## bool operator != (const txu::Time& a, const txu::Time& b)
+Возвращает true, если значения операндов не равны.
+
+## Бинарные математические операторы
+Операторы, такие как + и - - выполняют то же, что и математические + и -.
 
 # txu::Timer
 Это сопутствующий txu::Time класс. Он выполняет функцию таймера, как несложно догадаться из названия. Класс очень простой, в нём всего 2 функции, но полезный. Он считает время не в милисекундах, как например примитывный GetTickCount (), а в микросекундах, используя для работы значения частоты и тиков процессора, так что он позволяет выявить даже самые незначительные различия во времени.
