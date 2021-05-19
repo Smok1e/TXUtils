@@ -823,8 +823,8 @@ int main ()
 ## RGBQUAD* txu::Context::access (int x, int y)
 Делает то же, что и [txu::Context::access (size_t index)](https://github.com/Smok1e/TXUtils/blob/main/README.md#rgbquad-txucontextaccess-int-x-int-y), но вместа индекса принимает координаты пикселя.
 
-## void txu::Context::setPixel (int x, int y, txu::Color color)
-Устанавливает пиксель в точке, указанной параметрами x и y с учётом альфа-канала входного цвета.
+## void txu::Context::setPixel (int x, int y, txu::Color color, bool blend = true)
+Устанавливает пиксель в точке, указанной параметрами x и y с учётом альфа-канала входного цвета. Если в качестве последнего параметра передан false, альфа-канал не будет учтён, то есть в буффер изображения передастся цвет без изменений.
 
 ## txu::Color txu::Context::getPixel (int x, int y)
 Возвращает цвет пикселя по указанным координатам. Если координаты выходят за рамки изображения, функция вернёт txu::Color::Black.
