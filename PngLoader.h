@@ -23,9 +23,8 @@ const char* check_signature (const char* filename)
 {
 	const char png_signature[8] = {137, 80, 78, 71, 13, 10, 26, 10};
 
-	FILE* file = nullptr;
-	errno_t err = fopen_s (&file, filename, "rb");
-	if (err || !file)
+	FILE* file = __txu_fopen (filename, "rb");
+	if (!file)
 		return "Failed to open file";
 
 	char header[8] = "";
@@ -55,9 +54,8 @@ const char* load_png (RGBQUAD** buffer, int* sx, int* sy, const char* filename)
 	if (!infostruct)
 		return "Failed to create info struct";
 
-	FILE* file = nullptr;
-	errno_t err = fopen_s (&file, filename, "rb");
-	if (err || !file)
+	FILE* file = __txu_fopen (filename, "rb");
+	if (!file)
 		return "Failed to open file";
 
     png_init_io       (readstruct, file    );
@@ -89,7 +87,7 @@ const char* load_png (RGBQUAD** buffer, int* sx, int* sy, const char* filename)
 			Color color;
 
 			switch (cnannels)
-			{				
+			{
 				case 1:
 					color = txu::Color (*(begin+0), *(begin+0), *(begin+0));
 					break;
@@ -117,7 +115,7 @@ const char* load_png (RGBQUAD** buffer, int* sx, int* sy, const char* filename)
 
 	for (int y = 0; y < size_y; y++)
 		delete[] (row_pointers[y]);
-	
+
 	delete[] (row_pointers);
 
 	*buffer = buff;
@@ -142,10 +140,8 @@ const char* write_png (RGBQUAD* buffer, int size_x, int size_y, const char* file
 	if (!infostruct)
 		return "Failed to create info struct";
 
-	FILE* file = nullptr;
-	errno_t err = fopen_s (&file, filename, "wb");
-
-	if (err && !file)
+	FILE* file = __txu_fopen (filename, "rb");
+	if (!file)
 		return "Failed to open file";
 
 	png_set_IHDR

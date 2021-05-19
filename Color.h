@@ -98,16 +98,16 @@ const Color Color::Transparent (0,   0,   0,  0);
 //-------------------
 
 Color::Color (int r_, int g_, int b_, int a_) :
-	r (Clamp (r_, 0, 255)),
-	g (Clamp (g_, 0, 255)),
-	b (Clamp (b_, 0, 255)),
-	a (Clamp (a_, 0, 255))
+	r (static_cast <unsigned char> (Clamp (r_, 0, 255))),
+	g (static_cast <unsigned char> (Clamp (g_, 0, 255))),
+	b (static_cast <unsigned char> (Clamp (b_, 0, 255))),
+	a (static_cast <unsigned char> (Clamp (a_, 0, 255)))
 {}
 
 Color::Color (int r_, int g_, int b_) :
-	r (Clamp (r_, 0, 255)),
-	g (Clamp (g_, 0, 255)),
-	b (Clamp (b_, 0, 255)),
+	r (static_cast <unsigned char> (Clamp (r_, 0, 255))),
+	g (static_cast <unsigned char> (Clamp (g_, 0, 255))),
+	b (static_cast <unsigned char> (Clamp (b_, 0, 255))),
 	a (255)
 {}
 
@@ -120,15 +120,13 @@ Color::Color (const Color& that) :
 
 Color::Color (RGBQUAD rgbquad_) :
 	rgbquad (rgbquad_)
-{
-	a = 255;
-}
+{}
 
 Color::Color (COLORREF colorref) :
-	r (GetRValue (colorref)),
-	g (GetGValue (colorref)),
-	b (GetBValue (colorref)),
-	a (255)
+	r (static_cast <unsigned char> ( colorref        & 0x000000FF)),
+	g (static_cast <unsigned char> ((colorref >>  8) & 0x000000FF)),
+	b (static_cast <unsigned char> ((colorref >> 16) & 0x000000FF)),
+	a (static_cast <unsigned char> ((colorref >> 24) & 0x000000FF))
 {}
 
 Color::Color () :
@@ -144,10 +142,10 @@ Color Color::Interpolate (Color a, Color b, double t)
 {
 	t = Clamp (t, 0.0, 1.0);
 
-	return Color (a.r + t * (b.r - a.r),
-				  a.g + t * (b.g - a.g),
-				  a.b + t * (b.b - a.b),
-				  a.a + t * (b.a - a.a));
+	return Color (static_cast <int> (a.r + t * (b.r - a.r)),
+				  static_cast <int> (a.g + t * (b.g - a.g)),
+				  static_cast <int> (a.b + t * (b.b - a.b)),
+				  static_cast <int> (a.a + t * (b.a - a.a)));
 }
 
 Color Color::Interpolate (const std::initializer_list <Color>& list, double t)
@@ -156,8 +154,8 @@ Color Color::Interpolate (const std::initializer_list <Color>& list, double t)
 
 	size_t size = list.size ()-1;
 
-	int a_index = floor (t*size);
-	int b_index = ceil  (t*size);
+	size_t a_index = static_cast <size_t> (floor (t*size));
+	size_t b_index = static_cast <size_t> (ceil  (t*size));
 
 	Color a = *(list.begin () + a_index);
 	Color b = *(list.begin () + b_index);
@@ -174,10 +172,9 @@ Color::operator RGBQUAD ()
 
 Color::operator COLORREF ()
 {
-	if (a == 0)
-		return TX_TRANSPARENT;
+	if (a == 0) return TX_TRANSPARENT;
 
-	return RGB (r, g, b);
+	return r | (g << 8) | (b << 16) | (a << 24);
 }
 
 //-------------------
@@ -212,9 +209,9 @@ Color Color::HSV (int h, int s, int v)
 
     if (s == 0)
     {
-        rgb.r = v;
-        rgb.g = v;
-        rgb.b = v;
+        rgb.r = static_cast <unsigned char> (v);
+        rgb.g = static_cast <unsigned char> (v);
+        rgb.b = static_cast <unsigned char> (v);
 
         return rgb;
     }
@@ -229,27 +226,39 @@ Color Color::HSV (int h, int s, int v)
     switch (region)
     {
         case 0:
-            rgb.r = v; rgb.g = t; rgb.b = p;
+            rgb.r = static_cast <unsigned char> (v); 
+			rgb.g = static_cast <unsigned char> (t); 
+			rgb.b = static_cast <unsigned char> (p);
             break;
 
         case 1:
-            rgb.r = q; rgb.g = v; rgb.b = p;
+            rgb.r = static_cast <unsigned char> (q); 
+			rgb.g = static_cast <unsigned char> (v); 
+			rgb.b = static_cast <unsigned char> (p);
             break;
 
         case 2:
-			rgb.r = p; rgb.g = v; rgb.b = t;
+			rgb.r = static_cast <unsigned char> (p); 
+			rgb.g = static_cast <unsigned char> (v); 
+			rgb.b = static_cast <unsigned char> (t);
             break;
 
         case 3:
-            rgb.r = p; rgb.g = q; rgb.b = v;
+            rgb.r = static_cast <unsigned char> (p); 
+			rgb.g = static_cast <unsigned char> (q); 
+			rgb.b = static_cast <unsigned char> (v);
             break;
 
         case 4:
-            rgb.r = t; rgb.g = p; rgb.b = v;
+            rgb.r = static_cast <unsigned char> (t); 
+			rgb.g = static_cast <unsigned char> (p); 
+			rgb.b = static_cast <unsigned char> (v);
             break;
 
         default:
-            rgb.r = v; rgb.g = p; rgb.b = q;
+            rgb.r = static_cast <unsigned char> (v); 
+			rgb.g = static_cast <unsigned char> (p); 
+			rgb.b = static_cast <unsigned char> (q);
             break;
 
     }
@@ -272,7 +281,7 @@ int Color::hue ()
 	double h = 0;
 
 	if (delta < 0.00001)
-		return h;
+		return static_cast <int> (h);
 
     if (r >= max)
         h = (g - b) / delta;
@@ -288,7 +297,7 @@ int Color::hue ()
     if (h < 0)
         h += 360.0;
 
-    return 255.0/360.0*h;
+    return static_cast <int> (255.0/360.0 * h);
 }
 
 int Color::saturation ()
@@ -311,12 +320,13 @@ int Color::saturation ()
 	else if (max > 0.0)
 		s = (double) (delta / max);
 
-	return s * 255;
+	return static_cast <int> (s * 255);
 }
 
 int Color::value ()
 {
-    double min = 0, max = 0, delta = 0;
+    double min = 0;
+	double max = 0;
 
     min = r   < g ? r   : g;
     min = min < b ? min : b;
@@ -324,7 +334,7 @@ int Color::value ()
     max = r   > g ? r   : g;
     max = max > b ? max : b;
 
-	return max;
+	return static_cast <int> (max);
 }
 
 //-------------------
@@ -344,9 +354,9 @@ Color Blend (Color a, Color b)
 	double alpha = (double) a.a / 255;
 	double alpha_inv = 1.0 - alpha;
 
-	return Color ((double) b.r * alpha_inv + (double) a.r * alpha,
-		          (double) b.g * alpha_inv + (double) a.g * alpha,
-		          (double) b.b * alpha_inv + (double) a.b * alpha, a.a);
+	return Color (static_cast <int> ((double) b.r * alpha_inv + (double) a.r * alpha),
+		          static_cast <int> ((double) b.g * alpha_inv + (double) a.g * alpha),
+		          static_cast <int> ((double) b.b * alpha_inv + (double) a.b * alpha), a.a);
 }
 
 Color operator <<= (Color a, Color b)

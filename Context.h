@@ -51,7 +51,7 @@ public :
 	RGBQUAD* access (size_t index);
 	RGBQUAD* access (int x, int y);
 
-	void  setPixel (int x, int y, Color color);
+	void  setPixel (int x, int y, Color color, bool blend = true);
 	Color getPixel (int x, int y);
 
 	void setColor     (Color color, int thikness = 0);
@@ -283,7 +283,7 @@ size_t Context::getBufferLength ()
 RGBQUAD* Context::access (size_t index)
 {
 #ifdef _DEBUG
-	if (index >= size_x_*size_y_) return nullptr;
+	if ((int) index >= size_x_*size_y_) return nullptr;
 #endif
 
 	return buffer_ + index;
@@ -328,14 +328,14 @@ void Context::capture (HWND wnd /*= nullptr*/)
 
 //-------------------
 
-void Context::setPixel (int x, int y, Color color)
+void Context::setPixel (int x, int y, Color color, bool blend /*= true*/)
 {
 	y = size_y_ - y-1;
 
 	if (x < 0 || x >= size_x_ || y < 0 || y >= size_y_) return;
 
 	int index = x + y*size_x_;
-	buffer_[index] = (color.a < 255) ? (buffer_[index] <<= color) : color;
+	buffer_[index] = (blend && color.a < 255) ? (buffer_[index] <<= color) : color;
 }
 
 //-------------------

@@ -119,6 +119,9 @@ void _Uninit ()
 
 LRESULT CALLBACK WndProc (HWND wnd, UINT message, WPARAM wpar, LPARAM lpar)
 {
+	if (wnd != txWindow ())
+		return false;
+
 	switch (message)
 	{
 		case WM_CLOSE:      { if (WndProc_OnCLOSE      ()    ) return true; }
