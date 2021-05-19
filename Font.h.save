@@ -337,8 +337,8 @@ bool Font::update ()
 void Font::unload ()
 {
 	if (!has_loaded_) return;
-	_Gdi32_RemoveFontResourceA (loaded_filename_);
-	_Gdi32_RemoveFontResourceA (loaded_name_);
+	RemoveFontResourceA (loaded_filename_);
+	RemoveFontResourceA (loaded_name_);
 	has_loaded_ = false;
 }
 

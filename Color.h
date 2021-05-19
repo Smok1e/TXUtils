@@ -5,7 +5,7 @@ namespace txu
 
 //-------------------
 
-union Color;
+struct Color;
 
 template <typename TypeValue, typename TypeMin, typename TypeMax>
 TypeValue Clamp (TypeValue value, TypeMin min, TypeMax max);
@@ -20,12 +20,15 @@ bool operator != (const Color& a, const Color& b);
 
 #pragma pack (push, 1)
 
-union Color
+struct Color
 {
-	struct { unsigned char b, g, r, a; };
+	union
+	{
+		struct { unsigned char b, g, r, a; };
 
-	RGBQUAD       rgbquad;
-	unsigned char data[4];
+		RGBQUAD       rgbquad;
+		unsigned char data[4];
+	};
 
 	Color (int r, int g, int b, int a);
 	Color (int r, int g, int b       );
@@ -49,44 +52,44 @@ union Color
 	int saturation ();
 	int value      ();
 
-	static Color Black;
-	static Color White;
-	static Color Red;
-	static Color Green;
-	static Color Blue;
-	static Color Yellow;
-	static Color Pink;
-	static Color DarkPink;
-	static Color Cyan;
-	static Color Magneta;
-	static Color DarkCyan;
-	static Color DarkMagneta;
-	static Color Gray;
-	static Color Orange;
-	static Color DarkGreen;
+	static const Color Black;
+	static const Color White;
+	static const Color Red;
+	static const Color Green;
+	static const Color Blue;
+	static const Color Yellow;
+	static const Color Pink;
+	static const Color DarkPink;
+	static const Color Cyan;
+	static const Color Magneta;
+	static const Color DarkCyan;
+	static const Color DarkMagneta;
+	static const Color Gray;
+	static const Color Orange;
+	static const Color DarkGreen;
 
-	static Color Transparent;
+	static const Color Transparent;
 };
 
 //-------------------
 
-Color Color::Black       (0,   0,   0    );
-Color Color::White       (255, 255, 255  );
-Color Color::Red         (255, 0,   0    );
-Color Color::Green       (0,   255, 0    );
-Color Color::Blue        (0,   0,   255  );
-Color Color::Yellow      (255, 255, 0    );
-Color Color::Pink        (255, 54,  200  );
-Color Color::DarkPink	 (255, 0,   89   );
-Color Color::Cyan        (0,   255, 255  );
-Color Color::Magneta     (255, 0,   255  );
-Color Color::DarkCyan    (0,   140, 255  );
-Color Color::DarkMagneta (135, 0,   135  );
-Color Color::Gray        (100, 100, 100  );
-Color Color::Orange      (255, 135, 0    );
-Color Color::DarkGreen   (0,   128, 0    );
+const Color Color::Black       (0,   0,   0    );
+const Color Color::White       (255, 255, 255  );
+const Color Color::Red         (255, 0,   0    );
+const Color Color::Green       (0,   255, 0    );
+const Color Color::Blue        (0,   0,   255  );
+const Color Color::Yellow      (255, 255, 0    );
+const Color Color::Pink        (255, 54,  200  );
+const Color Color::DarkPink	 (255, 0,   89   );
+const Color Color::Cyan        (0,   255, 255  );
+const Color Color::Magneta     (255, 0,   255  );
+const Color Color::DarkCyan    (0,   140, 255  );
+const Color Color::DarkMagneta (135, 0,   135  );
+const Color Color::Gray        (100, 100, 100  );
+const Color Color::Orange      (255, 135, 0    );
+const Color Color::DarkGreen   (0,   128, 0    );
 
-Color Color::Transparent (0,   0,   0,  0);
+const Color Color::Transparent (0,   0,   0,  0);
 
 //-------------------
 
@@ -117,8 +120,8 @@ Color::Color (const Color& that) :
 
 Color::Color (RGBQUAD rgbquad_) :
 	rgbquad (rgbquad_)
-{ 
-	a = 255; 
+{
+	a = 255;
 }
 
 Color::Color (COLORREF colorref) :
@@ -153,13 +156,13 @@ Color Color::Interpolate (const std::initializer_list <Color>& list, double t)
 
 	size_t size = list.size ()-1;
 
-	int a_index = std::floor (t*size);
-	int b_index = std::ceil  (t*size);
+	int a_index = floor (t*size);
+	int b_index = ceil  (t*size);
 
 	Color a = *(list.begin () + a_index);
 	Color b = *(list.begin () + b_index);
 
-	return Interpolate (a, b, t*size - std::floor (t*size));
+	return Interpolate (a, b, t*size - floor (t*size));
 }
 
 //-------------------
@@ -171,7 +174,7 @@ Color::operator RGBQUAD ()
 
 Color::operator COLORREF ()
 {
-	if (a == 0)	
+	if (a == 0)
 		return TX_TRANSPARENT;
 
 	return RGB (r, g, b);
@@ -217,7 +220,7 @@ Color Color::HSV (int h, int s, int v)
     }
 
     int region = h / 43;
-    int remainder = (h - (region * 43)) * 6; 
+    int remainder = (h - (region * 43)) * 6;
 
     int p = (v * (255 - s)) >> 8;
     int q = (v * (255 - ((s * remainder) >> 8))) >> 8;
@@ -265,7 +268,7 @@ int Color::hue ()
     max = max > b ? max : b;
 
     delta = max - min;
-	
+
 	double h = 0;
 
 	if (delta < 0.00001)

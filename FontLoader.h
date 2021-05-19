@@ -102,9 +102,8 @@ void readobj (FILE* file, Type* obj);
 
 const char* load_fucking_font_record_data_228 (const char* filename, int nameid, char* buffer, size_t nMaxCount)
 {
-    FILE* file = nullptr;
-    errno_t err = fopen_s (&file, filename, "rb");
-    if (err || !file)
+    FILE* file = __txu_fopen (filename, "rb");
+    if (!file)
         return "failed to open file";
 
     OffsetTable offset = {};
@@ -114,15 +113,15 @@ const char* load_fucking_font_record_data_228 (const char* filename, int nameid,
     sswap (offset.major_version);
     sswap (offset.minor_version);
 
-    if (offset.major_version != 1 || offset.minor_version != 0) 
-    {   
+    if (offset.major_version != 1 || offset.minor_version != 0)
+    {
         fclose (file);
         return "file is not a ttf";
     }
 
     TableDirectory  dir    = {};
     NameTableHeader header = {};
-    
+
     bool found = false;
     for (size_t i = 0; i < offset.tables_count && !found; i++)
     {
@@ -137,7 +136,7 @@ const char* load_fucking_font_record_data_228 (const char* filename, int nameid,
         }
     }
 
-    if (!found) 
+    if (!found)
     {
         fclose (file);
         return "failed to find name tag";
@@ -164,7 +163,7 @@ const char* load_fucking_font_record_data_228 (const char* filename, int nameid,
             sswap (record.platform_id  );
             sswap (record.language_id  );
             sswap (record.string_length);
-            sswap (record.string_offset);        
+            sswap (record.string_offset);
 
             if (record.string_length >= nMaxCount)
             {
@@ -188,12 +187,12 @@ const char* load_fucking_font_record_data_228 (const char* filename, int nameid,
 
 sinfo_t& sswap (sinfo_t& x)
 {
-    return x = _byteswap_ushort (x);
+    return x = __txu_byteswap_16 (x);
 }
 
 linfo_t& lswap (linfo_t& x)
 {
-    return x = _byteswap_ulong (x);
+    return x = __txu_byteswap_32 (x);
 }
 
 //-------------------

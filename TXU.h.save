@@ -1,5 +1,5 @@
 #ifdef __TXLIB_H_INCLUDED
-    #include "Compatibility.h"
+    #include "C
 	#include "Utilits.h"
 	#include "Time.h"
 	#include "Timer.h"
