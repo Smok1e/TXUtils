@@ -17,7 +17,7 @@ TXUtils - это opensource библиотека, написанная мною 
 
 Готово!
 
-Примечание: я гарантирую работу библиотеки только компилятороми Visual C++ и MinGW. Я не отвечаю за совместимость с другими средами.
+Примечание: я гарантирую работу библиотеки только с компилятороми Visual C++ и MinGW. Я не отвечаю за совместимость с другими средами.
 
 # Функции библиотеки:
 - [void txu::WasExitButtonPressed    ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txuwasexitbuttonpressed-)
