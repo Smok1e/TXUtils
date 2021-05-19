@@ -737,7 +737,7 @@ result.render ();
 - [size_t txu::Context::getBufferLength ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#size_t-txucontextgetbufferlength-)
 - [RGBQUAD* txu::Context::access (size_t index)](https://github.com/Smok1e/TXUtils/blob/main/README.md#rgbquad-txucontextaccess-size_t-index)
 - [RGBQUAD* txu::Context::access (int x, int y)](https://github.com/Smok1e/TXUtils/blob/main/README.md#rgbquad-txucontextaccess-int-x-int-y)
-- [void txu::Context::setPixel (int x, int y, txu::Color color)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetpixel-int-x-int-y-txucolor-color)
+- [void txu::Context::setPixel (int x, int y, txu::Color color, bool blend = false)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetpixel-int-x-int-y-txucolor-color)
 - [txu::Color txu::Context::getPixel (int x, int y)](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucolor-txucontextgetpixel-int-x-int-y)
 - [void txu::Context::setColor (txu::Color color, int thikness = 0)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetcolor-txucolor-color-int-thikness--0)
 - [void txu::Context::setFillColor (txu::Color color)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetfillcolor-txucolor-color)
