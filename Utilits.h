@@ -15,39 +15,28 @@ namespace txu
 
 //-------------------
 
-#define _TXU_INIT_INITIALIZED   1
-#define _TXU_INIT_FAILED		2
-#define _TXU_INIT_UNINITIALIZED	3
-
-//-------------------
-
 int  _Init   ();
-void _Uninit ();
 
 //-------------------
 
-volatile HINSTANCE _ShellApi = nullptr;
+namespace shellapi
+{
+	_TX_DLLIMPORT ("Shlwapi", LPCSTR, PathFindExtensionA, (LPCSTR));
+}
 
-typedef LPCSTR (WINAPI* _ShellApi_GetFileExtentionFunc) (LPCSTR);
-_ShellApi_GetFileExtentionFunc _ShellApi_GetFileExtention = nullptr;
-
-volatile HINSTANCE _Gdi32 = nullptr;
-
-typedef int (WINAPI* _Gdi32_AddFontResourceExAFunc) (LPCSTR, DWORD, PVOID);
-_Gdi32_AddFontResourceExAFunc _Gdi32_AddFontResourceExA = nullptr;
-
-typedef HFONT (WINAPI* _Gdi32_CreateFontAFunc) (int, int, int, int, int, DWORD, DWORD, DWORD, DWORD, DWORD, DWORD, DWORD, DWORD, LPCSTR);
-_Gdi32_CreateFontAFunc _Gdi32_CreateFontA = nullptr;
-
-typedef BOOL (WINAPI* _Gdi32_RemoveFontResourceAFunc) (LPCSTR);
-_Gdi32_RemoveFontResourceAFunc _Gdi32_RemoveFontResourceA = nullptr;
+namespace gdi
+{
+	_TX_DLLIMPORT ("Gdi32", int,   AddFontResourceExA,  (LPCSTR, DWORD, PVOID)                                                                   );
+	_TX_DLLIMPORT ("Gdi32", HFONT, CreateFontA,         (int, int, int, int, int, DWORD, DWORD, DWORD, DWORD, DWORD, DWORD, DWORD, DWORD, LPCSTR));
+	_TX_DLLIMPORT ("Gdi32", BOOL,  RemoveFontResourceA, (LPCSTR)                                                                                 );
+}
 
 //-------------------
 
 volatile int _MouseWheelDelta      = 0;
 volatile int _WasExitButtonPressed = false;
 
-int _InitResult = _Init ();
+bool _InitResult = _Init ();
 
 //-------------------
 
@@ -67,52 +56,8 @@ bool SetWindowIcon (const char* filename);
 
 int _Init ()
 {
-	int result = _TXU_INIT_INITIALIZED;
-
-	if (_InitResult == _TXU_INIT_INITIALIZED)
-		return result;
-
 	txSetWindowsHook (WndProc);
-	
-	_ShellApi = LoadLibraryA ("Shlwapi.dll");
-	if (_ShellApi)
-		(FARPROC&) _ShellApi_GetFileExtention = GetProcAddress (_ShellApi, "PathFindExtensionA");
-
-	else
-	{
-		printf ("Warning! Failed to load Shlwapi.dll, some functions may crash\n");
-		result = _TXU_INIT_FAILED;
-	}
-
-	_Gdi32 = LoadLibraryA ("Gdi32.dll");
-	if (_Gdi32)
-	{
-		(FARPROC&) _Gdi32_AddFontResourceExA  = GetProcAddress (_Gdi32, "AddFontResourceExA" );
-		(FARPROC&) _Gdi32_CreateFontA         = GetProcAddress (_Gdi32, "CreateFontA"        );
-		(FARPROC&) _Gdi32_RemoveFontResourceA = GetProcAddress (_Gdi32, "RemoveFontResourceA");
-	}
-
-	else
-	{
-		printf ("Warning! Failed to load Gdi32.dll, some functions may crash\n");
-		result = _TXU_INIT_FAILED; 
-	}
-
-	atexit (_Uninit);
-	return result;
-}
-
-//-------------------
-
-void _Uninit ()
-{
-	if (_ShellApi)
-		FreeLibrary (_ShellApi);
-
-	if (_Gdi32)
-		FreeLibrary (_Gdi32);
-
-	_InitResult = _TXU_INIT_UNINITIALIZED;
+	return true;
 }
 
 //-------------------

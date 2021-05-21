@@ -203,7 +203,7 @@ bool Context::loadFromFile (const char* filename)
 		
 		resize (sx, sy);
 
-		for (size_t i = 0; i < sx*sy; i++)
+		for (size_t i = 0; i < static_cast <size_t> (sx*sy); i++)
 			buffer_[i] = buffer[i];
 
 		delete[] (buffer);
@@ -225,7 +225,7 @@ bool Context::loadFromFile (const char* filename)
 bool Context::saveToFile (const char* filename)
 {
 #ifdef TXU_USE_PNG
-	const char* extention = txu::_ShellApi_GetFileExtention (filename);
+	const char* extention = txu::shellapi::PathFindExtensionA (filename);
 
 	if (!strcmp (extention, ".png"))
 		return txu::png_loader::write_png (buffer_, size_x_, size_y_, filename);

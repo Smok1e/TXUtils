@@ -211,7 +211,7 @@ bool Font::loadFromFile (const char* filename)
 	unload ();
 
 	if (font_loader::load_fucking_font_record_data_228 (filename, NAMEID_FONT_FAMILY_NAME, loaded_name_, MAX_PATH)) return false;
-	if (!_Gdi32_AddFontResourceExA (filename, FR_NOT_ENUM, 0))                                                             return false;
+	if (!gdi::AddFontResourceExA (filename, FR_NOT_ENUM, 0))                                                        return false;
 
 	__txu_strncpy (loaded_filename_, filename, MAX_PATH);
 	name_ = loaded_name_;
@@ -328,7 +328,7 @@ void Font::select (HDC dc /*= txDC ()*/)
 
 bool Font::update ()
 {
-	handle_ = _Gdi32_CreateFontA (size_y_, size_x_, 0, 0, weight_, italic_, underline_, strikeout_, RUSSIAN_CHARSET, 0, 0, 0, 0, name_);
+	handle_ = gdi::CreateFontA (size_y_, size_x_, 0, 0, weight_, italic_, underline_, strikeout_, RUSSIAN_CHARSET, 0, 0, 0, 0, name_);
 	return handle_ != 0;
 }
 
@@ -337,8 +337,8 @@ bool Font::update ()
 void Font::unload ()
 {
 	if (!has_loaded_) return;
-	_Gdi32_RemoveFontResourceA (loaded_filename_);
-	_Gdi32_RemoveFontResourceA (loaded_name_);
+	gdi::RemoveFontResourceA (loaded_filename_);
+	gdi::RemoveFontResourceA (loaded_name_    );
 	has_loaded_ = false;
 }
 

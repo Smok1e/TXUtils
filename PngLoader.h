@@ -21,7 +21,7 @@ const char* load_png (RGBQUAD** buffer, int* sx, int* sy, const char* filename);
 
 const char* check_signature (const char* filename)
 {
-	const char png_signature[8] = {137, 80, 78, 71, 13, 10, 26, 10};
+	char png_signature[8] = {137, 80, 78, 71, 13, 10, 26, 10};
 
 	FILE* file = __txu_fopen (filename, "rb");
 	if (!file)
@@ -140,7 +140,7 @@ const char* write_png (RGBQUAD* buffer, int size_x, int size_y, const char* file
 	if (!infostruct)
 		return "Failed to create info struct";
 
-	FILE* file = __txu_fopen (filename, "rb");
+	FILE* file = __txu_fopen (filename, "wb");
 	if (!file)
 		return "Failed to open file";
 

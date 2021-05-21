@@ -80,7 +80,7 @@ const Color Color::Green       (0,   255, 0    );
 const Color Color::Blue        (0,   0,   255  );
 const Color Color::Yellow      (255, 255, 0    );
 const Color Color::Pink        (255, 54,  200  );
-const Color Color::DarkPink	 (255, 0,   89   );
+const Color Color::DarkPink	   (255, 0,   89   );
 const Color Color::Cyan        (0,   255, 255  );
 const Color Color::Magneta     (255, 0,   255  );
 const Color Color::DarkCyan    (0,   140, 255  );
