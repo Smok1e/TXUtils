@@ -78,9 +78,9 @@ private :
 Font::Font () :
 	name_        (nullptr),
 
-	loaded_name_     (__txu_empty_string),
-	loaded_filename_ (__txu_empty_string),
-	has_loaded_      (false),
+	loaded_name_     ({0}),
+	loaded_filename_ ({0}),
+	has_loaded_  (false),
 
 	size_x_    (0),
 	size_y_    (0),
@@ -88,19 +88,17 @@ Font::Font () :
 
 	italic_    (false),
 	underline_ (false),
-	strikeout_ (false),
-
-	handle_ (nullptr)
+	strikeout_ (false)
 {
 	create ();
 }
 
 Font::Font (const char* name, int size_x, int size_y, int weight /*= FW_DONTCARE*/, bool italic /*= false*/, bool underline /*= false*/, bool strikeout /*= false*/) :
-	name_ (nullptr),
+	name_ (nullptr),{0}
 
-	loaded_name_     (__txu_empty_string),
-	loaded_filename_ (__txu_empty_string),
-	has_loaded_      (false),
+	loaded_name_     ({0}),
+	loaded_filename_ ({0}),
+	has_loaded_  (false),
 
 	size_x_    (0),
 	size_y_    (0),
@@ -108,9 +106,7 @@ Font::Font (const char* name, int size_x, int size_y, int weight /*= FW_DONTCARE
 
 	italic_    (false),
 	underline_ (false),
-	strikeout_ (false),
-
-	handle_ (nullptr)
+	strikeout_ (false)
 {
 	create (name, size_x, size_y, weight, italic, underline, strikeout);
 }
@@ -118,9 +114,9 @@ Font::Font (const char* name, int size_x, int size_y, int weight /*= FW_DONTCARE
 Font::Font (const Font& that) :
 	name_ (nullptr),
 
-	loaded_name_     (__txu_empty_string),
-	loaded_filename_ (__txu_empty_string),
-	has_loaded_      (false),
+	loaded_name_     ({0}),
+	loaded_filename_ ({0}),
+	has_loaded_  (false),
 
 	size_x_    (0),
 	size_y_    (0),
@@ -128,9 +124,7 @@ Font::Font (const Font& that) :
 
 	italic_    (false),
 	underline_ (false),
-	strikeout_ (false),
-
-	handle_ (nullptr)
+	strikeout_ (false)
 {
 	create (that);
 }

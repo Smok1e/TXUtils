@@ -4,11 +4,28 @@
 
 namespace txu
 {
+	class Time;
+	class Timer;
+}
 
 //-------------------
 
-class Time;
-class Timer;
+txu::Time operator "" _mcsec (long long unsigned microseconds); // Returns time from microseconds integer
+txu::Time operator "" _msec  (long long unsigned milliseconds); // Returns time from milliseconds integer
+txu::Time operator "" _sec   (long long unsigned seconds     ); // Returns time from seconds integer
+txu::Time operator "" _min   (long long unsigned minutes     ); // Returns time from minutes integer
+txu::Time operator "" _hour  (long long unsigned hours       ); // Returns time from hours integer
+
+txu::Time operator "" _mcsec (long double microseconds); // Returns time from microseconds double
+txu::Time operator "" _msec  (long double milliseconds); // Returns time from milliseconds double
+txu::Time operator "" _sec   (long double seconds     ); // Returns time from seconds double
+txu::Time operator "" _min   (long double minutes     ); // Returns time from minutes double
+txu::Time operator "" _hour  (long double hours       ); // Returns time from hours double
+
+//-------------------
+
+namespace txu
+{
 
 //-------------------
 
@@ -35,11 +52,11 @@ public:
 	time_t getMinutes      ();
 	time_t getHours        ();
 
-	static Time microseoconds (time_t microseconds);
-	static Time milliseconds  (time_t milliseconds);
-	static Time seconds       (time_t seconds);
-	static Time minutes       (time_t minutes);
-	static Time hours         (time_t hours);
+	static Time microseconds (time_t microseconds);
+	static Time milliseconds (time_t milliseconds);
+	static Time seconds      (time_t seconds);
+	static Time minutes      (time_t minutes);
+	static Time hours        (time_t hours);
 
 	operator double ();
 
@@ -105,7 +122,7 @@ Time::time_t Time::getHours ()
 
 //-------------------
 
-Time Time::microseoconds (Time::time_t microseconds)
+Time Time::microseconds (Time::time_t microseconds)
 {
 	return Time (microseconds / 1000);
 }
@@ -196,3 +213,19 @@ bool operator != (const Time& a, const Time& b)
 //-------------------
 
 }
+
+//-------------------
+
+txu::Time operator "" _mcsec (long long unsigned microseconds) { return txu::Time::microseconds (static_cast <txu::Time::time_t> (microseconds)); }
+txu::Time operator "" _msec  (long long unsigned milliseconds) { return txu::Time::milliseconds (static_cast <txu::Time::time_t> (milliseconds)); }
+txu::Time operator "" _sec   (long long unsigned seconds     ) { return txu::Time::seconds      (static_cast <txu::Time::time_t> (seconds     )); }
+txu::Time operator "" _min   (long long unsigned minutes     ) { return txu::Time::minutes      (static_cast <txu::Time::time_t> (minutes     )); }
+txu::Time operator "" _hour  (long long unsigned hours       ) { return txu::Time::hours        (static_cast <txu::Time::time_t> (hours       )); }
+
+txu::Time operator "" _mcsec (long double microseconds) { return txu::Time::microseconds (static_cast <txu::Time::time_t> (microseconds)); }
+txu::Time operator "" _msec  (long double milliseconds) { return txu::Time::milliseconds (static_cast <txu::Time::time_t> (milliseconds)); }
+txu::Time operator "" _sec   (long double seconds     ) { return txu::Time::seconds      (static_cast <txu::Time::time_t> (seconds     )); }
+txu::Time operator "" _min   (long double minutes     ) { return txu::Time::minutes      (static_cast <txu::Time::time_t> (minutes     )); }
+txu::Time operator "" _hour  (long double hours       ) { return txu::Time::hours        (static_cast <txu::Time::time_t> (hours       )); }
+
+//-------------------
