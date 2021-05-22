@@ -864,7 +864,7 @@ txu::Time::hours        (1/3600);
 Хотите вызвать txSleep на 8 часов? ~зачем...~ Да без проблем!
 
 ```
-txSleep (8_hour);
+txSleep (8_hours);
 ```
 
 Для класса определены следующие литеральные операторы:
@@ -872,7 +872,7 @@ txSleep (8_hour);
 - \_msec  | время из миллисекунд
 - \_sec   | время из секунд
 - \_min   | время из минут
-- \_hour  | время из часов
+- \_hours | время из часов
 
 Все они возвращают объект типа txu::Time, с которым вы уже можете делать всё что душе угодно.
 
@@ -925,12 +925,12 @@ double milliseconds = 1_sec; // переменная milliseconds будет р�
 - [txu::Time operator "" \_msec (long long unsigned milliseconds)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-time)
 - [txu::Time operator "" \_sec (long long unsigned seconds)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-time)
 - [txu::Time operator "" \_min (long long unsigned minutes)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-time)
-- [txu::Time operator "" \_hour (long long unsigned hours)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-time)
+- [txu::Time operator "" \_hours (long long unsigned hours)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-time)
 - [txu::Time operator "" \_mcsec (long double microseconds)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-time)
 - [txu::Time operator "" \_msec (long double milliseconds)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-time)
 - [txu::Time operator "" \_sec (long double seconds)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-time)
 - [txu::Time operator "" \_min (long double minutes)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-time)
-- [txu::Time operator "" \_hour (long double hours)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-time)
+- [txu::Time operator "" \_hours (long double hours)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-time)
 
 ## txu::Time::time_t
 Это тип абстрактной единицы времени. По сути представляет из себя знаковое число с плавающей точкой.
@@ -964,7 +964,7 @@ double milliseconds = 1_sec; // переменная milliseconds будет р�
 
 ## Литеральные операторы Time
 Возвращают объект типа txu::Time, в зависимости от оператора.
-\_mcsec возвращает микросекунды, \_msec - миллисекунды, \_sec - секунды, \_min - минуты, и \_hour - часы.
+\_mcsec возвращает микросекунды, \_msec - миллисекунды, \_sec - секунды, \_min - минуты, и \_hours - часы.
 Литеральный оператор нужно писать сразу после числа, без пробелов. Синтаксис выглядит так:
 ```
 txu::Time time = 1400_msec;
