@@ -14,13 +14,13 @@ txu::Time operator "" _mcsec (long long unsigned microseconds); // Returns time 
 txu::Time operator "" _msec  (long long unsigned milliseconds); // Returns time from milliseconds integer
 txu::Time operator "" _sec   (long long unsigned seconds     ); // Returns time from seconds integer
 txu::Time operator "" _min   (long long unsigned minutes     ); // Returns time from minutes integer
-txu::Time operator "" _hour  (long long unsigned hours       ); // Returns time from hours integer
+txu::Time operator "" _hours (long long unsigned hours       ); // Returns time from hours integer
 
 txu::Time operator "" _mcsec (long double microseconds); // Returns time from microseconds double
 txu::Time operator "" _msec  (long double milliseconds); // Returns time from milliseconds double
 txu::Time operator "" _sec   (long double seconds     ); // Returns time from seconds double
 txu::Time operator "" _min   (long double minutes     ); // Returns time from minutes double
-txu::Time operator "" _hour  (long double hours       ); // Returns time from hours double
+txu::Time operator "" _hours (long double hours       ); // Returns time from hours double
 
 //-------------------
 
@@ -220,12 +220,12 @@ txu::Time operator "" _mcsec (long long unsigned microseconds) { return txu::Tim
 txu::Time operator "" _msec  (long long unsigned milliseconds) { return txu::Time::milliseconds (static_cast <txu::Time::time_t> (milliseconds)); }
 txu::Time operator "" _sec   (long long unsigned seconds     ) { return txu::Time::seconds      (static_cast <txu::Time::time_t> (seconds     )); }
 txu::Time operator "" _min   (long long unsigned minutes     ) { return txu::Time::minutes      (static_cast <txu::Time::time_t> (minutes     )); }
-txu::Time operator "" _hour  (long long unsigned hours       ) { return txu::Time::hours        (static_cast <txu::Time::time_t> (hours       )); }
+txu::Time operator "" _hours (long long unsigned hours       ) { return txu::Time::hours        (static_cast <txu::Time::time_t> (hours       )); }
 
 txu::Time operator "" _mcsec (long double microseconds) { return txu::Time::microseconds (static_cast <txu::Time::time_t> (microseconds)); }
 txu::Time operator "" _msec  (long double milliseconds) { return txu::Time::milliseconds (static_cast <txu::Time::time_t> (milliseconds)); }
 txu::Time operator "" _sec   (long double seconds     ) { return txu::Time::seconds      (static_cast <txu::Time::time_t> (seconds     )); }
 txu::Time operator "" _min   (long double minutes     ) { return txu::Time::minutes      (static_cast <txu::Time::time_t> (minutes     )); }
-txu::Time operator "" _hour  (long double hours       ) { return txu::Time::hours        (static_cast <txu::Time::time_t> (hours       )); }
+txu::Time operator "" _hours (long double hours       ) { return txu::Time::hours        (static_cast <txu::Time::time_t> (hours       )); }
 
 //-------------------
