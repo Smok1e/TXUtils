@@ -78,8 +78,8 @@ private :
 Font::Font () :
 	name_        (nullptr),
 
-	loaded_name_     (__txu_empty_string),
-	loaded_filename_ (__txu_empty_string),
+	loaded_name_     {},
+	loaded_filename_ {},
 	has_loaded_      (false),
 
 	size_x_    (0),
@@ -98,8 +98,8 @@ Font::Font () :
 Font::Font (const char* name, int size_x, int size_y, int weight /*= FW_DONTCARE*/, bool italic /*= false*/, bool underline /*= false*/, bool strikeout /*= false*/) :
 	name_ (nullptr),
 
-	loaded_name_     (__txu_empty_string),
-	loaded_filename_ (__txu_empty_string),
+	loaded_name_     {},
+	loaded_filename_ {},
 	has_loaded_      (false),
 
 	size_x_    (0),
@@ -118,8 +118,8 @@ Font::Font (const char* name, int size_x, int size_y, int weight /*= FW_DONTCARE
 Font::Font (const Font& that) :
 	name_ (nullptr),
 
-	loaded_name_     (__txu_empty_string),
-	loaded_filename_ (__txu_empty_string),
+	loaded_name_     {},
+	loaded_filename_ {},
 	has_loaded_      (false),
 
 	size_x_    (0),

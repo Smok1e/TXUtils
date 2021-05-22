@@ -2,16 +2,6 @@
 
 //-------------------
 
-#ifdef __txu_empty_string
-	#undef __txu_epmty_string
-#endif
-
-#ifdef __MINGW32__
-	#define __txu_empty_string {0}
-#else
-	#define __txu_empty_string ""
-#endif
-
 #ifdef __MINGW32__
 	#pragma GCC diagnostic ignored "-Wunused-parameter"
 	#pragma GCC diagnostic ignored "-Wunused-value"
