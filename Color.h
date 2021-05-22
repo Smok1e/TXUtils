@@ -40,8 +40,8 @@ struct Color
 	static Color Interpolate (Color a, Color b, double t);
 	static Color Interpolate (const std::initializer_list <Color>& list, double t);
 
-	operator RGBQUAD  ();
-	operator COLORREF ();
+	operator RGBQUAD  () const;
+	operator COLORREF () const;
 
 	Color& operator = (const Color& that);
 
@@ -165,16 +165,15 @@ Color Color::Interpolate (const std::initializer_list <Color>& list, double t)
 
 //-------------------
 
-Color::operator RGBQUAD ()
+Color::operator RGBQUAD () const
 {
 	return rgbquad;
 }
 
-Color::operator COLORREF ()
+Color::operator COLORREF () const
 {
 	if (a == 0) return TX_TRANSPARENT;
-
-	return r | (g << 8) | (b << 16) | (a << 24);
+	return r | (g << 8) | (b << 16); // | (a << 24); THIS SHIT DOESN'T WORK WITH TXSETCOLOR, FUCK!
 }
 
 //-------------------
