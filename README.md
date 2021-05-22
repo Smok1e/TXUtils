@@ -860,17 +860,33 @@ txu::Time::hours        (1/3600);
 
 Все эти записи эквивалентны и равняются одной секунде.
 
+Но даже это не предел удобства! Помните эти буквы после чисел, обозначающие тип числа? 10u 10f 10l и.т.д. Эти постификсы называются литеральными операторами. И разумеется, c++ был бы не ++, если бы в нём нельзя было определить пользовательские литеральные операторы. И в классе Time они тоже есть.
+Хотите вызвать txSleep на 8 часов? ~зачем...~ Да без проблем!
+
+```
+txSleep (8_hours);
+```
+
+Для класса определены следующие литеральные операторы:
+- \_mcsec | время из микросекунд
+- \_msec  | время из миллисекунд
+- \_sec   | время из секунд
+- \_min   | время из минут
+- \_hour  | время из часов
+
+Все они возвращают объект типа txu::Time, с которым вы уже можете делать всё что душе угодно.
+
 Разумеется, после создания переменной типа Time, вы можете достать из неё значения в любом удобном формате с помощью Time::getMicroseconds, Time::getMilliseconds, и.т.д.
 
 По умолчанию, время присваевается в милисекундах, то есть:
 
 ```
-txu::Time time = 1000; // будет равна 1000 милисекундам
+txu::Time time = 1000; // переменная time будет равна 1000 милисекундам
 ```
 
 Ну и разумеется, в классе предусмотрен оператор приведения к double:
 ```
-double time = txu::Time::seconds (1); // будет равна 1000 милисекундам
+double milliseconds = 1_sec; // переменная milliseconds будет равна 1000
 ```
 
 Оператор так же возвращает значение в милисекундах. Поэтому, вы можете использовать Time как обычное число в функциях, принимающих время в милисекундах.
@@ -905,6 +921,16 @@ double time = txu::Time::seconds (1); // будет равна 1000 милисе
 - [bool operator != (const txu::Time& a, const txu::Time& b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-operator--const-txutime-a-const-txutime-b-1)
 - [txu::Time operator + (const txu::Time& a, const txu::Time& b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D0%B1%D0%B8%D0%BD%D0%B0%D1%80%D0%BD%D1%8B%D0%B5-%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B)
 - [txu::Time operator - (const txu::Time& b, const txu::Time& b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D0%B1%D0%B8%D0%BD%D0%B0%D1%80%D0%BD%D1%8B%D0%B5-%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B)
+- [txu::Time operator "" \_mcsec (long long unsigned microseconds](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-time)
+- [txu::Time operator "" \_msec (long long unsigned milliseconds](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-time)
+- [txu::Time operator "" \_sec (long long unsigned seconds](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-time)
+- [txu::Time operator "" \_min (long long unsigned minutes](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-time)
+- [txu::Time operator "" \_hour (long long unsigned hours](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-time)
+- [txu::Time operator "" \_mcsec (long double microseconds](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-time)
+- [txu::Time operator "" \_msec (long double milliseconds](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-time)
+- [txu::Time operator "" \_sec (long double seconds](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-time)
+- [txu::Time operator "" \_min (long double minutes](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-time)
+- [txu::Time operator "" \_hour (long double hours](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-time)
 
 ## txu::Time::time_t
 Это тип абстрактной единицы времени. По сути представляет из себя знаковое число с плавающей точкой.
@@ -936,6 +962,15 @@ double time = txu::Time::seconds (1); // будет равна 1000 милисе
 ## Бинарные математические операторы
 Операторы, такие как + и - - выполняют то же, что и математические + и -.
 
+## Литеральные операторы Time
+Возвращают объект типа txu::Time, в зависимости от оператора.
+\_mcsec возвращает микросекунды, \_msec - миллисекунды, \_sec - секунды, \_min - минуты, и \_hour - часы.
+Литеральный оператор нужно писать сразу после числа, без пробелов. Синтаксис выглядит так:
+```
+txu::Time time = 1400_msec;
+```
+Тогда time будер равна 1400 миллисекундам.
+
 # txu::Timer
 Это сопутствующий txu::Time класс. Он выполняет функцию таймера, как несложно догадаться из названия. Класс очень простой, в нём всего 2 функции, но полезный. Он считает время не в милисекундах, как например примитывный GetTickCount (), а в микросекундах, используя для работы значения частоты и тиков процессора, так что он позволяет выявить даже самые незначительные различия во времени.
 
@@ -959,7 +994,7 @@ printf ("Function call elapsed %lf microseconds\n", elapsed.getMicroseconds ());
 
 # Функции-члены:
 - [void txu::Timer::start ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txutimerstart-)
-- [txu::Time txu::Timer::getTime] (https://github.com/Smok1e/TXUtils/blob/main/README.md#txutimer-txutimergettime-)
+- [txu::Time txu::Timer::getTime](https://github.com/Smok1e/TXUtils/blob/main/README.md#txutimer-txutimergettime-)
 
 ## void txu::Timer::start ()
 Начинает отсчёт времени с текущего момента.
