@@ -122,7 +122,7 @@ txSetFillColor (txu::Color (24, 24, 24));
 - [static Color Interpolate (Color a, Color b, double t)](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucolorinterpolate-color-a-color-b-color-t)
 - [static Color Interpolate (const std::initializer_list& list, double t)](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucolorinterpolate-const-stdinitializer_list-list-double-t)
 - [static Color Random ()]
-- [static Color Choose ()]
+- [static Color Choose ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucolorchoose-)
 - [operator RGBQUAD  ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoloropreator-rgbquad-)
 - [operator COLORREF ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoloroperator-colorref-)
 - [Color operator ! ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucoloroperator--)
@@ -186,8 +186,9 @@ for (int x = 0; x < size_x; x++)
 
 ## Color txu::Color::Choose ()
 Статическая функция. Вызывает стандартное диалоговое окно выбора цвета windows, и возвращает выбранный цвет если пользователь нажал кнопку ОК.
+Если пользователь отменил выбор цвета, функция вернёт чёрный цвет.
 
-![image](https://user-images.githubusercontent.com/33802666/120930771-5fb74480-c6f7-11eb-9744-77f37f612365.png)
+![color_choose_example](https://user-images.githubusercontent.com/33802666/120930771-5fb74480-c6f7-11eb-9744-77f37f612365.png)
 
 ## txu::Color::opreator RGBQUAD ()
 Оператор преобразования к RGBQUAD
