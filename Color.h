@@ -40,6 +40,9 @@ struct Color
 	static Color Interpolate (Color a, Color b, double t);
 	static Color Interpolate (const std::initializer_list <Color>& list, double t);
 
+	static Color Random ();
+	static Color Choose ();
+
 	operator RGBQUAD  () const;
 	operator COLORREF () const;
 
@@ -51,6 +54,8 @@ struct Color
 	int hue        ();
 	int saturation ();
 	int value      ();
+
+	int average ();
 
 	static const Color Black;
 	static const Color White;
@@ -126,7 +131,7 @@ Color::Color (COLORREF colorref) :
 	r (static_cast <unsigned char> ( colorref        & 0x000000FF)),
 	g (static_cast <unsigned char> ((colorref >>  8) & 0x000000FF)),
 	b (static_cast <unsigned char> ((colorref >> 16) & 0x000000FF)),
-	a (static_cast <unsigned char> ((colorref >> 24) & 0x000000FF))
+	a (255) //(static_cast <unsigned char> ((colorref >> 24) & 0x000000FF))	???
 {}
 
 Color::Color () :
@@ -165,6 +170,33 @@ Color Color::Interpolate (const std::initializer_list <Color>& list, double t)
 
 //-------------------
 
+Color Color::Random ()
+{
+	return Color (rand () % 255, rand () % 255, rand () % 255);
+}
+
+//-------------------
+
+Color Color::Choose ()
+{
+	static COLORREF data[16] = {};	
+	
+	CHOOSECOLORA cc = {};
+	cc.hwndOwner      = txWindow ();
+	cc.hInstance      = nullptr;
+	cc.lpCustColors   = data;
+	cc.Flags          = CC_RGBINIT | CC_ANYCOLOR | CC_FULLOPEN;
+	cc.lCustData      = {};
+	cc.lpfnHook       = nullptr;
+	cc.lpTemplateName = nullptr;
+	cc.lStructSize    = sizeof (cc);
+
+	if (ChooseColorA (&cc)) return cc.rgbResult;
+	else                    return Black;
+}
+
+//-------------------
+
 Color::operator RGBQUAD () const
 {
 	return rgbquad;
@@ -173,7 +205,7 @@ Color::operator RGBQUAD () const
 Color::operator COLORREF () const
 {
 	if (a == 0) return TX_TRANSPARENT;
-	return r | (g << 8) | (b << 16); // | (a << 24); THIS SHIT DOESN'T WORK WITH TXSETCOLOR, FUCK!
+	return r | (g << 8) | (b << 16); // | (a << 24); ???
 }
 
 //-------------------
@@ -344,6 +376,13 @@ TypeValue Clamp (TypeValue value, TypeMin min, TypeMax max)
 	if (value < min) return min;
 	if (value > max) return max;
 	return value;
+}
+
+//-------------------
+
+int Color::average ()
+{
+	return (r + g + b) / 3;
 }
 
 //-------------------

@@ -31,9 +31,11 @@ public :
 	Coord2D (double x, double y);
 	Coord2D (const Coord2D& that);
 	Coord2D (POINT point);
+	Coord2D (SIZE  size);
 	Coord2D ();
 
 	operator POINT ();
+	operator SIZE  ();
 
 	Coord2D operator - ();
 
@@ -65,6 +67,11 @@ Coord2D::Coord2D (POINT point) :
 	y (point.y)
 {}
 
+Coord2D::Coord2D (SIZE size) :
+	x (size.cx),
+	y (size.cy)
+{}
+
 Coord2D::Coord2D () :
 	x (0),
 	y (0)
@@ -74,7 +81,12 @@ Coord2D::Coord2D () :
 
 Coord2D::operator POINT ()
 {
-	return POINT {(int) x, (int) y};
+	return POINT {static_cast <int> (x), static_cast <int> (y)};
+}
+
+Coord2D::operator SIZE ()
+{
+	return SIZE {static_cast <int> (x), static_cast <int> (y)};
 }
 
 //-------------------
@@ -157,7 +169,7 @@ Coord2D operator operator_ (const Coord2D& coord, double scalar)		 \
 	return Coord2D (coord.x operator_ scalar, coord.y operator_ scalar); \
 }																		 \
 																		 \
-Coord2D operator operator_ (double scalar, const Coord2D coord)			 \
+Coord2D operator operator_ (double scalar, const Coord2D& coord)		 \
 {																		 \
 	return Coord2D (coord.x operator_ scalar, coord.y operator_ scalar); \
 }

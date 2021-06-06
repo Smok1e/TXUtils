@@ -21,7 +21,7 @@ const char* load_png (RGBQUAD** buffer, int* sx, int* sy, const char* filename);
 
 const char* check_signature (const char* filename)
 {
-	char png_signature[8] = {137, 80, 78, 71, 13, 10, 26, 10};
+	const char png_signature[] = {137u, 80u, 78u, 71u, 13u, 10u, 26u, 10u};
 
 	FILE* file = __txu_fopen (filename, "rb");
 	if (!file)

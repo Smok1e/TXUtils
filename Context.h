@@ -39,6 +39,7 @@ public :
 
 	void render (HDC dc = txDC (), int x = 0, int y = 0, int width = 0, int height = 0);
 
+	void clear ();
 	void clear (Color color);
 
 	void capture (HWND wnd = nullptr);
@@ -308,6 +309,11 @@ void Context::render (HDC dc /* = txDC () */, int x /* = 0 */, int y /* = 0 */, 
 }
 
 //-------------------
+
+void Context::clear ()
+{
+	txClear (dc_);
+}
 
 void Context::clear (Color color)
 {
