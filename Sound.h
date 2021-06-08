@@ -7,6 +7,19 @@ namespace txu
 
 //-------------------
 
+bool CheckWavSignature (FILE* file);
+
+//-------------------
+
+struct WavSignatureHeader
+{
+	unsigned long chunk_id;
+	unsigned long reserved;
+	unsigned long format;
+};
+
+//-------------------
+
 class Sound
 {
 public: 
@@ -71,6 +84,12 @@ bool Sound::loadFromFile (const char* filename)
 	if (!file)
 		return false;
 
+	if (!CheckWavSignature (file))
+	{
+		fclose (file);
+		return false;
+	}
+
 	size_t size = fsize (file);
 	resize (size);
 
@@ -106,6 +125,25 @@ void Sound::resize (size_t new_size)
 
 	if (tmp)
 		delete[] (tmp);
+}
+
+//-------------------
+
+bool CheckWavSignature (FILE* file)
+{
+	size_t position = ftell (file);
+	fseek (file, 0, SEEK_SET);
+
+	WavSignatureHeader sign = {};
+	freadobj (file, &sign);
+
+	fseek (file, position, SEEK_SET);
+	
+	sign.chunk_id = __txu_byteswap_32 (sign.chunk_id);
+	sign.format   = __txu_byteswap_32 (sign.format  );
+
+	return sign.chunk_id == 0x52494646 /* "RIFF" */ &&
+		   sign.format   == 0x57415645 /* "WAVE" */;
 }
 
 //-------------------
