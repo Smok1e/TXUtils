@@ -131,7 +131,7 @@ txSetFillColor (txu::Color (24, 24, 24));
 - [int hue ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txucolorhue-)
 - [int saturation ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txucolorsaturation-)
 - [int value ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txucolorvalue-)
-- [int average ()]
+- [int average ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txucoloraverage-)
 
 ## Функции для операций с цветом:
 - [txu::Color Blend (Color a, Color b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucolor-blend-color-a-color-b)
