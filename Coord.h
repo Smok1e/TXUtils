@@ -210,4 +210,4 @@ double Coord2Distance (const Coord2D& a, const Coord2D& b)
 
 //-------------------
 
-}
+} // namespace txu

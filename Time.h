@@ -212,7 +212,7 @@ bool operator != (const Time& a, const Time& b)
 
 //-------------------
 
-}
+} // namespace txu
 
 //-------------------
 

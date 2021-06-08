@@ -416,4 +416,4 @@ bool operator != (const Color& a, const Color& b)
 
 //-------------------
 
-}
+} // namespace txu

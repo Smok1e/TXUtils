@@ -60,4 +60,4 @@ Time Timer::getTime ()
 
 //-------------------
 
-}
+} // namespace txu

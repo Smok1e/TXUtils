@@ -31,6 +31,11 @@ namespace gdi
 	_TX_DLLIMPORT ("Gdi32", BOOL,  RemoveFontResourceA, (LPCSTR)                                                                                 );
 }
 
+namespace winmm
+{
+	_TX_DLLIMPORT ("Winmm", BOOL, PlaySoundA, (LPCSTR, HMODULE, DWORD));
+}
+
 //-------------------
 
 volatile int _MouseWheelDelta      = 0;
@@ -142,4 +147,4 @@ bool SetWindowIcon (const char* filename)
 
 //-------------------
 
-}
+} // namespace txu

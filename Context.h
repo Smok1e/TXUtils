@@ -389,4 +389,4 @@ void Context::setFont (const char * name, int sx, int sy /*= -1*/, int bold /*= 
 
 //------------------
 
-}
+} // namespace txu

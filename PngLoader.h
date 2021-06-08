@@ -193,6 +193,6 @@ const char* write_png (RGBQUAD* buffer, int size_x, int size_y, const char* file
 
 //-------------------
 
-}
+} // namespace png_loader
 
-}
+} // namespace txu

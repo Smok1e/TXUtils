@@ -95,9 +95,6 @@ const char* load_fucking_font_record_data_228 (const char* filename, int nameid,
 sinfo_t& sswap (sinfo_t& x);
 linfo_t& lswap (linfo_t& x);
 
-template <typename Type>
-void readobj (FILE* file, Type* obj);
-
 //-------------------
 
 const char* load_fucking_font_record_data_228 (const char* filename, int nameid, char* buffer, size_t nMaxCount)
@@ -107,7 +104,7 @@ const char* load_fucking_font_record_data_228 (const char* filename, int nameid,
         return "failed to open file";
 
     OffsetTable offset = {};
-    readobj (file, &offset);
+    freadobj (file, &offset);
 
     sswap (offset.tables_count );
     sswap (offset.major_version);
@@ -125,7 +122,7 @@ const char* load_fucking_font_record_data_228 (const char* filename, int nameid,
     bool found = false;
     for (size_t i = 0; i < offset.tables_count && !found; i++)
     {
-        readobj (file, &dir);
+        freadobj (file, &dir);
 
         if (!strncmp (dir.tag, "name", 4))
         {
@@ -144,7 +141,7 @@ const char* load_fucking_font_record_data_228 (const char* filename, int nameid,
     found = false;
 
     fseek (file, dir.offset, SEEK_SET);
-    readobj (file, &header);
+    freadobj (file, &header);
     sswap (header.name_records_count);
     sswap (header.storage_offset    );
 
@@ -154,7 +151,7 @@ const char* load_fucking_font_record_data_228 (const char* filename, int nameid,
     NameRecord record = {};
     for (size_t i = 0; i < header.name_records_count && !found; i++)
     {
-        readobj (file, &record);
+        freadobj (file, &record);
         sswap (record.name_id);
 
         if (record.name_id == nameid)
@@ -197,16 +194,8 @@ linfo_t& lswap (linfo_t& x)
 
 //-------------------
 
-template <typename Type>
-void readobj (FILE* file, Type* obj)
-{
-    fread (obj, 1, sizeof (Type), file);
-}
+} // namespace font_loader
 
-//-------------------
-
-}
-
-}
+} // namespace txu
 
 //-------------------

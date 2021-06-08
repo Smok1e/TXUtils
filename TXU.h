@@ -6,6 +6,7 @@
 	#endif
 
     #include "Compatibility.h"
+	#include "Filesystem.h"
 	#include "Utilits.h"
 	#include "Time.h"
 	#include "Timer.h"
@@ -13,6 +14,7 @@
 	#include "Font.h"
 	#include "Coord.h"
 	#include "Context.h"
+	#include "Sound.h"
 
 	#ifdef __MINGW32__
 		#pragma GCC diagnostic pop

@@ -350,4 +350,4 @@ void Font::unload ()
 
 //-------------------
 
-}
+} // namespace txu
