@@ -1040,7 +1040,7 @@ sound.play ();
 - [void txu::Sound::play_async ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txusoundplayasync-)
 
 ## bool txu::Sound::loadFromFile (const char* filename)
-Загружает звук из файла. Возвращает true в случае успеха.
+Загружает звук из файла. В случае, если формат файла не соответствует wav, функция вернёт false и не станет его загружать. Если файл загрузится успешно, возвращает true.
 
 ## void txu::Sound::play ()
 Проигрывает звук, останавливая программу на время воспроизведения.
