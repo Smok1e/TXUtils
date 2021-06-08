@@ -36,7 +36,7 @@ TXUtils - это opensource библиотека, написанная мною 
 - [txu::Context](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucontext)
 - [txu::Time](https://github.com/Smok1e/TXUtils/blob/main/README.md#txutime)
 - [txu::Timer](https://github.com/Smok1e/TXUtils/blob/main/README.md#txutimer)
-- [txu::Sound]
+- [txu::Sound](https://github.com/Smok1e/TXUtils/blob/main/README.md#txusound)
 
 ## bool txu::WasExitButtonPressed ()
 Возвращает true, если был нажат крестик в меню окна, иначе false, для того чтобы программист сам мог отреагировать на нажатие крестика. Например так:
@@ -1019,9 +1019,9 @@ printf ("Function call elapsed %lf microseconds\n", elapsed.getMicroseconds ());
 Возвращает прошедшее с момента вызва функции start время в виде объекта txu::Time.
 
 # txu::Sound
-Простой класс, предназначенный для хранения и воспроизведения звуков формата wav. С его помощью нельзя редактировать или записывать звуки, он предназначен только для хранения данных wav-файла и их воспроизведения. Это нужно для того чтобы не подгружать один и тот же файл каждый раз при его проигрывании, что довольно сильно экономит ресурсы, если звук проигрывается часто.
+Простой класс, предназначенный для хранения и воспроизведения звуков формата wav. С его помощью нельзя редактировать или записывать звуки, он предназначен только для хранения данных wav-файла и их воспроизведения. Это нужно для того чтобы не подгружать один и тот же файл каждый раз при его проигрывании, что довольно сильно экономит ресурсы, если звук проигрывается часто. В целом, воспроизводить звуки из буффера сэмплов сам winapi позволяет, а загрузку и сохранение вполне реально реализовать самостоятельно. Но задача эта не самая простая, так что скорее всего я реализую большие возможности позже, когда возникнет необходимость.
 
-Обращатся с классом очень просто. Вот пример кода, который загружает и проигрывает звук из файла "sound.wav":
+Обращаться с классом очень просто. Вот пример кода, который загружает и проигрывает звук из файла "sound.wav":
 
 ```
 txu::Sound sound ("sound.wav");
@@ -1035,9 +1035,9 @@ sound.play ();
 - txu::Sound::Sound (Sound&& copy)
 
 # Функции-члены:
-- bool txu::Sound::loadFromFile (const char* filename)
-- void txu::Sound::play ()
-- void txu::Sound::play_async ()
+- [bool txu::Sound::loadFromFile (const char* filename)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txusoundloadfromfile-const-char-filename)
+- [void txu::Sound::play ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txusoundplay-)
+- [void txu::Sound::play_async ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txusoundplayasync-)
 
 ## bool txu::Sound::loadFromFile (const char* filename)
 Загружает звук из файла. Возвращает true в случае успеха.
