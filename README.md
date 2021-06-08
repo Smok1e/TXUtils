@@ -36,6 +36,7 @@ TXUtils - это opensource библиотека, написанная мною 
 - [txu::Context](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucontext)
 - [txu::Time](https://github.com/Smok1e/TXUtils/blob/main/README.md#txutime)
 - [txu::Timer](https://github.com/Smok1e/TXUtils/blob/main/README.md#txutimer)
+- [txu::Sound]
 
 ## bool txu::WasExitButtonPressed ()
 Возвращает true, если был нажат крестик в меню окна, иначе false, для того чтобы программист сам мог отреагировать на нажатие крестика. Например так:
@@ -1016,6 +1017,36 @@ printf ("Function call elapsed %lf microseconds\n", elapsed.getMicroseconds ());
 
 ## txu::Time txu::Timer::getTime ()
 Возвращает прошедшее с момента вызва функции start время в виде объекта txu::Time.
+
+# txu::Sound
+Простой класс, предназначенный для хранения и воспроизведения звуков формата wav. С его помощью нельзя редактировать или записывать звуки, он предназначен только для хранения данных wav-файла и их воспроизведения. Это нужно для того чтобы не подгружать один и тот же файл каждый раз при его проигрывании, что довольно сильно экономит ресурсы, если звук проигрывается часто.
+
+Обращатся с классом очень просто. Вот пример кода, который загружает и проигрывает звук из файла "sound.wav":
+
+```
+txu::Sound sound ("sound.wav");
+sound.play ();
+```
+
+# Конструкторы класса:
+- txu::Sound::Sound ()
+- txu::Sound::Sound (const char* filename)
+- txu::Sound::Sound (Sound&  copy)
+- txu::Sound::Sound (Sound&& copy)
+
+# Функции-члены:
+- bool txu::Sound::loadFromFile (const char* filename)
+- void txu::Sound::play ()
+- void txu::Sound::play_async ()
+
+## bool txu::Sound::loadFromFile (const char* filename)
+Загружает звук из файла. Возвращает true в случае успеха.
+
+## void txu::Sound::play ()
+Проигрывает звук, останавливая программу на время воспроизведения.
+
+## void txu::Sound::playAsync ()
+Проигрывает звук параллельно с работой программы.
 
 # Спасибо за использование TXUtils!
 Я буду рад ответить на ваши вопросы и предложения. В будущем я собираюсь добавить ещё множество удобных фич!
