@@ -121,6 +121,8 @@ txSetFillColor (txu::Color (24, 24, 24));
 ## Функции-члены:
 - [static Color Interpolate (Color a, Color b, double t)](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucolorinterpolate-color-a-color-b-color-t)
 - [static Color Interpolate (const std::initializer_list& list, double t)](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucolorinterpolate-const-stdinitializer_list-list-double-t)
+- [static Color Random ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucolorrandom-)
+- [static Color Choose ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucolorchoose-)
 - [operator RGBQUAD  ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoloropreator-rgbquad-)
 - [operator COLORREF ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoloroperator-colorref-)
 - [Color operator ! ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucoloroperator--)
@@ -129,6 +131,7 @@ txSetFillColor (txu::Color (24, 24, 24));
 - [int hue ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txucolorhue-)
 - [int saturation ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txucolorsaturation-)
 - [int value ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txucolorvalue-)
+- [int average ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txucoloraverage-)
 
 ## Функции для операций с цветом:
 - [txu::Color Blend (Color a, Color b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucolor-blend-color-a-color-b)
@@ -178,6 +181,15 @@ for (int x = 0; x < size_x; x++)
 Этот код нарисует плавный переход от синего к розовому, а от розового к зелёному:
 
 ![color_interpolate_initializer_list_example](https://user-images.githubusercontent.com/33802666/117331231-39577c80-ae9f-11eb-961f-6b6fc0e6d246.png)
+
+## Color txu::Color::Random ()
+Статическая функция. Возвращает случайный цвет.
+
+## Color txu::Color::Choose ()
+Статическая функция. Вызывает стандартное диалоговое окно выбора цвета windows, и возвращает выбранный цвет если пользователь нажал кнопку ОК.
+Если пользователь отменил выбор цвета, функция вернёт чёрный цвет.
+
+![color_choose_example](https://user-images.githubusercontent.com/33802666/120930771-5fb74480-c6f7-11eb-9744-77f37f612365.png)
 
 ## txu::Color::opreator RGBQUAD ()
 Оператор преобразования к RGBQUAD
@@ -230,6 +242,9 @@ for (int x = 0; x < size_x; x++)
 
 ## int txu::Color::value ()
 Переводит цвет в формат HSV, и возвращает значение value (яркость). См. [Цветовая модель HSV](https://ru.wikipedia.org/wiki/HSV_(%D1%86%D0%B2%D0%B5%D1%82%D0%BE%D0%B2%D0%B0%D1%8F_%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C)).
+
+## int txu::Color::average ()
+Возвращает среднее значение каналов r, g и b. Альфа-канал не учитывается.
 
 ## txu::Color Blend (Color a, Color b)
 Функция смешивания цветов с учётом альфа-канала.
