@@ -594,7 +594,7 @@ Coord2D result = coord * scalar; // result == {5, 25}
 Оператор сравнения для Coord2D. Возвращает true, если a.x != b.x, или a.y != b.y, иначе false.
 
 ## double txu::Coord2Distance (const Coord2D& a, const Coord2D& b)
-Очень полезная функция. Возвращает численное расстояние между точками a и b по теореме пифагора.
+Очень полезная функция. Возвращает численное расстояние между точками a и b, согласно теореме пифагора.
 
 ## double txu::Coord2DSqrDistance (const Coord2D& a, const Coord2D& b)
 Возвращает численное расстояние между точками a и b, возведённое в квадрат.
@@ -626,7 +626,7 @@ txRectangle (txCoord (position), txCoord (position + size));
 txu::Coord2D position (100, 100);
 double radius = 5;
 
-txEllipse (position.x - 5, position.y - 5, position.x + 5, position.y + 5);
+txEllipse (position.x - radius, position.y - radius, position.x + radius, position.y + radius);
 ```
 
 так же эквивалентно
@@ -635,7 +635,7 @@ txEllipse (position.x - 5, position.y - 5, position.x + 5, position.y + 5);
 txu::Coord2D position (100, 100);
 double radius = 5;
 
-txEllipse (txCoord (position-5), txCoord (position+5));
+txEllipse (txCoord (position-radius), txCoord (position+radius));
 ```
 
 # txu::Context
