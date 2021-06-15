@@ -121,7 +121,7 @@ txSetFillColor (txu::Color (24, 24, 24));
 
 ## Функции-члены:
 - [static Color Interpolate (Color a, Color b, double t)](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucolorinterpolate-color-a-color-b-color-t)
-- [static Color Interpolate (const std::initializer_list \<Color\>& list, double t)](https://github.com/Smok1e/TXUtils/blob/main/README.md#txcoordcoord)
+- [static Color Interpolate (const std::initializer_list \<Color\>& list, double t)](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucolorinterpolate-const-stdinitializer_list-color-list-double-t)
 - [static Color Random ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucolorrandom-)
 - [static Color Choose ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucolorchoose-)
 - [operator RGBQUAD  ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoloropreator-rgbquad-)
