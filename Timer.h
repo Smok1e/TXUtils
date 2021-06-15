@@ -18,31 +18,31 @@ public:
 	Time getTime ();
 
 private:
-	LARGE_INTEGER start_;
-	LARGE_INTEGER freq_;
+	LARGE_INTEGER m_start;
+	LARGE_INTEGER m_freq;
 };
 
 //-------------------
 
 Timer::Timer (const Timer& that) :
-	start_ (that.start_),
-	freq_  (that.freq_ )
+	m_start (that.m_start),
+	m_freq  (that.m_freq )
 {}
 
 Timer::Timer () :
-	start_ (),
-	freq_  ()
+	m_start (),
+	m_freq  ()
 { start (); }
 
 //-------------------
 
 void Timer::start ()
 {
-	start_ = {};
-	QueryPerformanceCounter   (&start_);
+	m_start = {};
+	QueryPerformanceCounter (&m_start);
 
-	freq_  = {};
-	QueryPerformanceFrequency (&freq_);
+	m_freq = {};
+	QueryPerformanceFrequency (&m_freq);
 }
 
 //-------------------
@@ -53,8 +53,8 @@ Time Timer::getTime ()
 	QueryPerformanceCounter (&stop);
 
 	return Time::seconds (
-		static_cast <Time::time_t> (stop.QuadPart - start_.QuadPart) / 
-		static_cast <Time::time_t> (freq_.QuadPart)
+		static_cast <Time::time_t> (stop.QuadPart - m_start.QuadPart) / 
+		static_cast <Time::time_t> (m_freq.QuadPart)
 	);
 }
 

@@ -65,11 +65,11 @@ public :
 		          double angle = 0);
 
 private :
-	RGBQUAD* buffer_;
-	HDC      dc_;
+	RGBQUAD* m_buffer;
+	HDC      m_dc;
 
-	int size_x_;
-	int size_y_;
+	int m_size_x;
+	int m_size_y;
 
 	void destruct ();
 };
@@ -77,51 +77,51 @@ private :
 //-------------------
 
 Context::Context () :
-	buffer_ (nullptr),
-	dc_     (nullptr),
+	m_buffer (nullptr),
+	m_dc     (nullptr),
 
-	size_x_ (0),
-	size_y_ (0)
+	m_size_x (0),
+	m_size_y (0)
 {
 	create (); 
 }
 
 Context::Context (int size_x, int size_y) :
-	buffer_ (nullptr),
-	dc_     (nullptr),
+	m_buffer (nullptr),
+	m_dc     (nullptr),
 
-	size_x_ (0),
-	size_y_ (0)
+	m_size_x (0),
+	m_size_y (0)
 {
 	create (size_x, size_y); 
 }
 
 Context::Context (const Context& that) :
-	buffer_ (nullptr),
-	dc_     (nullptr),
+	m_buffer (nullptr),
+	m_dc     (nullptr),
 
-	size_x_ (0),
-	size_y_ (0)
+	m_size_x (0),
+	m_size_y (0)
 {
 	create (that); 
 }
 
 Context::Context (const HDC& dc) :
-	buffer_ (nullptr),
-	dc_     (nullptr),
+	m_buffer (nullptr),
+	m_dc     (nullptr),
 
-	size_x_ (0),
-	size_y_ (0)
+	m_size_x (0),
+	m_size_y (0)
 {
 	create (dc); 
 }
 
 Context::Context (const char* filename) :
-	buffer_ (nullptr),
-	dc_     (nullptr),
+	m_buffer (nullptr),
+	m_dc     (nullptr),
 
-	size_x_ (0),
-	size_y_ (0)
+	m_size_x (0),
+	m_size_y (0)
 {
 	create (filename); 
 }
@@ -147,27 +147,27 @@ bool Context::create (int size_x, int size_y)
 	if (size_x == 0) size_x = 1;
 	if (size_y == 0) size_y = 1;
 
-	size_x_ = size_x;
-	size_y_ = size_y;
-	dc_ = txCreateDIBSection (size_x_, size_y_, &buffer_);
+	m_size_x = size_x;
+	m_size_y = size_y;
+	m_dc = txCreateDIBSection (m_size_x, m_size_y, &m_buffer);
 
-	return dc_ != 0;
+	return m_dc != 0;
 }
 
 bool Context::create (const Context& that)
 {
-	create (that.size_x_, that.size_y_);
-	txBitBlt (dc_, 0, 0, 0, 0, that.dc_);
+	create (that.m_size_x, that.m_size_y);
+	txBitBlt (m_dc, 0, 0, 0, 0, that.m_dc);
 
-	return dc_ != 0;
+	return m_dc != 0;
 }
 
 bool Context::create (const HDC& dc)
 {
 	create (txGetExtentX (dc), txGetExtentY (dc));
-	txBitBlt (dc_, 0, 0, 0, 0, dc);
+	txBitBlt (m_dc, 0, 0, 0, 0, dc);
 
-	return dc_ != 0;
+	return m_dc != 0;
 }
 
 bool Context::create (const char* filename)
@@ -179,13 +179,13 @@ bool Context::create (const char* filename)
 
 void Context::destruct ()
 {
-	if (!dc_) return;
-	txDeleteDC (dc_);
+	if (!m_dc) return;
+	txDeleteDC (m_dc);
 
-	dc_     = nullptr;
-	buffer_ = nullptr;
-	size_x_ = 0;
-	size_y_ = 0;
+	m_dc     = nullptr;
+	m_buffer = nullptr;
+	m_size_x = 0;
+	m_size_y = 0;
 }
 
 //-------------------
@@ -205,7 +205,7 @@ bool Context::loadFromFile (const char* filename)
 		resize (sx, sy);
 
 		for (size_t i = 0; i < static_cast <size_t> (sx*sy); i++)
-			buffer_[i] = buffer[i];
+			m_buffer[i] = buffer[i];
 
 		delete[] (buffer);
 
@@ -229,97 +229,97 @@ bool Context::saveToFile (const char* filename)
 	const char* extention = txu::shellapi::PathFindExtensionA (filename);
 
 	if (!strcmp (extention, ".png"))
-		return txu::png_loader::write_png (buffer_, size_x_, size_y_, filename);
+		return !txu::png_loader::write_png (m_buffer, m_size_x, m_size_y, filename);
 #endif
 
-	return txSaveImage (filename, dc_);
+	return txSaveImage (filename, m_dc);
 }
 
 //-------------------
 
 int Context::getSizeX ()
 {
-	return size_x_;
+	return m_size_x;
 }
 
 int Context::getSizeY ()
 {
-	return size_y_;
+	return m_size_y;
 }
 
 void Context::resize (int new_size_x, int new_size_y)
 {
-	if (new_size_x == size_x_ && new_size_y == size_y_) return;
+	if (new_size_x == m_size_x && new_size_y == m_size_y) return;
 
-	HDC new_dc = txCreateDIBSection (new_size_x, new_size_y, &buffer_);
-	if (dc_) txBitBlt (new_dc, 0, 0, 0, 0, dc_);
+	HDC new_dc = txCreateDIBSection (new_size_x, new_size_y, &m_buffer);
+	if (m_dc) txBitBlt (new_dc, 0, 0, 0, 0, m_dc);
 	
-	std::swap (dc_, new_dc);
+	std::swap (m_dc, new_dc);
 	
 	txDeleteDC (new_dc);
 
-	size_x_ = new_size_x;
-	size_y_ = new_size_y;
+	m_size_x = new_size_x;
+	m_size_y = new_size_y;
 }
 
 //-------------------
 
 Context::operator HDC& ()
 {
-	return dc_;
+	return m_dc;
 }
 
 //-------------------
 
 RGBQUAD* Context::getBuffer ()
 {
-	return buffer_;
+	return m_buffer;
 }
 
 size_t Context::getBufferLength ()
 {
-	return size_x_*size_y_;
+	return m_size_x*m_size_y;
 }
 
 RGBQUAD* Context::access (size_t index)
 {
 #ifdef _DEBUG
-	if ((int) index >= size_x_*size_y_) return nullptr;
+	if (static_cast <int> (index) >= m_size_x*m_size_y) return nullptr;
 #endif
 
-	return buffer_ + index;
+	return m_buffer + index;
 }
 
 RGBQUAD* Context::access (int x, int y)
 {
-	y = size_y_ - y-1;
+	y = m_size_y - y-1;
 
 #ifdef _DEBUG
-	if (x < 0 || x >= size_x_ || y < 0 || y >= size_y_)	return nullptr;
+	if (x < 0 || x >= m_size_x || y < 0 || y >= m_size_y) return nullptr;
 #endif
 
-	return buffer_ + y*size_x_ + x;
+	return m_buffer + y*m_size_x + x;
 }
 
 //-------------------
 
-void Context::render (HDC dc /* = txDC () */, int x /* = 0 */, int y /* = 0 */, int width /* = 0 */, int height /* = 0 */)
+void Context::render (HDC dc /*= txDC ()*/, int x /*= 0*/, int y /*= 0*/, int width /*= 0*/, int height /*= 0*/)
 {
-	txBitBlt (dc, x, y, width, height, dc_);
+	txBitBlt (dc, x, y, width, height, m_dc);
 }
 
 //-------------------
 
 void Context::clear ()
 {
-	txClear (dc_);
+	txClear (m_dc);
 }
 
 void Context::clear (Color color)
 {
-	Color last_fillcolor = txGetFillColor (dc_);
+	Color last_fillcolor = txGetFillColor (m_dc);
 	setFillColor (color);
-	txClear (dc_);
+	txClear (m_dc);
 	setFillColor (last_fillcolor);
 }
 
@@ -336,55 +336,52 @@ void Context::capture (HWND wnd /*= nullptr*/)
 
 void Context::setPixel (int x, int y, Color color, bool blend /*= true*/)
 {
-	y = size_y_ - y-1;
+	y = m_size_y - y-1;
+	if (x < 0 || x >= m_size_x || y < 0 || y >= m_size_y) return;
 
-	if (x < 0 || x >= size_x_ || y < 0 || y >= size_y_) return;
-
-	int index = x + y*size_x_;
-	buffer_[index] = (blend && color.a < 255) ? (buffer_[index] <<= color) : color;
+	int index = x + y*m_size_x;
+	m_buffer[index] = (blend && color.a < 255) ? (m_buffer[index] <<= color) : color;
 }
 
 //-------------------
 
 Color Context::getPixel (int x, int y)
 {
-	y = size_y_ - y-1;
+	y = m_size_y - y-1;
+	if (x < 0 || x >= m_size_x || y < 0 || y >= m_size_y) return Color::Black;
 
-	if (x < 0 || x >= size_x_ || y < 0 || y >= size_y_) return Color::Black;
-
-	int index = x + y * size_x_;
-
-	return txu::Color (buffer_[index]);
+	int index = x + y * m_size_x;
+	return txu::Color (m_buffer[index]);
 }
 
 //------------------
 
 void Context::setColor (Color color, int thikness /*= 0*/)
 {
-	txSetColor (color, thikness, dc_);
+	txSetColor (color, thikness, m_dc);
 }
 
 //------------------
 
 void Context::setFillColor (Color color)
 {
-	txSetFillColor (color, dc_);
+	txSetFillColor (color, m_dc);
 }
 
 //------------------
 
 void Context::setFont (HFONT font)
 {
-	_txBuffer_Select (font, dc_);
+	_txBuffer_Select (font, m_dc);
 }
 
 //------------------
 
 void Context::setFont (const char * name, int sx, int sy /*= -1*/, int bold /*= FW_DONTCARE*/, 
-	                          bool italic /*= false*/, bool underline /*= false*/, bool strikeout /*= false*/, 
-	                          double angle /*= 0*/)
+	                   bool italic /*= false*/, bool underline /*= false*/, bool strikeout /*= false*/, 
+	                   double angle /*= 0*/)
 {
-	txSelectFont (name, sx, sy, bold, italic, underline, strikeout, angle, dc_);
+	txSelectFont (name, sx, sy, bold, italic, underline, strikeout, angle, m_dc);
 }
 
 //------------------

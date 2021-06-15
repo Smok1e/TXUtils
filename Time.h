@@ -68,7 +68,7 @@ public:
 	Time& operator -= (const Time& that);
 
 private:
-	double milliseconds_;
+	double m_milliseconds;
 
 	friend class Timer;
 
@@ -82,42 +82,42 @@ private:
 //-------------------
 
 Time::Time (time_t milliseconds) :
-	milliseconds_ (milliseconds)
+	m_milliseconds (milliseconds)
 {}
 
 Time::Time (const Time& that) :
-	milliseconds_ (that.milliseconds_)
+	m_milliseconds (that.m_milliseconds)
 {}
 
 Time::Time () :
-	milliseconds_ (0)
+	m_milliseconds (0)
 {}
 
 //-------------------
 
 Time::time_t Time::getMicroseconds ()
 {
-	return milliseconds_ * 1000;
+	return m_milliseconds * 1000;
 }
 
 Time::time_t Time::getMilliseconds ()
 {
-	return milliseconds_;
+	return m_milliseconds;
 }
 
 Time::time_t Time::getSeconds ()
 {
-	return milliseconds_ / 1000;
+	return m_milliseconds / 1000;
 }
 
 Time::time_t Time::getMinutes ()
 {
-	return milliseconds_ / 1000 / 60;
+	return m_milliseconds / 1000 / 60;
 }
 
 Time::time_t Time::getHours ()
 {
-	return milliseconds_ / 1000 / 60 / 60;
+	return m_milliseconds / 1000 / 60 / 60;
 }
 
 //-------------------
@@ -151,7 +151,7 @@ Time Time::hours (Time::time_t hours)
 
 Time::operator double ()
 {
-	return static_cast <double> (milliseconds_);
+	return static_cast <double> (m_milliseconds);
 }
 
 //-------------------
@@ -161,7 +161,7 @@ Time& Time::operator = (const Time& that)
 	if (this == &that) 
 		return *this;
 
-	milliseconds_ = that.milliseconds_;
+	m_milliseconds = that.m_milliseconds;
 	return *this;
 }
 
@@ -169,20 +169,20 @@ Time& Time::operator = (const Time& that)
 
 Time Time::operator - ()
 {
-	return Time (-milliseconds_);
+	return Time (-m_milliseconds);
 }
 
 //-------------------
 
 Time& Time::operator += (const Time& that)
 {
-	milliseconds_ += that.milliseconds_;
+	m_milliseconds += that.m_milliseconds;
 	return *this;
 }
 
 Time& Time::operator -= (const Time& that)
 {
-	milliseconds_ -= that.milliseconds_;
+	m_milliseconds -= that.m_milliseconds;
 	return *this;
 }
 
@@ -190,24 +190,24 @@ Time& Time::operator -= (const Time& that)
 
 Time operator + (const Time& a, const Time& b)
 {
-	return Time (a.milliseconds_ + b.milliseconds_);
+	return Time (a.m_milliseconds + b.m_milliseconds);
 }
 
 Time operator - (const Time& a, const Time& b)
 {
-	return Time (a.milliseconds_ - b.milliseconds_);
+	return Time (a.m_milliseconds - b.m_milliseconds);
 }
 
 //-------------------
 
 bool operator == (const Time& a, const Time& b)
 {
-	return a.milliseconds_ == b.milliseconds_;
+	return a.m_milliseconds == b.m_milliseconds;
 }
 
 bool operator != (const Time& a, const Time& b)
 {
-	return a.milliseconds_ != b.milliseconds_;
+	return a.m_milliseconds != b.m_milliseconds;
 }
 
 //-------------------
