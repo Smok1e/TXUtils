@@ -1,6 +1,6 @@
 # TXUtils
 TXUtils - это opensource библиотека, написанная мною для ~~себя~~ облегчения и удобства работы с графикой, используя [TXLib](http://storage.ded32.net.ru/Lib/TX/TXUpdate/Doc/HTML.ru/).
-Библиотека совместима с Visual C++ (Microsoft Visual Studio) и с MinGW (Скорее всего, установлена вами вместе с CodeBlocks)
+Библиотека совместима с MSVC (Microsoft Visual Studio) и с MinGW (Скорее всего, установлена вами вместе с CodeBlocks)
 
 # Зависимости
 Разумеется, для работы TXUtils необходим [TXLib](http://storage.ded32.net.ru/Lib/TX/TXUpdate/Doc/HTML.ru/). 
@@ -17,7 +17,7 @@ TXUtils - это opensource библиотека, написанная мною 
 
 Готово!
 
-Примечание: я гарантирую работу библиотеки только с компилятороми Visual C++ и MinGW. Я не отвечаю за совместимость с другими средами.
+Примечание: я гарантирую работу библиотеки только с компилятороми MSVC и MinGW. Я не отвечаю за совместимость с другими компиляторами.
 
 # Функции библиотеки:
 - [void txu::WasExitButtonPressed    ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txuwasexitbuttonpressed-)
@@ -1040,7 +1040,7 @@ sound.play ();
 - [void txu::Sound::play_async ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txusoundplayasync-)
 
 ## bool txu::Sound::loadFromFile (const char* filename)
-Загружает звук из файла. Возвращает true в случае успеха.
+Загружает звук из файла. В случае, если формат файла не соответствует wav, функция вернёт false и не станет его загружать. Если файл загрузится успешно, возвращает true.
 
 ## void txu::Sound::play ()
 Проигрывает звук, останавливая программу на время воспроизведения.
