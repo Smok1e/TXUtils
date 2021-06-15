@@ -121,7 +121,7 @@ txSetFillColor (txu::Color (24, 24, 24));
 
 ## Функции-члены:
 - [static Color Interpolate (Color a, Color b, double t)](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucolorinterpolate-color-a-color-b-color-t)
-- [static Color Interpolate (const std::initializer_list& list, double t)](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucolorinterpolate-const-stdinitializer_list-list-double-t)
+- [static Color Interpolate (const std::initializer_list \<Color\>& list, double t)](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucolorinterpolate-const-stdinitializer_list-list-double-t)
 - [static Color Random ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucolorrandom-)
 - [static Color Choose ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucolorchoose-)
 - [operator RGBQUAD  ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoloropreator-rgbquad-)
@@ -162,7 +162,7 @@ for (int x = 0; x < size_x; x++)
 
 ![color_interpolate_example](https://user-images.githubusercontent.com/33802666/117331183-2d6bba80-ae9f-11eb-8345-622fd799f51a.png)
 
-## Color txu::Color::Interpolate (const std::initializer_list& list, double t)
+## Color txu::Color::Interpolate (const std::initializer_list \<Color\>& list, double t)
 Тоже самое что и txu::Color::Interpolate (Color a, Color b, double t), но может принять произвольное количество цветов. Например:
 
 ```
@@ -532,7 +532,7 @@ while (!GetAsyncKeyState (VK_ESCAPE) && !txu::WasExitButtonPressed ())
 - [double Coord2DSqrDistance (const Coord2D& a, const Coord2D& b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#double-txucoord2dsqrdistance-const-coord2d-a-const-coord2d-b)
 
 ## Макросы для операций с классом:
-- txCoord(coord)
+- [txCoord(coord)](https://github.com/Smok1e/TXUtils/blob/main/README.md#txcoordcoord)
 
 ## txu::Coord2D::operator POINT ()
 Оператор преобразования к POINT.
