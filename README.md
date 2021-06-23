@@ -2,6 +2,9 @@
 TXUtils - это opensource библиотека, написанная мною для ~~себя~~ облегчения и удобства работы с графикой, используя [TXLib](http://storage.ded32.net.ru/Lib/TX/TXUpdate/Doc/HTML.ru/).
 Библиотека совместима с MSVC (Microsoft Visual Studio) и с MinGW (Скорее всего, установлена вами вместе с CodeBlocks)
 
+# Контакты
+Если у вас есть вопросы или предложения - можете написать мне в [вк](https://vk.com/synthw6ve). С радостью отвечу всем желающим.
+
 # Зависимости
 Разумеется, для работы TXUtils необходим [TXLib](http://storage.ded32.net.ru/Lib/TX/TXUpdate/Doc/HTML.ru/). 
 Так же, рекомендуется установить [libpng](http://www.libpng.org/pub/png/libpng.html), если у вас её нет. Библиотека может работать и без неё, но тогда вы не сможете работать с форматом png используя [txu::Context](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucontext).
