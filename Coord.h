@@ -34,6 +34,8 @@ public :
 	Coord2D (SIZE  size);
 	Coord2D ();
 
+	static Coord2D Screen ();
+
 	operator POINT ();
 	operator SIZE  ();
 
@@ -76,6 +78,13 @@ Coord2D::Coord2D () :
 	x (0),
 	y (0)
 {}
+
+//-------------------
+
+Coord2D Coord2D::Screen ()
+{
+	return Coord2D (GetSystemMetrics (SM_CXSCREEN), GetSystemMetrics (SM_CYSCREEN));
+}
 
 //-------------------
 

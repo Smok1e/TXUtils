@@ -33,8 +33,8 @@ public :
 	bool loadFromFile (const char* filename);
 	bool saveToFile   (const char* filename);
 
-	int getSizeX ();
-	int getSizeY ();
+	int  getSizeX ();
+	int  getSizeY ();
 	void resize  (int new_size_x, int new_size_y);
 
 	void render (HDC dc = txDC (), int x = 0, int y = 0, int width = 0, int height = 0);
@@ -60,7 +60,7 @@ public :
 
 	void setFont (HFONT font);
 
-	void setFont (const char *name, int sx, int sy = -1, int bold = FW_DONTCARE, 
+	void setFont (const char *name, int sy, int sx = -1, int bold = FW_DONTCARE, 
 		          bool italic = false, bool underline = false, bool strikeout = false, 
 		          double angle = 0);
 
@@ -377,11 +377,11 @@ void Context::setFont (HFONT font)
 
 //------------------
 
-void Context::setFont (const char * name, int sx, int sy /*= -1*/, int bold /*= FW_DONTCARE*/, 
+void Context::setFont (const char * name, int sy, int sx /*= -1*/, int bold /*= FW_DONTCARE*/, 
 	                   bool italic /*= false*/, bool underline /*= false*/, bool strikeout /*= false*/, 
 	                   double angle /*= 0*/)
 {
-	txSelectFont (name, sx, sy, bold, italic, underline, strikeout, angle, m_dc);
+	txSelectFont (name, sy, sx, bold, italic, underline, strikeout, angle, m_dc);
 }
 
 //------------------

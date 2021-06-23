@@ -21,19 +21,20 @@ const char* load_png (RGBQUAD** buffer, int* sx, int* sy, const char* filename);
 
 const char* check_signature (const char* filename)
 {
-	const char png_signature[] = {137u, 80u, 78u, 71u, 13u, 10u, 26u, 10u};
+	const int png_signature[] = {137, 80, 78, 71, 13, 10, 26, 10};
 
 	FILE* file = __txu_fopen (filename, "rb");
 	if (!file)
 		return "Failed to open file";
 
-	char header[8] = "";
-	fread (header, 1, 8, file);
+	unsigned char data[8] = "";
+	fread (data, 1, 8, file);
 
 	fclose (file);
 
-	if (strncmp (header, png_signature, 8))
-		return "Wrong png file signature";
+	for (size_t i = 0; i < 8; i++)
+		if (png_signature[i] != data[i])
+			return "Wrong png file signature";
 
 	return nullptr;
 }
