@@ -506,7 +506,7 @@ while (!GetAsyncKeyState (VK_ESCAPE) && !txu::WasExitButtonPressed ())
 - txu::Coord2D ()
 
 ## Функции-члены:
-- [static txu::Coord2D txu::Coord2D::Screen ()]
+- [static txu::Coord2D txu::Coord2D::Screen ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoord2d-txucoord2dscreen-)
 - [txu::Coord2D::operator POINT ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoord2doperator-point-)
 - [Coord2D txu::Coord2D::operator - ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#coord2d-txucoord2doperator----%D1%83%D0%BD%D0%B0%D1%80%D0%BD%D1%8B%D0%B9)
 - [Coord2D& txu::Coord2D::operator += (const Coord2D& that)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-coord2d)
