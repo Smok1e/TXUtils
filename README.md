@@ -773,7 +773,7 @@ result.render ();
 - [void txu::Context::setColor (txu::Color color, int thikness = 0)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetcolor-txucolor-color-int-thikness--0)
 - [void txu::Context::setFillColor (txu::Color color)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetfillcolor-txucolor-color)
 - [void txu::Context::setFont (HFONT font)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetfont-hfont-font)
-- [void txu::Context::setFont (const char* name, int sx, int sy = -1, int bold = FW_DONTCARE, bool italic = false, bool underline = false, bool strikeout = false, double angle = 0)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetfont-const-char-name-int-sx-int-sy---1-int-bold--fw_dontcare-bool-italic--false-bool-underline--false-bool-strikeout--false-double-angle--0)
+- [void txu::Context::setFont (const char* name, int sy, int sx = -1, int bold = FW_DONTCARE, bool italic = false, bool underline = false, bool strikeout = false, double angle = 0)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetfont-const-char-name-int-sy-int-sx---1-int-bold--fw_dontcare-bool-italic--false-bool-underline--false-bool-strikeout--false-double-angle--0)
 
 ## bool txu::Context::create (...)
 Заново инициализирует изображение в соответствии с указанными параметрами. Возвращает true в случае успеха.
@@ -869,7 +869,7 @@ int main ()
 ## void txu::Context::setFont (HFONT font)
 Устанавливает шрифт для внутреннего HDC, указанный в параметрах. В качестве параметра используйте txu::Font.
 
-## void txu::Context::setFont (const char* name, int sx, int sy = -1, int bold = FW_DONTCARE, bool italic = false, bool underline = false, bool strikeout = false, double angle = 0)
+## void txu::Context::setFont (const char* name, int sy, int sx = -1, int bold = FW_DONTCARE, bool italic = false, bool underline = false, bool strikeout = false, double angle = 0)
 Устанавливает шрифт для внутреннего HDC по указанным параметрам. Тоже самое, что и txSelectFont.
 
 # txu::Time
