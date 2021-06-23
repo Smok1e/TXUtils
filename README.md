@@ -121,7 +121,7 @@ txSetFillColor (txu::Color (24, 24, 24));
 
 ## Функции-члены:
 - [static Color Interpolate (Color a, Color b, double t)](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucolorinterpolate-color-a-color-b-color-t)
-- [static Color Interpolate (const std::initializer_list& list, double t)](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucolorinterpolate-const-stdinitializer_list-list-double-t)
+- [static Color Interpolate (const std::initializer_list \<Color\>& list, double t)](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucolorinterpolate-const-stdinitializer_list-color-list-double-t)
 - [static Color Random ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucolorrandom-)
 - [static Color Choose ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucolorchoose-)
 - [operator RGBQUAD  ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoloropreator-rgbquad-)
@@ -162,7 +162,7 @@ for (int x = 0; x < size_x; x++)
 
 ![color_interpolate_example](https://user-images.githubusercontent.com/33802666/117331183-2d6bba80-ae9f-11eb-8345-622fd799f51a.png)
 
-## Color txu::Color::Interpolate (const std::initializer_list& list, double t)
+## Color txu::Color::Interpolate (const std::initializer_list \<Color\>& list, double t)
 Тоже самое что и txu::Color::Interpolate (Color a, Color b, double t), но может принять произвольное количество цветов. Например:
 
 ```
@@ -196,7 +196,7 @@ for (int x = 0; x < size_x; x++)
 Оператор преобразования к RGBQUAD
 
 ## txu::Color::operator COLORREF ()
-Оператор преобразования к COLORREF
+Оператор преобразования к COLORREF.
 Обратите внимание, что если альфа-канал цвета равен нулю, то оператор COLORREF вернёт TX_TRANSPARENT.
 В остальных случаях альфа-канал не учитывается. К сожалению, хоть размер COLORREF и равен четырём байтам, в одном из которых в теории можно хранить альфа-канал, GDI windows не позволяет оперировать полу-прозрачными цветами нативно, а четвёртый байт COLORREF'a считается зарезервированным.
 
@@ -532,7 +532,7 @@ while (!GetAsyncKeyState (VK_ESCAPE) && !txu::WasExitButtonPressed ())
 - [double Coord2DSqrDistance (const Coord2D& a, const Coord2D& b)](https://github.com/Smok1e/TXUtils/blob/main/README.md#double-txucoord2dsqrdistance-const-coord2d-a-const-coord2d-b)
 
 ## Макросы для операций с классом:
-- txCoord(coord)
+- [txCoord(coord)](https://github.com/Smok1e/TXUtils/blob/main/README.md#txcoordcoord)
 
 ## txu::Coord2D::operator POINT ()
 Оператор преобразования к POINT.
@@ -594,7 +594,7 @@ Coord2D result = coord * scalar; // result == {5, 25}
 Оператор сравнения для Coord2D. Возвращает true, если a.x != b.x, или a.y != b.y, иначе false.
 
 ## double txu::Coord2Distance (const Coord2D& a, const Coord2D& b)
-Очень полезная функция. Возвращает численное расстояние между точками a и b по теореме пифагора.
+Очень полезная функция. Возвращает численное расстояние между точками a и b, согласно теореме пифагора.
 
 ## double txu::Coord2DSqrDistance (const Coord2D& a, const Coord2D& b)
 Возвращает численное расстояние между точками a и b, возведённое в квадрат.
@@ -626,7 +626,7 @@ txRectangle (txCoord (position), txCoord (position + size));
 txu::Coord2D position (100, 100);
 double radius = 5;
 
-txEllipse (position.x - 5, position.y - 5, position.x + 5, position.y + 5);
+txEllipse (position.x - radius, position.y - radius, position.x + radius, position.y + radius);
 ```
 
 так же эквивалентно
@@ -635,7 +635,7 @@ txEllipse (position.x - 5, position.y - 5, position.x + 5, position.y + 5);
 txu::Coord2D position (100, 100);
 double radius = 5;
 
-txEllipse (txCoord (position-5), txCoord (position+5));
+txEllipse (txCoord (position-radius), txCoord (position+radius));
 ```
 
 # txu::Context
