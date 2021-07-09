@@ -48,14 +48,14 @@ struct Color
 
 	Color& operator = (const Color& that);
 
-	Color operator ! ();
+	Color operator ! () const;
 
 	static Color HSV (int hue, int saturation, int value);
-	int hue        ();
-	int saturation ();
-	int value      ();
+	int hue        () const;
+	int saturation () const;
+	int value      () const;
 
-	int average ();
+	int average () const;
 
 	static const Color Black;
 	static const Color White;
@@ -210,7 +210,7 @@ Color::operator COLORREF () const
 
 //-------------------
 
-Color Color::operator ! ()
+Color Color::operator ! () const
 {
 	return Color (255-r, 255-g, 255-b, a);
 }
@@ -297,7 +297,7 @@ Color Color::HSV (int h, int s, int v)
     return rgb;
 }
 
-int Color::hue ()
+int Color::hue () const
 {
     double min = 0, max = 0, delta = 0;
 
@@ -331,7 +331,7 @@ int Color::hue ()
     return static_cast <int> (255.0/360.0 * h);
 }
 
-int Color::saturation ()
+int Color::saturation () const
 {
 	double min = 0, max = 0, delta = 0;
 
@@ -354,7 +354,7 @@ int Color::saturation ()
 	return static_cast <int> (s * 255);
 }
 
-int Color::value ()
+int Color::value () const
 {
     double min = 0;
 	double max = 0;
@@ -380,7 +380,7 @@ TypeValue Clamp (TypeValue value, TypeMin min, TypeMax max)
 
 //-------------------
 
-int Color::average ()
+int Color::average () const
 {
 	return (r + g + b) / 3;
 }

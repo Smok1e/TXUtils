@@ -46,11 +46,11 @@ public:
 	Time (const Time& that);
 	Time ();
 
-	time_t getMicroseconds ();
-	time_t getMilliseconds ();
-	time_t getSeconds      ();
-	time_t getMinutes      ();
-	time_t getHours        ();
+	time_t getMicroseconds () const;
+	time_t getMilliseconds () const;
+	time_t getSeconds      () const;
+	time_t getMinutes      () const;
+	time_t getHours        () const;
 
 	static Time microseconds (time_t microseconds);
 	static Time milliseconds (time_t milliseconds);
@@ -58,7 +58,7 @@ public:
 	static Time minutes      (time_t minutes);
 	static Time hours        (time_t hours);
 
-	operator double ();
+	operator double () const;
 
 	Time& operator = (const Time& that);
 
@@ -95,27 +95,27 @@ Time::Time () :
 
 //-------------------
 
-Time::time_t Time::getMicroseconds ()
+Time::time_t Time::getMicroseconds () const
 {
 	return m_milliseconds * 1000;
 }
 
-Time::time_t Time::getMilliseconds ()
+Time::time_t Time::getMilliseconds () const
 {
 	return m_milliseconds;
 }
 
-Time::time_t Time::getSeconds ()
+Time::time_t Time::getSeconds () const
 {
 	return m_milliseconds / 1000;
 }
 
-Time::time_t Time::getMinutes ()
+Time::time_t Time::getMinutes () const
 {
 	return m_milliseconds / 1000 / 60;
 }
 
-Time::time_t Time::getHours ()
+Time::time_t Time::getHours () const
 {
 	return m_milliseconds / 1000 / 60 / 60;
 }
@@ -149,7 +149,7 @@ Time Time::hours (Time::time_t hours)
 
 //-------------------
 
-Time::operator double ()
+Time::operator double () const
 {
 	return static_cast <double> (m_milliseconds);
 }

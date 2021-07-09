@@ -19,7 +19,7 @@ size_t fwriteobj (FILE* file, obj_t* obj);
 
 size_t fsize (FILE* file)
 {
-	size_t position = ftell (file);
+	long position = ftell (file);
 	
 	fseek (file, 0, SEEK_END);
 	size_t size = ftell (file);

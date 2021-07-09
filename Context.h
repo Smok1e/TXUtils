@@ -31,13 +31,13 @@ public :
 	bool create (const char* filename);
 
 	bool loadFromFile (const char* filename);
-	bool saveToFile   (const char* filename);
+	bool saveToFile   (const char* filename) const;
 
-	int  getSizeX ();
-	int  getSizeY ();
+	int  getSizeX () const;
+	int  getSizeY () const;
 	void resize  (int new_size_x, int new_size_y);
 
-	void render (HDC dc = txDC (), int x = 0, int y = 0, int width = 0, int height = 0);
+	void render (HDC dc = txDC (), int x = 0, int y = 0, int width = 0, int height = 0) const;
 
 	void clear ();
 	void clear (Color color);
@@ -53,7 +53,7 @@ public :
 	RGBQUAD* access (int x, int y);
 
 	void  setPixel (int x, int y, Color color, bool blend = true);
-	Color getPixel (int x, int y);
+	Color getPixel (int x, int y) const;
 
 	void setColor     (Color color, int thikness = 0);
 	void setFillColor (Color color);
@@ -223,7 +223,7 @@ bool Context::loadFromFile (const char* filename)
 
 //-------------------
 
-bool Context::saveToFile (const char* filename)
+bool Context::saveToFile (const char* filename)	const
 {
 #ifdef TXU_USE_PNG
 	const char* extention = txu::shellapi::PathFindExtensionA (filename);
@@ -237,12 +237,12 @@ bool Context::saveToFile (const char* filename)
 
 //-------------------
 
-int Context::getSizeX ()
+int Context::getSizeX () const
 {
 	return m_size_x;
 }
 
-int Context::getSizeY ()
+int Context::getSizeY () const
 {
 	return m_size_y;
 }
@@ -303,7 +303,7 @@ RGBQUAD* Context::access (int x, int y)
 
 //-------------------
 
-void Context::render (HDC dc /*= txDC ()*/, int x /*= 0*/, int y /*= 0*/, int width /*= 0*/, int height /*= 0*/)
+void Context::render (HDC dc /*= txDC ()*/, int x /*= 0*/, int y /*= 0*/, int width /*= 0*/, int height /*= 0*/) const
 {
 	txBitBlt (dc, x, y, width, height, m_dc);
 }
@@ -345,7 +345,7 @@ void Context::setPixel (int x, int y, Color color, bool blend /*= true*/)
 
 //-------------------
 
-Color Context::getPixel (int x, int y)
+Color Context::getPixel (int x, int y) const
 {
 	y = m_size_y - y-1;
 	if (x < 0 || x >= m_size_x || y < 0 || y >= m_size_y) return Color::Black;

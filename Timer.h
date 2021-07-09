@@ -15,7 +15,7 @@ public:
 
 	void start ();
 
-	Time getTime ();
+	Time getTime () const;
 
 private:
 	LARGE_INTEGER m_start;
@@ -47,7 +47,7 @@ void Timer::start ()
 
 //-------------------
 
-Time Timer::getTime ()
+Time Timer::getTime () const
 {
 	LARGE_INTEGER stop = {};
 	QueryPerformanceCounter (&stop);

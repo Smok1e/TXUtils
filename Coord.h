@@ -36,8 +36,8 @@ public :
 
 	static Coord2D Screen ();
 
-	operator POINT ();
-	operator SIZE  ();
+	operator POINT () const;
+	operator SIZE  () const;
 
 	Coord2D operator - ();
 
@@ -88,12 +88,12 @@ Coord2D Coord2D::Screen ()
 
 //-------------------
 
-Coord2D::operator POINT ()
+Coord2D::operator POINT () const
 {
 	return POINT {static_cast <int> (x), static_cast <int> (y)};
 }
 
-Coord2D::operator SIZE ()
+Coord2D::operator SIZE () const
 {
 	return SIZE {static_cast <int> (x), static_cast <int> (y)};
 }

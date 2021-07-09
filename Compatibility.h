@@ -11,8 +11,9 @@
 	#pragma GCC diagnostic ignored "-Weffc++"
 	#pragma GCC diagnostic ignored "-Wmissing-declarations"
 #else
-	#pragma warning (disable: 4100)
-	#pragma warning (disable: 4838)
+	#pragma warning (disable: 4100 )
+	#pragma warning (disable: 4838 )
+	#pragma warning (disable: 26439)
 #endif
 
 //-------------------

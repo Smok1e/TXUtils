@@ -32,8 +32,8 @@ public:
 
 	bool loadFromFile (const char* filename);
 
-	void play      ();
-	void playAsync ();
+	void play      () const;
+	void playAsync () const;
 
 private:
 	char*  m_data;
@@ -101,12 +101,12 @@ bool Sound::loadFromFile (const char* filename)
 
 //-------------------
 
-void Sound::play ()
+void Sound::play () const
 {
 	winmm::PlaySoundA (m_data, GetModuleHandleA (nullptr), SND_MEMORY);
 }
 
-void Sound::playAsync ()
+void Sound::playAsync () const
 {
 	winmm::PlaySoundA (m_data, GetModuleHandleA (nullptr), SND_MEMORY | SND_ASYNC);
 }
@@ -131,7 +131,7 @@ void Sound::resize (size_t new_size)
 
 bool CheckWavSignature (FILE* file)
 {
-	size_t position = ftell (file);
+	long position = ftell (file);
 	fseek (file, 0, SEEK_SET);
 
 	WavSignatureHeader sign = {};

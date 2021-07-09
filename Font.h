@@ -28,23 +28,23 @@ public :
 
 	void setSize (int size_x, int size_y);
 
-	int getSizeX ();
-	int getSizeY ();
+	int getSizeX () const;
+	int getSizeY () const;
 
 	void setWeight (int weight);
-	int  getWeight ();
+	int  getWeight () const;
 
 	void setItalicEnabled (bool enable);
-	bool getItalicEnabled ();
+	bool getItalicEnabled () const;
 
 	void setUnderlineEnabled (bool enable);
-	bool getUnderlineEnabled ();
+	bool getUnderlineEnabled () const;
 
 	void setStrikeoutEnabled (bool enable);
-	bool getStrikeoutEnabled ();
+	bool getStrikeoutEnabled () const;
 
 	void        setName (const char* name);
-	const char* getName ();
+	const char* getName () const;
 
 	HFONT getSystemHandle ();
 	operator HFONT ();
@@ -237,12 +237,12 @@ void Font::setSize (int size_x, int size_y)
 	update ();
 }
 
-int Font::getSizeX ()
+int Font::getSizeX () const
 {
 	return m_size_x;
 }
 
-int Font::getSizeY ()
+int Font::getSizeY () const
 {
 	return m_size_y;
 }
@@ -255,7 +255,7 @@ void Font::setWeight (int weight)
 	update ();
 }
 
-int Font::getWeight ()
+int Font::getWeight () const
 {
 	return m_weight;
 }
@@ -268,7 +268,7 @@ void Font::setItalicEnabled (bool enabled)
 	update ();
 }
 
-bool Font::getItalicEnabled ()
+bool Font::getItalicEnabled () const
 {
 	return m_italic;
 }
@@ -281,7 +281,7 @@ void Font::setUnderlineEnabled (bool enabled)
 	update ();
 }
 
-bool Font::getUnderlineEnabled ()
+bool Font::getUnderlineEnabled () const
 {
 	return m_underline;
 }
@@ -293,7 +293,7 @@ void Font::setStrikeoutEnabled (bool enable)
 	m_strikeout = enable;
 }
 
-bool Font::getStrikeoutEnabled ()
+bool Font::getStrikeoutEnabled () const
 {
 	return m_strikeout;
 }
@@ -306,7 +306,7 @@ void Font::setName (const char* name)
 	update ();
 }
 
-const char* Font::getName ()
+const char* Font::getName () const
 {
 	return m_name;
 }
