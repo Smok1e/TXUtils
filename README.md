@@ -2,8 +2,11 @@
 TXUtils - это opensource библиотека, написанная мною для ~~себя~~ облегчения и удобства работы с графикой, используя [TXLib](http://storage.ded32.net.ru/Lib/TX/TXUpdate/Doc/HTML.ru/).
 Библиотека совместима с MSVC (Microsoft Visual Studio) и с MinGW (Скорее всего, установлена вами вместе с CodeBlocks)
 
+# Контакты
+Если у вас есть вопросы или предложения - можете написать мне в [вк](https://vk.com/synthw6ve). С радостью отвечу всем желающим.
+
 # Зависимости
-Разумеется, для работы TXUtils необходим [TXLib](http://storage.ded32.net.ru/Lib/TX/TXUpdate/Doc/HTML.ru/). 
+Вообще я за здоровый образ жизни. Однако, разумеется, для работы TXUtils необходим [TXLib](http://storage.ded32.net.ru/Lib/TX/TXUpdate/Doc/HTML.ru/). 
 Так же, рекомендуется установить [libpng](http://www.libpng.org/pub/png/libpng.html), если у вас её нет. Библиотека может работать и без неё, но тогда вы не сможете работать с форматом png используя [txu::Context](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucontext).
 
 # Установка
@@ -506,6 +509,7 @@ while (!GetAsyncKeyState (VK_ESCAPE) && !txu::WasExitButtonPressed ())
 - txu::Coord2D ()
 
 ## Функции-члены:
+- [static txu::Coord2D txu::Coord2D::Screen ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoord2d-txucoord2dscreen-)
 - [txu::Coord2D::operator POINT ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoord2doperator-point-)
 - [Coord2D txu::Coord2D::operator - ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#coord2d-txucoord2doperator----%D1%83%D0%BD%D0%B0%D1%80%D0%BD%D1%8B%D0%B9)
 - [Coord2D& txu::Coord2D::operator += (const Coord2D& that)](https://github.com/Smok1e/TXUtils/blob/main/README.md#%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-coord2d)
@@ -533,6 +537,17 @@ while (!GetAsyncKeyState (VK_ESCAPE) && !txu::WasExitButtonPressed ())
 
 ## Макросы для операций с классом:
 - [txCoord(coord)](https://github.com/Smok1e/TXUtils/blob/main/README.md#txcoordcoord)
+
+## txu::Coord2D txu::Coord2D::Screen ()
+Статическая функция. Возвращает экземпляр класса Coord2D, с размерами основного экрана.
+Вот небольшой пример использования:
+```
+txu::Coord2D screen = txu::Coord2D::Screen ();
+
+_txWindowStyle = WS_NOFRAME;
+txCreateWindow (txCoord (screen));
+```
+В результате откроется полноэкранное окно.
 
 ## txu::Coord2D::operator POINT ()
 Оператор преобразования к POINT.
@@ -758,7 +773,7 @@ result.render ();
 - [void txu::Context::setColor (txu::Color color, int thikness = 0)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetcolor-txucolor-color-int-thikness--0)
 - [void txu::Context::setFillColor (txu::Color color)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetfillcolor-txucolor-color)
 - [void txu::Context::setFont (HFONT font)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetfont-hfont-font)
-- [void txu::Context::setFont (const char* name, int sx, int sy = -1, int bold = FW_DONTCARE, bool italic = false, bool underline = false, bool strikeout = false, double angle = 0)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetfont-const-char-name-int-sx-int-sy---1-int-bold--fw_dontcare-bool-italic--false-bool-underline--false-bool-strikeout--false-double-angle--0)
+- [void txu::Context::setFont (const char* name, int sy, int sx = -1, int bold = FW_DONTCARE, bool italic = false, bool underline = false, bool strikeout = false, double angle = 0)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextsetfont-const-char-name-int-sy-int-sx---1-int-bold--fw_dontcare-bool-italic--false-bool-underline--false-bool-strikeout--false-double-angle--0)
 
 ## bool txu::Context::create (...)
 Заново инициализирует изображение в соответствии с указанными параметрами. Возвращает true в случае успеха.
@@ -854,7 +869,7 @@ int main ()
 ## void txu::Context::setFont (HFONT font)
 Устанавливает шрифт для внутреннего HDC, указанный в параметрах. В качестве параметра используйте txu::Font.
 
-## void txu::Context::setFont (const char* name, int sx, int sy = -1, int bold = FW_DONTCARE, bool italic = false, bool underline = false, bool strikeout = false, double angle = 0)
+## void txu::Context::setFont (const char* name, int sy, int sx = -1, int bold = FW_DONTCARE, bool italic = false, bool underline = false, bool strikeout = false, double angle = 0)
 Устанавливает шрифт для внутреннего HDC по указанным параметрам. Тоже самое, что и txSelectFont.
 
 # txu::Time
@@ -1037,7 +1052,7 @@ sound.play ();
 # Функции-члены:
 - [bool txu::Sound::loadFromFile (const char* filename)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txusoundloadfromfile-const-char-filename)
 - [void txu::Sound::play ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txusoundplay-)
-- [void txu::Sound::play_async ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txusoundplayasync-)
+- [void txu::Sound::playAsync ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txusoundplayasync-)
 
 ## bool txu::Sound::loadFromFile (const char* filename)
 Загружает звук из файла. В случае, если формат файла не соответствует wav, функция вернёт false и не станет его загружать. Если файл загрузится успешно, возвращает true.
