@@ -12,8 +12,8 @@
 		#include "Time.h"
 		#include "Timer.h"
 		#include "Color.h"
-		#include "Font.h"
 		#include "Coord.h"
+		#include "Font.h"
 		#include "Context.h"
 		#include "Sound.h"
 

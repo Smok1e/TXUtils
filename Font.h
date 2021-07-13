@@ -26,10 +26,12 @@ public :
 
 	bool loadFromFile (const char* filename);
 
+	void setSize (Coord2D size);
 	void setSize (int size_x, int size_y);
 
-	int getSizeX () const;
-	int getSizeY () const;
+	Coord2D getSize  () const;
+	int     getSizeX () const;
+	int     getSizeY () const;
 
 	void setWeight (int weight);
 	int  getWeight () const;
@@ -49,7 +51,7 @@ public :
 	HFONT getSystemHandle ();
 	operator HFONT ();
 
-	void select (HDC dc = txDC ());
+	void select (HDC dc = txDC ()) const;
 
 private :
 	const char* m_name;
@@ -229,12 +231,27 @@ bool Font::loadFromFile (const char* filename)
 
 //-------------------
 
+void Font::setSize (txu::Coord2D size)
+{
+	m_size_x = static_cast <int> (size.x);
+	m_size_y = static_cast <int> (size.y);
+
+	update ();
+}
+
 void Font::setSize (int size_x, int size_y)
 {
 	m_size_x = size_x;
 	m_size_y = size_y;
 
 	update ();
+}
+
+//-------------------
+
+Coord2D Font::getSize () const
+{
+	return Coord2D (m_size_x, m_size_y);
 }
 
 int Font::getSizeX () const
@@ -325,7 +342,7 @@ Font::operator HFONT ()
 
 //-------------------
 
-void Font::select (HDC dc /*= txDC ()*/)
+void Font::select (HDC dc /*= txDC ()*/) const
 {
 	_txBuffer_Select (m_handle, dc);
 }

@@ -59,19 +59,28 @@ struct Color
 
 	static const Color Black;
 	static const Color White;
+	static const Color Gray;
 	static const Color Red;
 	static const Color Green;
 	static const Color Blue;
 	static const Color Yellow;
+	static const Color Orange;
 	static const Color Pink;
-	static const Color DarkPink;
 	static const Color Cyan;
 	static const Color Magneta;
-	static const Color DarkCyan;
-	static const Color DarkMagneta;
-	static const Color Gray;
-	static const Color Orange;
+	static const Color DarkRed;
 	static const Color DarkGreen;
+	static const Color DarkBlue;
+	static const Color DarkCyan;
+	static const Color DarkPink;
+	static const Color DarkMagneta;
+	static const Color DarkGray;
+	static const Color Gray128;
+	static const Color Gray64;
+	static const Color Gray48;
+	static const Color Gray32;
+	static const Color Gray24;
+	static const Color Gray16;
 
 	static const Color Transparent;
 };
@@ -80,19 +89,27 @@ struct Color
 
 const Color Color::Black       (0,   0,   0    );
 const Color Color::White       (255, 255, 255  );
+const Color Color::Gray        (100, 100, 100  );
 const Color Color::Red         (255, 0,   0    );
 const Color Color::Green       (0,   255, 0    );
 const Color Color::Blue        (0,   0,   255  );
 const Color Color::Yellow      (255, 255, 0    );
+const Color Color::Orange      (255, 135, 0    );
 const Color Color::Pink        (255, 54,  200  );
-const Color Color::DarkPink	   (255, 0,   89   );
 const Color Color::Cyan        (0,   255, 255  );
 const Color Color::Magneta     (255, 0,   255  );
-const Color Color::DarkCyan    (0,   140, 255  );
-const Color Color::DarkMagneta (135, 0,   135  );
-const Color Color::Gray        (100, 100, 100  );
-const Color Color::Orange      (255, 135, 0    );
+const Color Color::DarkRed     (128, 0,   0    );
 const Color Color::DarkGreen   (0,   128, 0    );
+const Color Color::DarkBlue    (0,   0,   128  );
+const Color Color::DarkCyan    (0,   140, 255  );
+const Color Color::DarkPink	   (255, 0,   89   );
+const Color Color::DarkMagneta (135, 0,   135  );
+const Color Color::Gray128     (128, 128, 128  );
+const Color Color::Gray64      (64,  64,  64   );
+const Color Color::Gray48      (48,  48,  48   );
+const Color Color::Gray32	   (32,  32,  32   );
+const Color Color::Gray24      (24,  24,  24   );
+const Color Color::Gray16      (16,  16,  16   );
 
 const Color Color::Transparent (0,   0,   0,  0);
 
@@ -179,8 +196,8 @@ Color Color::Random ()
 
 Color Color::Choose ()
 {
-	static COLORREF data[16] = {};	
-	
+	static COLORREF data[16] = {};
+
 	CHOOSECOLORA cc = {};
 	cc.hwndOwner      = txWindow ();
 	cc.hInstance      = nullptr;
@@ -191,8 +208,8 @@ Color Color::Choose ()
 	cc.lpTemplateName = nullptr;
 	cc.lStructSize    = sizeof (cc);
 
-	if (ChooseColorA (&cc)) return cc.rgbResult;
-	else                    return Black;
+	if (comdlg::ChooseColorA (&cc)) return cc.rgbResult;
+	else                            return Black;
 }
 
 //-------------------
@@ -257,38 +274,38 @@ Color Color::HSV (int h, int s, int v)
     switch (region)
     {
         case 0:
-            rgb.r = static_cast <unsigned char> (v); 
-			rgb.g = static_cast <unsigned char> (t); 
+            rgb.r = static_cast <unsigned char> (v);
+			rgb.g = static_cast <unsigned char> (t);
 			rgb.b = static_cast <unsigned char> (p);
             break;
 
         case 1:
-            rgb.r = static_cast <unsigned char> (q); 
-			rgb.g = static_cast <unsigned char> (v); 
+            rgb.r = static_cast <unsigned char> (q);
+			rgb.g = static_cast <unsigned char> (v);
 			rgb.b = static_cast <unsigned char> (p);
             break;
 
         case 2:
-			rgb.r = static_cast <unsigned char> (p); 
-			rgb.g = static_cast <unsigned char> (v); 
+			rgb.r = static_cast <unsigned char> (p);
+			rgb.g = static_cast <unsigned char> (v);
 			rgb.b = static_cast <unsigned char> (t);
             break;
 
         case 3:
-            rgb.r = static_cast <unsigned char> (p); 
-			rgb.g = static_cast <unsigned char> (q); 
+            rgb.r = static_cast <unsigned char> (p);
+			rgb.g = static_cast <unsigned char> (q);
 			rgb.b = static_cast <unsigned char> (v);
             break;
 
         case 4:
-            rgb.r = static_cast <unsigned char> (t); 
-			rgb.g = static_cast <unsigned char> (p); 
+            rgb.r = static_cast <unsigned char> (t);
+			rgb.g = static_cast <unsigned char> (p);
 			rgb.b = static_cast <unsigned char> (v);
             break;
 
         default:
-            rgb.r = static_cast <unsigned char> (v); 
-			rgb.g = static_cast <unsigned char> (p); 
+            rgb.r = static_cast <unsigned char> (v);
+			rgb.g = static_cast <unsigned char> (p);
 			rgb.b = static_cast <unsigned char> (q);
             break;
 
@@ -373,8 +390,8 @@ int Color::value () const
 template <typename TypeValue, typename TypeMin, typename TypeMax>
 TypeValue Clamp (TypeValue value, TypeMin min, TypeMax max)
 {
-	if (value < min) return min;
-	if (value > max) return max;
+	if (value < min) return static_cast <TypeValue> (min);
+	if (value > max) return static_cast <TypeValue> (max);
 	return value;
 }
 

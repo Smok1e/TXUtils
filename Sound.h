@@ -22,7 +22,7 @@ struct WavSignatureHeader
 
 class Sound
 {
-public: 
+public:
 	Sound ();
 	Sound (const char* filename);
 	Sound (Sound&  copy);
@@ -40,7 +40,7 @@ private:
 	size_t m_data_size;
 
 	void resize (size_t new_size);
-	
+
 };
 
 //-------------------
@@ -60,7 +60,7 @@ Sound::Sound (Sound& copy) :
 	m_data_size (0)
 {
 	resize (copy.m_data_size);
-	std::memcpy (m_data, copy.m_data, m_data_size);
+	__txu_memcpy (m_data, copy.m_data, m_data_size);
 }
 
 Sound::Sound (Sound&& copy)	:
@@ -116,9 +116,9 @@ void Sound::playAsync () const
 void Sound::resize (size_t new_size)
 {
 	char* tmp = new char[new_size];
-	
-	if (m_data) 
-		std::memcpy (tmp, m_data, std::min (new_size, m_data_size));
+
+	if (m_data)
+		__txu_memcpy (tmp, m_data, std::min (new_size, m_data_size));
 
 	std::swap (m_data, tmp);
 	m_data_size = new_size;
@@ -138,7 +138,7 @@ bool CheckWavSignature (FILE* file)
 	freadobj (file, &sign);
 
 	fseek (file, position, SEEK_SET);
-	
+
 	sign.chunk_id = __txu_byteswap_32 (sign.chunk_id);
 	sign.format   = __txu_byteswap_32 (sign.format  );
 

@@ -21,19 +21,32 @@ int  _Init   ();
 
 namespace shellapi
 {
-	_TX_DLLIMPORT ("Shlwapi", LPCSTR, PathFindExtensionA, (LPCSTR));
+	#define __dll_name "Shlwapi"
+	_TX_DLLIMPORT (__dll_name, LPCSTR, PathFindExtensionA, (LPCSTR));
+	#undef __dll_name
 }
 
 namespace gdi
 {
-	_TX_DLLIMPORT ("Gdi32", int,   AddFontResourceExA,  (LPCSTR, DWORD, PVOID)                                                                   );
-	_TX_DLLIMPORT ("Gdi32", HFONT, CreateFontA,         (int, int, int, int, int, DWORD, DWORD, DWORD, DWORD, DWORD, DWORD, DWORD, DWORD, LPCSTR));
-	_TX_DLLIMPORT ("Gdi32", BOOL,  RemoveFontResourceA, (LPCSTR)                                                                                 );
+	#define __dll_name "Gdi32"
+	_TX_DLLIMPORT (__dll_name, int,   AddFontResourceExA,  (LPCSTR, DWORD, PVOID)                                                                   );
+	_TX_DLLIMPORT (__dll_name, HFONT, CreateFontA,         (int, int, int, int, int, DWORD, DWORD, DWORD, DWORD, DWORD, DWORD, DWORD, DWORD, LPCSTR));
+	_TX_DLLIMPORT (__dll_name, BOOL,  RemoveFontResourceA, (LPCSTR));
+	#undef __dll_name
 }
 
 namespace winmm
 {
-	_TX_DLLIMPORT ("Winmm", BOOL, PlaySoundA, (LPCSTR, HMODULE, DWORD));
+	#define __dll_name "Winmm"
+	_TX_DLLIMPORT (__dll_name, BOOL, PlaySoundA, (LPCSTR, HMODULE, DWORD));
+	#undef __dll_name
+}
+
+namespace comdlg
+{
+	#define __dll_name "Comdlg32"
+	_TX_DLLIMPORT (__dll_name, BOOL, ChooseColorA, (LPCHOOSECOLOR));
+	#undef __dll_name
 }
 
 //-------------------

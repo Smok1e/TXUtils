@@ -54,9 +54,9 @@ public :
 
 //-------------------
 
-Coord2D::Coord2D (double x_, double y_) :
-	x (x_),
-	y (y_)
+Coord2D::Coord2D (double x, double y) :
+	x (x),
+	y (y)
 {}
 
 Coord2D::Coord2D (const Coord2D& that) :

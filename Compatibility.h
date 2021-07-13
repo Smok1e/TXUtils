@@ -18,11 +18,23 @@
 
 //-------------------
 
+#ifdef __txu_memcpy
+	#undef __txu_memcpy
+#endif
+
+#ifdef __MINGW32__
+	#define __txu_memcpy memcpy
+#else
+	#define __txu_memcpy std::memcpy
+#endif
+
+//-------------------
+
 char* __txu_strncpy (char* dst, const char* src, size_t len);
 FILE* __txu_fopen   (const char* filename, const char* flags);
 
 unsigned short __txu_byteswap_16 (unsigned short x);
-unsigned long  __txu_byteswap_32  (unsigned long  x);
+unsigned long  __txu_byteswap_32 (unsigned long  x);
 
 //-------------------
 
@@ -39,16 +51,15 @@ char* __txu_strncpy (char* dst, const char* src, size_t len)
 
 //-------------------
 
-FILE* __txu_fopen (const char* filename, const char* flags)
+FILE* __txu_fopen (const char* filename, const char* mode)
 {
 	FILE* file = nullptr;
 
 #ifdef __MINGW32__
-	file = fopen (filename, flags);
+	file = fopen (filename, mode);
 #else
-	errno_t err = fopen_s (&file, filename, flags);
-	if (err)
-		file = nullptr;
+	errno_t err = fopen_s (&file, filename, mode);
+	if (err) file = nullptr;
 #endif
 
 	return file;

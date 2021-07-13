@@ -18,6 +18,7 @@ class Context
 public :
 	Context ();
 	Context (int size_x, int size_y);
+	Context (Coord2D size);
 	Context (const Context& that);
 	Context (const HDC& dc);
 	Context (const char* filename);
@@ -26,6 +27,7 @@ public :
 
 	bool create ();
 	bool create (int size_x, int size_y);
+	bool create (Coord2D size);
 	bool create (const Context& that);
 	bool create (const HDC& dc);
 	bool create (const char* filename);
@@ -33,11 +35,13 @@ public :
 	bool loadFromFile (const char* filename);
 	bool saveToFile   (const char* filename) const;
 
-	int  getSizeX () const;
-	int  getSizeY () const;
-	void resize  (int new_size_x, int new_size_y);
+	Coord2D getSize  () const;
+	int     getSizeX () const;
+	int     getSizeY () const;
+	void    resize   (int new_size_x, int new_size_y);
 
-	void render (HDC dc = txDC (), int x = 0, int y = 0, int width = 0, int height = 0) const;
+	void render (HDC dc = txDC (), int dst_x = 0, int dst_y = 0, int width = 0, int height = 0, 
+		         int src_x = 0, int src_y = 0, unsigned operation = SRCCOPY) const;
 
 	void clear ();
 	void clear (Color color);
@@ -96,6 +100,16 @@ Context::Context (int size_x, int size_y) :
 	create (size_x, size_y); 
 }
 
+Context::Context (Coord2D size) :
+	m_buffer (nullptr),
+	m_dc     (nullptr),
+
+	m_size_x (0),
+	m_size_y (0)
+{
+	create (size); 
+}
+
 Context::Context (const Context& that) :
 	m_buffer (nullptr),
 	m_dc     (nullptr),
@@ -152,6 +166,11 @@ bool Context::create (int size_x, int size_y)
 	m_dc = txCreateDIBSection (m_size_x, m_size_y, &m_buffer);
 
 	return m_dc != 0;
+}
+
+bool Context::create (Coord2D size)
+{
+	return create (static_cast <int> (size.x), static_cast <int> (size.y));
 }
 
 bool Context::create (const Context& that)
@@ -237,6 +256,11 @@ bool Context::saveToFile (const char* filename)	const
 
 //-------------------
 
+Coord2D Context::getSize () const
+{
+	return txu::Coord2D (m_size_x, m_size_y);
+}
+
 int Context::getSizeX () const
 {
 	return m_size_x;
@@ -303,9 +327,10 @@ RGBQUAD* Context::access (int x, int y)
 
 //-------------------
 
-void Context::render (HDC dc /*= txDC ()*/, int x /*= 0*/, int y /*= 0*/, int width /*= 0*/, int height /*= 0*/) const
+void Context::render (HDC dc /*= txDC ()*/, int dst_x /*= 0*/, int dst_y /*= 0*/, int width /*= 0*/, int height /*= 0*/, 
+	                  int src_x /*= 0*/, int src_y /*= 0*/, unsigned operation /*= SRCCOPY*/) const
 {
-	txBitBlt (dc, x, y, width, height, m_dc);
+	txBitBlt (dc, dst_x, dst_y, width, height, m_dc, src_x, src_y, operation);
 }
 
 //-------------------
