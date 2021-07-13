@@ -330,7 +330,9 @@ txTextOut (size_x/2 - txGetTextExtentX (text)/2, size_y/2 - txGetTextExtentY (te
 - [bool txu::Font::create (const char* name, int size_x, int size_y, int weight = FW_DONTCARE, bool italic = false, bool underline = false, bool strikeout = false)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txufontcreate-)
 - [bool txu::Font::create (const Font& that)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txufontcreate-)
 - [bool txu::Font::loadFromFile (const char* filename)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txufontloadfromfile-const-char-filename)
+- [void txu::Font::setSize (Coord2D size)]()
 - [void txu::Font::setSize (int size_x, int size_y)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txufontsetsize-int-size_x-int-size_y)
+- [Coord2D txu::Font::getSize ()]()
 - [int txu::Font::getSizeX ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txufontgetsizex-)
 - [int txu::Font::getSizeY ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txufontgetsizey-)
 - [void txu::Font::setWeight (int weight)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txufontsetweight-int-weight)
@@ -402,8 +404,14 @@ while (!GetAsyncKeyState (VK_ESCAPE) && !txu::WasExitButtonPressed ())
 
 ![font_load_example](https://user-images.githubusercontent.com/33802666/117331419-686dee00-ae9f-11eb-909c-e2456a08367f.gif)
 
+## void txu::Font::setSize (Coord2D size)
+Устанавливает размер шрифта.
+
 ## void txu::Font::setSize (int size_x, int size_y)
 Устанавливает размер шрифта.
+
+## Coord2D txu::Font::getSize ()
+Возвращает размер шрифта.
 
 ## int txu::Font::getSizeX ()
 Возвращает ширину шрифта.
@@ -757,6 +765,7 @@ result.render ();
 - [bool txu::Context::create (const char* filename)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txucontextcreate-)
 - [bool txu::Context::loadFromFile (const char* filename)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txucontextloadfromfile-const-char-filename)
 - [bool txu::Context::saveToFile (const char* filename)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txucontextsavetofile-const-char-filename)
+- [Coord2D txu::Context::getSize ()]()
 - [int txu::Context::getSizeX ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txucontextgetsizex-)
 - [int txu::Context::getSizeY ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txucontextgetsizey-)
 - [void txu::Context::resize (int new_size_x, int new_size_y)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextresize-int-new_size_x-int-new_size_y)
@@ -819,6 +828,9 @@ int main ()
 
 ## bool txu::Context::saveToFile (const char* filename)
 Сохраняет изображение в файл, указанный в параметрах. По умолчанию сохраняет в формате .bmp, однако, если вы подключили использование libpng (см [bool txu::Context::loadFromFile (const char* filename)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txucontextloadfromfile-const-char-filename)), функция автоматически определит его расширение из строки имени. То есть, если в конце имени файла указано ".png", и при этом подключён libpng, то изображение сохранится в формате png. В любых других случаях, изображение будет сохранено в формате bmp.
+
+## Coord2D txu::Context::getSize ()
+Возвращает размер изображения.
 
 ## int txu::Context::getSizeX ()
 Возвращает ширину изображения.
