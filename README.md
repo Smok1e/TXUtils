@@ -23,10 +23,10 @@ TXUtils - это opensource библиотека, написанная мною 
 Примечание: я гарантирую работу библиотеки только с компилятороми MSVC и MinGW. Я не отвечаю за совместимость с другими компиляторами.
 
 # Функции библиотеки:
-- [void txu::WasExitButtonPressed    ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txuwasexitbuttonpressed-)
-- [int  txu::GetMouseWheel           ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txugetmousewheel-)
+- [void txu::WasExitButtonPressed ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txuwasexitbuttonpressed-)
+- [int  txu::GetMouseWheel ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txugetmousewheel-)
 - [void txu::SetConsoleOutputEnabled (bool enable)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txusetconsoleoutputenabled-bool-enable)
-- [bool txu::IsConsoleOutputEnabled  ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txuisconsoleoutputenabled-)
+- [bool txu::IsConsoleOutputEnabled ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txuisconsoleoutputenabled-)
 - [bool txu::SetWindowIcon (const char* filename)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txusetwindowicon-const-char-filename)
 
 # Макросы
