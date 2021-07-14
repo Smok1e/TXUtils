@@ -130,7 +130,7 @@ txSetFillColor (txu::Color (24, 24, 24));
 - [static Color Interpolate (Color a, Color b, double t)](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucolorinterpolate-color-a-color-b-color-t)
 - [static Color Interpolate (const std::initializer_list \<Color\>& list, double t)](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucolorinterpolate-const-stdinitializer_list-color-list-double-t)
 - [static Color Random ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucolorrandom-)
-- [static Color Choose (Color def = Black)](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucolorchoose)
+- [static Color Choose (Color def = Black)](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucolorchoose-color-def--black)
 - [operator RGBQUAD  ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoloropreator-rgbquad-)
 - [operator COLORREF ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#txucoloroperator-colorref-)
 - [Color operator ! ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#color-txucoloroperator--)
