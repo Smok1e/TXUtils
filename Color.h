@@ -41,7 +41,7 @@ struct Color
 	static Color Interpolate (const std::initializer_list <Color>& list, double t);
 
 	static Color Random ();
-	static Color Choose ();
+	static Color Choose (Color def = Black);
 
 	operator RGBQUAD  () const;
 	operator COLORREF () const;
@@ -74,7 +74,6 @@ struct Color
 	static const Color DarkCyan;
 	static const Color DarkPink;
 	static const Color DarkMagneta;
-	static const Color DarkGray;
 	static const Color Gray128;
 	static const Color Gray64;
 	static const Color Gray48;
@@ -194,7 +193,7 @@ Color Color::Random ()
 
 //-------------------
 
-Color Color::Choose ()
+Color Color::Choose (Color def /*= Black*/)
 {
 	static COLORREF data[16] = {};
 
@@ -209,7 +208,7 @@ Color Color::Choose ()
 	cc.lStructSize    = sizeof (cc);
 
 	if (comdlg::ChooseColorA (&cc)) return cc.rgbResult;
-	else                            return Black;
+	else                            return def;
 }
 
 //-------------------
