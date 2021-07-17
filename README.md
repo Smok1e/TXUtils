@@ -769,7 +769,7 @@ result.render ();
 - [bool txu::Context::create (const char* filename)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txucontextcreate-)
 - [bool txu::Context::loadFromFile (const char* filename)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txucontextloadfromfile-const-char-filename)
 - [bool txu::Context::saveToFile (const char* filename)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txucontextsavetofile-const-char-filename)
-- [Coord2D txu::Context::getSize ()](context getsize coord2d https://github.com/Smok1e/TXUtils/blob/main/README.md#coord2d-txucontextgetsize-)
+- [Coord2D txu::Context::getSize ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#coord2d-txucontextgetsize-)
 - [int txu::Context::getSizeX ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txucontextgetsizex-)
 - [int txu::Context::getSizeY ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#int-txucontextgetsizey-)
 - [void txu::Context::resize (int new_size_x, int new_size_y)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txucontextresize-int-new_size_x-int-new_size_y)
