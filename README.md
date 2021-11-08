@@ -28,9 +28,9 @@ TXUtils - это opensource библиотека, написанная мною 
 - [void txu::SetConsoleOutputEnabled (bool enable)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txusetconsoleoutputenabled-bool-enable)
 - [bool txu::IsConsoleOutputEnabled ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txuisconsoleoutputenabled-)
 - [bool txu::SetWindowIcon (const char* filename)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txusetwindowicon-const-char-filename)
-- [void txu::SetWindowCursor (HCURSOR cursor)]
-- [void txu::SetCursorVisible (bool visible)]
-- [void txu::IsCursorVisible ()]
+- [void txu::SetWindowCursor (HCURSOR cursor)](https://github.com/Smok1e/TXUtils#void-txusetwindowcursor-hcursor-cursor)
+- [void txu::SetCursorVisible (bool visible)](https://github.com/Smok1e/TXUtils#void-txusetcursorvisible-bool-visible)
+- [void txu::IsCursorVisible ()](https://github.com/Smok1e/TXUtils#bool-txuiscursorvisible-)
 
 # Макросы
 - [WS_NOFRAME](https://github.com/Smok1e/TXUtils/blob/main/README.md#ws_noframe)
