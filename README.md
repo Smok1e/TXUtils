@@ -28,6 +28,9 @@ TXUtils - это opensource библиотека, написанная мною 
 - [void txu::SetConsoleOutputEnabled (bool enable)](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txusetconsoleoutputenabled-bool-enable)
 - [bool txu::IsConsoleOutputEnabled ()](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txuisconsoleoutputenabled-)
 - [bool txu::SetWindowIcon (const char* filename)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txusetwindowicon-const-char-filename)
+- [void txu::SetWindowCursor (HCURSOR cursor)]
+- [void txu::SetCursorVisible (bool visible)]
+- [void txu::IsCursorVisible ()]
 
 # Макросы
 - [WS_NOFRAME](https://github.com/Smok1e/TXUtils/blob/main/README.md#ws_noframe)
@@ -93,6 +96,16 @@ txu::SetWindowIcon ("icon.ico");
 Так же, советую вам [плагин для фотошопа, позволяющий сохранять картинки в формате ico](https://rugraphics.ru/photoshop/plagin-format-ico-v-photoshop-cs6-i-cc).
 
 И напоследок, если вам не нравится то, что TXLib устанавливает своё имя в заголовке окна, используйте функцию [SetWindowText](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowtexta) из WinApi.
+
+## void txu::SetWindowCursor (HCURSOR cursor)
+Устанавливает курсор, переданный в параметрах, для окна TXLib.
+Если в качестве параметра передать нулевой указатель, обработка курсора прекратится, то есть установится стандартный курсор, определённый системой.
+
+## void txu::SetCursorVisible (bool visible)
+Устанавливает видимость курсора внутри окна TXLib. false - курсор не будет видно, true - курсор будет видно.
+
+## bool txu::IsCursorVisible ()
+Возвращает состояние видимости курсора.
 
 ## WS_NOFRAME
 Стиль окна без заголовка и рамок.
