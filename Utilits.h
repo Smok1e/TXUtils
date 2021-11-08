@@ -15,7 +15,7 @@ namespace txu
 
 //-------------------
 
-int  _Init   ();
+int _Init ();
 
 //-------------------
 
@@ -54,13 +54,17 @@ namespace comdlg
 volatile int _MouseWheelDelta      = 0;
 volatile int _WasExitButtonPressed = false;
 
+volatile bool    _CursorVisible = true;
+volatile HCURSOR _CursorHandle  = nullptr;
+
 bool _InitResult = _Init ();
 
 //-------------------
 
 LRESULT CALLBACK WndProc (HWND wnd, UINT message, WPARAM wpar, LPARAM lpar);
-	bool WndProc_OnCLOSE      ();
-	bool WndProc_OnMOUSEWHEEL (WPARAM wpar);
+bool WndProc_OnCLOSE      ();
+bool WndProc_OnMOUSEWHEEL (WPARAM wpar);
+bool WndProc_OnSETCURSOR  (LPARAM lpar);
 
 bool WasExitButtonPressed    ();
 int  GetMouseWheel           ();
@@ -69,6 +73,10 @@ void SetConsoleOutputEnabled (bool enable);
 bool IsConsoleOutputEnabled  ();
 
 bool SetWindowIcon (const char* filename);
+
+void SetWindowCursor  (HCURSOR cursor);
+void SetCursorVisible (bool visible);
+bool IsCursorVisible  ();
 
 //-------------------
 
@@ -89,9 +97,9 @@ LRESULT CALLBACK WndProc (HWND wnd, UINT message, WPARAM wpar, LPARAM lpar)
 	{
 		case WM_CLOSE:      { if (WndProc_OnCLOSE      ()    ) return true; }
 		case WM_MOUSEWHEEL: { if (WndProc_OnMOUSEWHEEL (wpar)) return true; }
+		case WM_SETCURSOR:  { if (WndProc_OnSETCURSOR  (lpar)) return true; }
 
-		default: 
-			break;
+		default: break;
 	}
 
 	return false;
@@ -110,6 +118,22 @@ bool WndProc_OnCLOSE ()
 bool WndProc_OnMOUSEWHEEL (WPARAM wpar)
 {
 	_MouseWheelDelta = GET_WHEEL_DELTA_WPARAM (wpar) / 120;
+	return true;
+}
+
+//-------------------
+
+bool WndProc_OnSETCURSOR (LPARAM lpar)
+{
+	if (LOWORD (lpar) != HTCLIENT) return false;
+
+	if (_CursorVisible)
+	{
+		if (_CursorHandle) SetCursor (_CursorHandle);
+		else return false;
+	}
+	else SetCursor (nullptr);
+
 	return true;
 }
 
@@ -152,10 +176,29 @@ bool SetWindowIcon (const char* filename)
 	HICON icon = (HICON) LoadImageA (NULL, filename, IMAGE_ICON, 32, 32, LR_LOADFROMFILE | LR_SHARED);
 	if (!icon) return false;
 
-	SendMessage (txWindow (), WM_SETICON, ICON_SMALL, (LPARAM) icon);
-	SendMessage (txWindow (), WM_SETICON, ICON_BIG,   (LPARAM) icon);
+	SendMessageA (txWindow (), WM_SETICON, ICON_SMALL, (LPARAM) icon);
+	SendMessageA (txWindow (), WM_SETICON, ICON_BIG,   (LPARAM) icon);
 
 	return true;
+}
+
+//-------------------
+
+void SetWindowCursor (HCURSOR cursor)
+{
+	_CursorHandle = cursor;
+	SendMessageA (txWindow (), WM_SETCURSOR, 0, MAKELPARAM (HTCLIENT, 0));
+}
+
+void SetCursorVisible (bool visible)
+{
+	_CursorVisible = visible;
+	SendMessageA (txWindow (), WM_SETCURSOR, 0, MAKELPARAM (HTCLIENT, 0));
+}
+
+bool IsCursorVisible ()
+{
+	return _CursorVisible;
 }
 
 //-------------------

@@ -8,8 +8,12 @@ namespace txu
 #ifdef txCoord
 	#undef txCoord
 #endif
+#define txCoord(coord) ((txu::Coord2D)(coord)).x, ((txu::Coord2D)(coord)).y
 
-#define txCoord(coord) (coord).x, (coord).y
+#ifdef txCoordInt
+	#undef txCoordInt
+#endif
+#define txCoordInt(coord) static_cast <int> (((txu::Coord2D)(coord)).x), static_cast <int> (((txu::Coord2D)(coord)).y)
 
 //-------------------
 

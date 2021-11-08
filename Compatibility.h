@@ -33,8 +33,8 @@
 char* __txu_strncpy (char* dst, const char* src, size_t len);
 FILE* __txu_fopen   (const char* filename, const char* flags);
 
-unsigned short __txu_byteswap_16 (unsigned short x);
-unsigned long  __txu_byteswap_32 (unsigned long  x);
+unsigned __int16 __txu_byteswap_16 (unsigned __int16 x);
+unsigned __int32 __txu_byteswap_32 (unsigned __int32 x);
 
 //-------------------
 
@@ -67,16 +67,16 @@ FILE* __txu_fopen (const char* filename, const char* mode)
 
 //-------------------
 
-unsigned short __txu_byteswap_16 (unsigned short x)
+unsigned __int16 __txu_byteswap_16 (unsigned __int16 x)
 {
 #ifdef __MINGW32__
-	return ((unsigned short) ((((x) >> 8) & 0xff) | (((x) & 0xff) << 8)));
+	return ((unsigned __int16) ((((x) >> 8) & 0xff) | (((x) & 0xff) << 8)));
 #else
 	return _byteswap_ushort (x);
 #endif
 }
 
-unsigned long  __txu_byteswap_32  (unsigned long  x)
+unsigned __int32  __txu_byteswap_32 (unsigned __int32 x)
 {
 #ifdef __MINGW32__
 	return ((((x) & 0xff000000u) >> 24) | (((x) & 0x00ff0000u) >> 8 ) |

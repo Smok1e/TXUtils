@@ -40,7 +40,7 @@ public :
 	int     getSizeY () const;
 	void    resize   (int new_size_x, int new_size_y);
 
-	void render (HDC dc = txDC (), int dst_x = 0, int dst_y = 0, int width = 0, int height = 0, 
+	void render (HDC dc = txDC (), int dst_x = 0, int dst_y = 0, int width = 0, int height = 0,
 		         int src_x = 0, int src_y = 0, unsigned operation = SRCCOPY) const;
 
 	void clear ();
@@ -64,8 +64,8 @@ public :
 
 	void setFont (HFONT font);
 
-	void setFont (const char *name, int sy, int sx = -1, int bold = FW_DONTCARE, 
-		          bool italic = false, bool underline = false, bool strikeout = false, 
+	void setFont (const char *name, int sy, int sx = -1, int bold = FW_DONTCARE,
+		          bool italic = false, bool underline = false, bool strikeout = false,
 		          double angle = 0);
 
 private :
@@ -87,7 +87,7 @@ Context::Context () :
 	m_size_x (0),
 	m_size_y (0)
 {
-	create (); 
+	create ();
 }
 
 Context::Context (int size_x, int size_y) :
@@ -97,7 +97,7 @@ Context::Context (int size_x, int size_y) :
 	m_size_x (0),
 	m_size_y (0)
 {
-	create (size_x, size_y); 
+	create (size_x, size_y);
 }
 
 Context::Context (Coord2D size) :
@@ -107,7 +107,7 @@ Context::Context (Coord2D size) :
 	m_size_x (0),
 	m_size_y (0)
 {
-	create (size); 
+	create (size);
 }
 
 Context::Context (const Context& that) :
@@ -117,7 +117,7 @@ Context::Context (const Context& that) :
 	m_size_x (0),
 	m_size_y (0)
 {
-	create (that); 
+	create (that);
 }
 
 Context::Context (const HDC& dc) :
@@ -127,7 +127,7 @@ Context::Context (const HDC& dc) :
 	m_size_x (0),
 	m_size_y (0)
 {
-	create (dc); 
+	create (dc);
 }
 
 Context::Context (const char* filename) :
@@ -137,7 +137,7 @@ Context::Context (const char* filename) :
 	m_size_x (0),
 	m_size_y (0)
 {
-	create (filename); 
+	create (filename);
 }
 
 //-------------------
@@ -220,7 +220,7 @@ bool Context::loadFromFile (const char* filename)
 
 		if (png_loader::load_png (&buffer, &sx, &sy, filename))
 			return false;
-		
+
 		resize (sx, sy);
 
 		for (size_t i = 0; i < static_cast <size_t> (sx*sy); i++)
@@ -277,9 +277,9 @@ void Context::resize (int new_size_x, int new_size_y)
 
 	HDC new_dc = txCreateDIBSection (new_size_x, new_size_y, &m_buffer);
 	if (m_dc) txBitBlt (new_dc, 0, 0, 0, 0, m_dc);
-	
+
 	std::swap (m_dc, new_dc);
-	
+
 	txDeleteDC (new_dc);
 
 	m_size_x = new_size_x;
@@ -327,7 +327,7 @@ RGBQUAD* Context::access (int x, int y)
 
 //-------------------
 
-void Context::render (HDC dc /*= txDC ()*/, int dst_x /*= 0*/, int dst_y /*= 0*/, int width /*= 0*/, int height /*= 0*/, 
+void Context::render (HDC dc /*= txDC ()*/, int dst_x /*= 0*/, int dst_y /*= 0*/, int width /*= 0*/, int height /*= 0*/,
 	                  int src_x /*= 0*/, int src_y /*= 0*/, unsigned operation /*= SRCCOPY*/) const
 {
 	txBitBlt (dc, dst_x, dst_y, width, height, m_dc, src_x, src_y, operation);
@@ -402,8 +402,8 @@ void Context::setFont (HFONT font)
 
 //------------------
 
-void Context::setFont (const char * name, int sy, int sx /*= -1*/, int bold /*= FW_DONTCARE*/, 
-	                   bool italic /*= false*/, bool underline /*= false*/, bool strikeout /*= false*/, 
+void Context::setFont (const char * name, int sy, int sx /*= -1*/, int bold /*= FW_DONTCARE*/,
+	                   bool italic /*= false*/, bool underline /*= false*/, bool strikeout /*= false*/,
 	                   double angle /*= 0*/)
 {
 	txSelectFont (name, sy, sx, bold, italic, underline, strikeout, angle, m_dc);

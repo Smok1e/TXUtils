@@ -109,7 +109,6 @@ const Color Color::Gray48      (48,  48,  48   );
 const Color Color::Gray32	   (32,  32,  32   );
 const Color Color::Gray24      (24,  24,  24   );
 const Color Color::Gray16      (16,  16,  16   );
-
 const Color Color::Transparent (0,   0,   0,  0);
 
 //-------------------

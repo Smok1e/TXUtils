@@ -10,8 +10,8 @@ namespace font_loader
 
 //-------------------
 
-typedef unsigned short sinfo_t;
-typedef unsigned long  linfo_t;
+typedef unsigned __int16 sinfo_t;
+typedef unsigned __int32 linfo_t;
 
 //-------------------
 
