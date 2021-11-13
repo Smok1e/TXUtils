@@ -15,7 +15,41 @@ namespace txu
 
 class Context
 {
-public :
+public:
+	class Iterator
+	{
+	public:
+		class PixelReference
+		{
+		public:
+			PixelReference (RGBQUAD* reference_pixel);
+			PixelReference (const PixelReference& copy);
+
+			operator Color    ();
+			operator RGBQUAD  ();
+			operator COLORREF ();
+
+			PixelReference& operator = (const Color& color);
+
+		private:
+			RGBQUAD* m_reference_pixel;
+
+		};
+
+		Iterator (txu::Context* reference_context, int reference_x);
+		Iterator (const Iterator& copy);
+
+		txu::Context* getReferenceContext ();
+		int           getReferenceX       () const;
+
+		PixelReference operator [] (int y);			
+
+	private:
+		txu::Context* m_reference_context;
+		int           m_reference_x;
+
+	};
+
 	Context ();
 	Context (int size_x, int size_y);
 	Context (Coord2D size);
@@ -48,6 +82,11 @@ public :
 
 	void capture (HWND wnd = nullptr);
 
+	HCURSOR makeCursor (txu::Color alpha, int x_hot_spot = -1, int y_hot_spot = -1);
+
+	Iterator                 operator [] (int x);
+	Iterator::PixelReference operator [] (const Coord2D& coord);
+
 	operator HDC& ();
 
 	RGBQUAD* getBuffer       ();
@@ -68,7 +107,7 @@ public :
 		          bool italic = false, bool underline = false, bool strikeout = false,
 		          double angle = 0);
 
-private :
+private:
 	RGBQUAD* m_buffer;
 	HDC      m_dc;
 
@@ -77,6 +116,72 @@ private :
 
 	void destruct ();
 };
+
+//-------------------
+
+Context::Iterator::PixelReference::PixelReference (RGBQUAD* reference_pixel):
+	m_reference_pixel (reference_pixel)
+{}
+
+Context::Iterator::PixelReference::PixelReference (const PixelReference& copy):
+	m_reference_pixel (copy.m_reference_pixel)
+{}
+
+//-------------------
+
+Context::Iterator::PixelReference::operator Color ()
+{
+	return Color (*m_reference_pixel);
+}
+
+Context::Iterator::PixelReference::operator RGBQUAD ()
+{
+	return Color (*m_reference_pixel).operator RGBQUAD ();
+}
+
+Context::Iterator::PixelReference::operator COLORREF ()
+{
+	return Color (*m_reference_pixel).operator COLORREF ();
+}
+
+//-------------------
+
+Context::Iterator::PixelReference& Context::Iterator::PixelReference::operator = (const Color& color)
+{
+	*m_reference_pixel = (color.a < 255) ? (*m_reference_pixel <<= color) : color;
+	return *this;
+}
+
+//-------------------
+
+Context::Iterator::Iterator (Context* reference_context, int reference_x):
+	m_reference_context (reference_context),
+	m_reference_x       (reference_x      )
+{}
+
+Context::Iterator::Iterator (const Context::Iterator& copy):
+	m_reference_context (copy.m_reference_context),
+	m_reference_x       (copy.m_reference_x      )
+{}
+
+//-------------------
+
+Context* Context::Iterator::getReferenceContext ()
+{
+	return m_reference_context;
+}
+
+int Context::Iterator::getReferenceX () const
+{
+	return m_reference_x;		
+}
+
+//-------------------
+
+Context::Iterator::PixelReference Context::Iterator::operator [] (int y)
+{
+	return PixelReference (m_reference_context -> access (m_reference_x, y));
+}	
 
 //-------------------
 
@@ -288,6 +393,18 @@ void Context::resize (int new_size_x, int new_size_y)
 
 //-------------------
 
+Context::Iterator Context::operator [] (int x)
+{
+	return Iterator (this, x);
+}
+
+Context::Iterator::PixelReference Context::operator [] (const Coord2D& coord)
+{
+	return Iterator::PixelReference (access (txCoordInt (coord)));
+}
+
+//-------------------
+
 Context::operator HDC& ()
 {
 	return m_dc;
@@ -359,6 +476,48 @@ void Context::capture (HWND wnd /*= nullptr*/)
 
 //-------------------
 
+HCURSOR Context::makeCursor (txu::Color alpha, int x_hot_spot /*= -1*/, int y_hot_spot /*= -1*/)
+{
+	return nullptr;
+
+	/* IN DEVELOPMENT
+
+	x_hot_spot = Clamp (x_hot_spot >= 0? x_hot_spot: m_size_x / 2, 0, m_size_x);
+	y_hot_spot = Clamp (y_hot_spot >= 0? y_hot_spot: m_size_y / 2, 0, m_size_y);
+	
+	unsigned char* ANDMask = new unsigned char[m_size_x*m_size_y*3];
+	unsigned char* XORMask = new unsigned char[m_size_x*m_size_y*3];
+
+	for (int x = 0; x < m_size_x; x++)
+	for (int y = 0; y < m_size_y; y++)
+	{
+		int index = x + (m_size_y - y-1)*m_size_x;
+		txu::Color pixel = getPixel (x, y);
+
+		if (pixel == alpha)
+		{
+			ANDMask[index*3] = 0x00FFFFFF;
+			XORMask[index*3] = 0x00000000;
+		}
+
+		else
+		{
+			*(&ANDMask[index*3]) = 0x00000000;	
+			*(&XORMask[index*3]) = pixel;
+		}
+	}
+
+	HCURSOR cursor = CreateCursor (GetModuleHandleA (nullptr), x_hot_spot, y_hot_spot, m_size_x, m_size_y, ANDMask, XORMask);
+	
+	delete[] (ANDMask);
+	delete[] (XORMask);
+	return cursor;
+
+	*/
+}
+
+//-------------------
+
 void Context::setPixel (int x, int y, Color color, bool blend /*= true*/)
 {
 	y = m_size_y - y-1;
@@ -375,8 +534,10 @@ Color Context::getPixel (int x, int y) const
 	y = m_size_y - y-1;
 	if (x < 0 || x >= m_size_x || y < 0 || y >= m_size_y) return Color::Black;
 
-	int index = x + y * m_size_x;
-	return txu::Color (m_buffer[index]);
+	txu::Color color = m_buffer[x + y * m_size_x];
+	color.a = 255;
+
+	return color;
 }
 
 //------------------

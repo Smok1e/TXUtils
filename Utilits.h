@@ -51,8 +51,9 @@ namespace comdlg
 
 //-------------------
 
-volatile int _MouseWheelDelta      = 0;
-volatile int _WasExitButtonPressed = false;
+volatile int _MouseWheelDelta                  = 0;
+volatile int _WasExitButtonPressed             = false;
+volatile int _LastWasExitButtonPressedCallTime = GetTickCount ();
 
 volatile bool    _CursorVisible = true;
 volatile HCURSOR _CursorHandle  = nullptr;
@@ -95,9 +96,9 @@ LRESULT CALLBACK WndProc (HWND wnd, UINT message, WPARAM wpar, LPARAM lpar)
 
 	switch (message)
 	{
-		case WM_CLOSE:      { if (WndProc_OnCLOSE      ()    ) return true; }
-		case WM_MOUSEWHEEL: { if (WndProc_OnMOUSEWHEEL (wpar)) return true; }
-		case WM_SETCURSOR:  { if (WndProc_OnSETCURSOR  (lpar)) return true; }
+		case WM_CLOSE:      { if (WndProc_OnCLOSE      ()    ) return true; break; }
+		case WM_MOUSEWHEEL: { if (WndProc_OnMOUSEWHEEL (wpar)) return true; break; }
+		case WM_SETCURSOR:  { if (WndProc_OnSETCURSOR  (lpar)) return true; break; }
 
 		default: break;
 	}
@@ -110,7 +111,7 @@ LRESULT CALLBACK WndProc (HWND wnd, UINT message, WPARAM wpar, LPARAM lpar)
 bool WndProc_OnCLOSE ()
 {
 	_WasExitButtonPressed = true;
-	return false;
+	return (GetTickCount () - _LastWasExitButtonPressedCallTime) < 200;
 }
 
 //-------------------
@@ -143,6 +144,8 @@ bool WasExitButtonPressed ()
 {
 	bool pressed = _WasExitButtonPressed;
 	_WasExitButtonPressed = false;
+
+	_LastWasExitButtonPressedCallTime = GetTickCount ();
 
 	return pressed;
 }

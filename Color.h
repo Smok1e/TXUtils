@@ -219,8 +219,7 @@ Color::operator RGBQUAD () const
 
 Color::operator COLORREF () const
 {
-	if (a == 0) return TX_TRANSPARENT;
-	return r | (g << 8) | (b << 16); // | (a << 24); ???
+	return a? r | (g << 8) | (b << 16): TX_TRANSPARENT;
 }
 
 //-------------------
