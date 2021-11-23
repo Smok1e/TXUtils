@@ -146,7 +146,7 @@ bool WndProc_OnSETCURSOR (LPARAM lpar)
 
 //-------------------
 
-WNDPROC _SetTxWindowsHook (WNDPROC new_proc = nullptr)
+WNDPROC _SetTxWindowsHook (WNDPROC new_proc /*= nullptr*/)
 {
 	WNDPROC old_proc = _AltWndProc;
 	_AltWndProc = new_proc;
