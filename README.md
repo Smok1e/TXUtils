@@ -108,6 +108,28 @@ txu::SetWindowIcon ("icon.ico");
 ## bool txu::IsCursorVisible ()
 Возвращает состояние видимости курсора.
 
+## void txu::SetWindowResizingEnabled (bool enable, HWND wnd = txWindow ())
+Устанавливает разрешение на изменения размера окна пользователем.
+
+## bool txu::IsWindowResizingEnabled (HWND wnd = txWindow ())
+Возвращает true, если изсенение размера окна пользователем разрешено.
+
+## bool txu::WasWindowResized ()
+Возвращает true, если размер окна TXLib был изменён пользователем, но функция GetNewWindowSize или WasWindowResized ещё не была вызвана.
+
+## bool txu::GetNewWindowSize (POINT* size)
+Переменная, на которую указывает указатель size получает последний изменённый пользователем размер окна. 
+Возвращает true, если пользователь изменил размер окна, но функция GetNewWindowSize или WasWindowResized ещё не была вызвана.
+TXUtils автоматически изменяет размер нужных буфферов окна, когда его размер меняется. Вот небольшой пример обработки изменения размера окна: 
+
+```
+int size_x = 800;
+int size_y = 800;
+
+txCreateWindow (size_x, size_y);
+txu::SetWindowResizingEnabled (true);
+```
+
 ## WS_NOFRAME
 Стиль окна без заголовка и рамок.
 ```
