@@ -128,6 +128,16 @@ int size_y = 800;
 
 txCreateWindow (size_x, size_y);
 txu::SetWindowResizingEnabled (true);
+
+while (!txu::WasExitButtonPressed ())
+{
+	POINT size = {};
+	if (txu::GetNewWindowSize (&size)
+	{
+		printf ("New window size: {%d, %d}\n", size.x, size.y);
+		// ...
+	}
+}
 ```
 
 ## WS_NOFRAME
