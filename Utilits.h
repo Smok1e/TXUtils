@@ -51,9 +51,11 @@ namespace comdlg
 
 //-------------------
 
-volatile int _MouseWheelDelta                  = 0;
-volatile int _WasExitButtonPressed             = false;
-volatile int _LastWasExitButtonPressedCallTime = GetTickCount ();
+volatile int   _MouseWheelDelta                  = 0;
+volatile int   _WasExitButtonPressed             = false;
+volatile int   _LastWasExitButtonPressedCallTime = GetTickCount ();
+volatile int   _WasWindowResized                 = false;
+         POINT _NewWindowSize                    = {};
 
 volatile bool    _CursorVisible = true;
 volatile HCURSOR _CursorHandle  = nullptr;
@@ -64,10 +66,11 @@ bool _InitResult = _Init ();
 
 //-------------------
 
-LRESULT CALLBACK WndProc (HWND wnd, UINT message, WPARAM wpar, LPARAM lpar);
+LRESULT CALLBACK WndProc  (HWND wnd, UINT message, WPARAM wpar, LPARAM lpar);
 bool WndProc_OnCLOSE      ();
 bool WndProc_OnMOUSEWHEEL (WPARAM wpar);
 bool WndProc_OnSETCURSOR  (LPARAM lpar);
+bool WndProc_OnSIZE       (LPARAM lpar);
 
 WNDPROC _SetTxWindowsHook (WNDPROC new_proc = nullptr);
 
@@ -82,6 +85,11 @@ bool SetWindowIcon (const char* filename);
 void SetWindowCursor  (HCURSOR cursor);
 void SetCursorVisible (bool visible);
 bool IsCursorVisible  ();
+
+void SetWindowResizingEnabled (bool enable, HWND wnd = txWindow ());
+bool IsWindowResizingEnabled  (             HWND wnd = txWindow ());
+bool WasWindowResized         ();
+bool GetNewWindowSize         (POINT* size);
 
 //-------------------
 
@@ -105,6 +113,7 @@ LRESULT CALLBACK WndProc (HWND wnd, UINT message, WPARAM wpar, LPARAM lpar)
 		case WM_CLOSE:      { if (WndProc_OnCLOSE      ()    ) return true; break; }
 		case WM_MOUSEWHEEL: { if (WndProc_OnMOUSEWHEEL (wpar)) return true; break; }
 		case WM_SETCURSOR:  { if (WndProc_OnSETCURSOR  (lpar)) return true; break; }
+		case WM_SIZE:       { if (WndProc_OnSIZE       (lpar)) return true; break; }
 
 		default: break;
 	}
@@ -140,6 +149,33 @@ bool WndProc_OnSETCURSOR (LPARAM lpar)
 		else return false;
 	}
 	else SetCursor (nullptr);
+
+	return true;
+}
+
+//-------------------
+
+bool WndProc_OnSIZE (LPARAM lpar)
+{
+	unsigned new_x = LOWORD (lpar);
+	unsigned new_y = HIWORD (lpar);
+	if (!new_x || !new_y) return false;
+
+	_WasWindowResized = true;
+	_NewWindowSize.x  = new_x;
+	_NewWindowSize.y  = new_y;
+
+	HDC tmp0 = _txBuffer_Create (txWindow (), &_NewWindowSize);
+	HDC tmp1 = _txBuffer_Create (txWindow (), &_NewWindowSize);
+
+	txBitBlt (tmp0, 0, 0, new_x, new_y, _txCanvas_BackBuf[0]);
+	txBitBlt (tmp1, 0, 0, new_x, new_y, _txCanvas_BackBuf[1]);
+
+	std::swap (tmp0, _txCanvas_BackBuf[0]);
+	std::swap (tmp1, _txCanvas_BackBuf[1]);
+
+	_txBuffer_Delete (&tmp0);
+	_txBuffer_Delete (&tmp1);
 
 	return true;
 }
@@ -218,6 +254,36 @@ void SetCursorVisible (bool visible)
 bool IsCursorVisible ()
 {
 	return _CursorVisible;
+}
+
+//-------------------
+
+void SetWindowResizingEnabled (bool enable, HWND wnd /*= txWindow ()*/)
+{
+	if (!wnd) return;
+
+	int style = GetWindowLongA (wnd, GWL_STYLE);
+	            SetWindowLongA (wnd, GWL_STYLE, enable? style | WS_SIZEBOX: style & ~WS_SIZEBOX);
+}
+
+bool IsWindowResizingEnabled (HWND wnd /*= txWindow ()*/)
+{
+	if (!wnd) return false;
+	return GetWindowLongA (wnd, GWL_STYLE) & WS_SIZEBOX;
+}
+
+bool WasWindowResized ()
+{
+	bool resized = _WasWindowResized;
+	_WasWindowResized = false;
+
+	return resized;
+}
+
+bool GetNewWindowSize (POINT* size)
+{
+	*size = _NewWindowSize;
+	return WasWindowResized ();
 }
 
 //-------------------
