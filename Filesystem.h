@@ -7,7 +7,8 @@ namespace txu
 
 //-------------------
 
-size_t fsize (FILE* file);
+bool   fexists (const char* filename);
+size_t fsize   (FILE* file);
 
 template <typename obj_t>
 void freadobj (FILE* file, obj_t* obj);
@@ -20,6 +21,21 @@ void fwriteobj (FILE* file, obj_t* obj);
 
 template <typename obj_t>
 void mwriteobj (const char* data, obj_t* obj);
+
+//-------------------
+
+bool fexists (const char* filename)
+{
+	FILE* file = nullptr;
+	errno_t err = fopen_s (&file, filename, "rb");
+	if (file && !err)
+	{
+		fclose (file);
+		return true;
+	}
+
+	return false;
+}
 
 //-------------------
 

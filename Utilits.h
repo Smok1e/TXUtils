@@ -58,6 +58,8 @@ volatile int _LastWasExitButtonPressedCallTime = GetTickCount ();
 volatile bool    _CursorVisible = true;
 volatile HCURSOR _CursorHandle  = nullptr;
 
+WNDPROC _AltWndProc = nullptr;
+
 bool _InitResult = _Init ();
 
 //-------------------
@@ -66,6 +68,8 @@ LRESULT CALLBACK WndProc (HWND wnd, UINT message, WPARAM wpar, LPARAM lpar);
 bool WndProc_OnCLOSE      ();
 bool WndProc_OnMOUSEWHEEL (WPARAM wpar);
 bool WndProc_OnSETCURSOR  (LPARAM lpar);
+
+WNDPROC _SetTxWindowsHook (WNDPROC new_proc = nullptr);
 
 bool WasExitButtonPressed    ();
 int  GetMouseWheel           ();
@@ -83,7 +87,7 @@ bool IsCursorVisible  ();
 
 int _Init ()
 {
-	txSetWindowsHook (WndProc);
+	_AltWndProc = txSetWindowsHook (WndProc);
 	return true;
 }
 
@@ -93,6 +97,8 @@ LRESULT CALLBACK WndProc (HWND wnd, UINT message, WPARAM wpar, LPARAM lpar)
 {
 	if (wnd != txWindow ())
 		return false;
+
+	if (_AltWndProc) if (_AltWndProc (wnd, message, wpar, lpar)) return true;
 
 	switch (message)
 	{
@@ -136,6 +142,16 @@ bool WndProc_OnSETCURSOR (LPARAM lpar)
 	else SetCursor (nullptr);
 
 	return true;
+}
+
+//-------------------
+
+WNDPROC _SetTxWindowsHook (WNDPROC new_proc = nullptr)
+{
+	WNDPROC old_proc = _AltWndProc;
+	_AltWndProc = new_proc;
+
+	return old_proc;
 }
 
 //-------------------
@@ -207,3 +223,12 @@ bool IsCursorVisible ()
 //-------------------
 
 } // namespace txu
+
+//-------------------
+
+#ifdef txSetWindowsHook
+	#undef txSetWindowsHook
+#endif
+#define txSetWindowsHook(...) txu::_SetTxWindowsHook (__VA_ARGS__)
+
+//-------------------

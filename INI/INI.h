@@ -77,6 +77,8 @@ bool INI::loadFromFile (const char* filename)
 	static char path[_TX_BUFSIZE] = "";
 	GetFullPathNameA (filename, _TX_BUFSIZE, path, nullptr);
 
+	if (!fexists (path)) return false;
+
 	// GetPrivateProfileSectionNamesA - довольно специфичная функция. 
 	// Её результат - double-null-terminated строка, состоящая из имён секций INI файла, разделённых нулевыми символами,
 	// поэтому отделить имена секций друг от друга при помощи strtok не получится - она воспримет нулевые символы как конец строки.

@@ -115,6 +115,8 @@ bool Value::loadFromFile (const char* filename, const char* section, const char*
 	static char path[_TX_BUFSIZE] = "";
 	GetFullPathNameA (filename, _TX_BUFSIZE, path, nullptr);	
 
+	if (!fexists (path)) return false;
+
 	size_t buffsize = _TX_BUFSIZE;
 	char* buffer = new char[buffsize];
 
