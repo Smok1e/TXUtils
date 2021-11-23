@@ -32,6 +32,10 @@ TXUtils - это библиотека с открытым исходным ко�
 - [void txu::SetWindowCursor (HCURSOR cursor)](https://github.com/Smok1e/TXUtils#void-txusetwindowcursor-hcursor-cursor)
 - [void txu::SetCursorVisible (bool visible)](https://github.com/Smok1e/TXUtils#void-txusetcursorvisible-bool-visible)
 - [void txu::IsCursorVisible ()](https://github.com/Smok1e/TXUtils#bool-txuiscursorvisible-)
+- [void txu::SetWindowResizingEnabled](https://github.com/Smok1e/TXUtils/blob/main/README.md#void-txusetwindowresizingenabled-bool-enable-hwnd-wnd--txwindow-)
+- [bool txu::IsWindowResizingEnabled](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txuiswindowresizingenabled-hwnd-wnd--txwindow-)
+- [bool txu::WasWindowResized](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txuwaswindowresized-)
+- [bool txu::GetNewWindowSize (POINT* size)](https://github.com/Smok1e/TXUtils/blob/main/README.md#bool-txugetnewwindowsize-point-size)
 
 # Макросы
 - [WS_NOFRAME](https://github.com/Smok1e/TXUtils/blob/main/README.md#ws_noframe)
