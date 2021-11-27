@@ -352,7 +352,7 @@ bool Context::saveToFile (const char* filename)	const
 #ifdef TXU_USE_PNG
 	const char* extention = txu::shellapi::PathFindExtensionA (filename);
 
-	if (!strcmp (extention, ".png"))
+	if (!_stricmp (extention, ".png"))
 		return !txu::png_loader::write_png (m_buffer, m_size_x, m_size_y, filename);
 #endif
 
